@@ -1,0 +1,173 @@
+/* تعميم التصميم */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff8f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+}
+
+/* الهيدر */
+header {
+  background-color: #8B4513;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+header p {
+  margin: 5px 0 0;
+  font-size: 1.1em;
+}
+
+/* البطل */
+.hero {
+  background: url('images/bakery-bg.jpg') no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #e67e22;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #d35400;
+}
+
+/* المنتجات */
+#products {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: 200px;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.product-card h3 {
+  margin: 10px 0 5px;
+}
+
+.product-card p {
+  color: #e67e22;
+  font-weight: bold;
+}
+
+/* التواصل */
+#contact {
+  background-color: #f9f2ec;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+/* الفوتر */
+footer {
+  background-color: #8B4513;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+.product-img {
+  width: 250px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-img:hover {
+  transform: scale(1.05);
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.map-button {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.map-link {
+  background-color: #ff6600;
+  color: white;
+  padding: 15px 25px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.map-link:hover {
+  background-color: #e65c00;
+}
+@media (max-width: 600px) {
+  .product-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .btn, .map-link {
+    width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+
+  .hero h2 {
+    font-size: 1.5em;
+  }
+}
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #8B4513;
+}
+
+h3 {
+  color: #444;
+}
