@@ -1,85 +1,675 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>مخبزة وحلويات علاّف | Allaf Bakery - الطعم الأصيل</title>
-  
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <!-- Linking the external CSS file -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مخبزة وحلويات علاّف | طعم لا يُنسى</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #FFD700;
+            --text-dark: #2C1810;
+            --text-light: #6B4423;
+            --bg-cream: #FFF8F0;
+            --bg-white: #FFFFFF;
+            --shadow-light: rgba(139, 69, 19, 0.1);
+            --shadow-medium: rgba(139, 69, 19, 0.2);
+            --gradient-warm: linear-gradient(135deg, #FFE4B5 0%, #DEB887 100%);
+            --font-arabic: 'Cairo', sans-serif;
+            --font-elegant: 'Amiri', serif;
+        }
+
+        /* ===== Global Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-arabic);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== Loading Animation ===== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--accent-color);
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: var(--bg-white);
+            box-shadow: 0 2px 20px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 4px 30px var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+        }
+
+        .brand-text h1 {
+            font-family: var(--font-elegant);
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .brand-text p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            background: var(--gradient-warm);
+            padding: 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072') center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h2 {
+            font-family: var(--font-elegant);
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ===== Sections ===== */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: var(--font-elegant);
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* ===== Products Grid ===== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--shadow-medium);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* ===== Cart Modal ===== */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .cart-content {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ===== Contact Section ===== */
+        .contact-section {
+            background: var(--gradient-warm);
+            text-align: center;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <header class="fade-in">
-    <img src="images/logo.png" alt="شعار مخبزة علاّف" class="logo" />
-    <h1>مخبزة وحلويات علاّف</h1>
-    <p>المذاق الأصيل الذي لا يُنسى</p>
-  </header>
-
-  <div onclick="showCart()" class="cart-icon">
-    <i class="fas fa-shopping-basket"></i>
-    <span id="cart-count-badge" class="cart-count-badge">0</span>
-  </div>
-
-  <main>
-    <section class="hero fade-in">
-      <h2>نخبز لكم السعادة كل يوم</h2>
-      <a href="#products" class="btn">اكتشف منتجاتنا</a>
-    </section>
-
-    <section id="products" class="fade-in">
-      <h2>منتجاتنا الطازجة</h2>
-      <div class="products">
-        <div class="product-card">
-          <img src="images/croissant.jpg" alt="كرواسون" />
-          <h3>كرواسون بالزبدة</h3>
-          <p>2 دراهم</p>
-          <button class="cart-btn" onclick="addToCart('كرواسون بالزبدة', 2)">أضف للسلة</button>
-        </div>
-        <div class="product-card">
-          <img src="images/msemen.jpg" alt="مسمن" />
-          <h3>مسمن بلدي معسل</h3>
-          <p>3.5 دراهم</p>
-          <button class="cart-btn" onclick="addToCart('مسمن بلدي معسل', 3.5)">أضف للسلة</button>
-        </div>
-        <div class="product-card">
-          <img src="images/cake.jpg" alt="كيك" />
-          <h3>كيكة الشوكولاتة</h3>
-          <p>40 درهم</p>
-          <button class="cart-btn" onclick="addToCart('كيكة الشوكولاتة', 40)">أضف للسلة</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="fade-in">
-      <h2>تواصل معنا أو تفضل بزيارتنا</h2>
-      <div class="map-button">
-        <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="map-link">📍 موقعنا على الخريطة</a>
-        <a href="https://wa.me/212681848262" target="_blank" class="btn">💬 الطلب عبر واتساب</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="fade-in">
-    <p>جميع الحقوق محفوظة © 2025 | Allaf.com</p>
-    <p>عدد الزوار: <span id="visitor-count">0</span></p>
-  </footer>
-
-  <div id="cart-popup">
-    <h2><i class="fas fa-shopping-basket"></i> سلة التسوق</h2>
-    <ul id="cart-items"><li>السلة فارغة حاليًا.</li></ul>
-    <p><strong>المجموع: <span id="cart-total">0.00</span> درهم</strong></p>
-    <div class="cart-actions">
-        <button class="btn" onclick="closeCart()">إغلاق</button>
-        <button class="cart-btn" onclick="generateWhatsAppInvoice()">إرسال الطلب</button>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
     </div>
-  </div>
 
-  <!-- Linking the external JavaScript file -->
-  <script src="script.js"></script>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="images/logo.png" alt="شعار مخبزة علاّف" class="logo">
+                <div class="brand-text">
+                    <h1>مخبزة علاّف</h1>
+                    <p>طعم لا يُنسى</p>
+                </div>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#hero" class="nav-link">الرئيسية</a></li>
+                    <li><a href="#products" class="nav-link">منتجاتنا</a></li>
+                    <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            
+            <button class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
 
-</body>
-</html>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h2>نخبز بحب، نقدم بشغف</h2>
+            <p>اكتشف تشكيلتنا الفريدة من المخبوزات الطازجة والحلويات الشهية المصنوعة يدوياً كل يوم</p>
+            <a href="#products" class="cta-button">
+                <i class="fas fa-arrow-down"></i>
+                اكتشف منتجاتنا
+            </a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <h2 class="section-title fade-in">منتجاتنا المميزة</h2>
+        <div class="products-grid">
+            <div class="product-card fade-in">
+                <img src="images/croissant.jpg" alt="كرواسون بالزبدة" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">كرواسون بالزبدة الفرنسية</h3>
+                    <p class="product-description">مخبوز طازج يومياً بأجود أنواع الزبدة الفرنسية</p>
+                    <div class="product-price">2.00 درهم</div>
+                    <button class="add-to-cart" onclick="addToCart('كرواسون بالزبدة الفرنسية', 2.00)">
+                        <i class="fas fa-plus"></i>
+                        أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <img src="images/msemen.jpg" alt="مسمن بلدي" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">مسمن بلدي معسل</h3>
+                    <p class="product-description">مسمن تقليدي مغربي بالعسل الطبيعي</p>
+                    <div class="product-price">3.50 درهم</div>
+                    <button class="add-to-cart" onclick="addToCart('مسمن بلدي معسل', 3.50)">
+                        <i class="fas fa-plus"></i>
+                        أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <img src="images/cake.jpg" alt="كيكة الشوكولاتة" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">كيكة الشوكولاتة الغنية</h3>
+                    <p class="product-description">كيكة شوكولاتة فاخرة بطبقات كريمية</p>
+                    <div class="product-price">40.00 درهم</div>
+                    <button class="add-to-cart" onclick="addToCart('كيكة الشوكولاتة الغنية', 40.00)">
+                        <i class="fas fa-plus"></i>
+                        أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=400" alt="خبز بلدي" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">خبز بلدي طازج</h3>
+                    <p class="product-description">خبز مغربي تقليدي مخبوز في فرن الحطب</p>
+                    <div class="product-price">1.50 درهم</div>
+                    <button class="add-to-cart" onclick="addToCart('خبز بلدي طازج', 1.50)">
+                        <i class="fas fa-plus"></i>
+                        أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=400" alt="دونات" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">دونات محشية</h3>
+                    <p class="product-description">دونات طرية محشية بالكريمة والمربى</p>
+                    <div class="product-price">4.00 درهم</div>
+                    <button class="add-to-cart" onclick="addToCart('دونات محشية', 4.00)">
+                        <i class="fas fa-plus"></i>
+                        أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?q=80&w=400" alt="معجنات" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">معجنات متنوعة</h3>
+                    <p class="product-description">تشكيلة من المعجنات الشهية بحشوات مختلفة</p>
+                    <div class="product-price">5.00 درهم</div>
+                    <button class="add-to-cart" onclick="addToCart('معجنات متنوعة', 5.00)">
+                        <i class="fas fa-plus"></i>
+                        أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+   
