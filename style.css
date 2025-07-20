@@ -1,4 +1,4 @@
-/* تعميم التصميم */
+/* ========== إعدادات عامة ========== */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #fff8f0;
@@ -8,7 +8,7 @@ body {
   direction: rtl;
 }
 
-/* الهيدر */
+/* ========== الهيدر ========== */
 header {
   background-color: #8B4513;
   color: white;
@@ -26,7 +26,7 @@ header p {
   font-size: 1.1em;
 }
 
-/* البطل */
+/* ========== قسم البطل ========== */
 .hero {
   background: url('images/bakery-bg.jpg') no-repeat center center/cover;
   color: #fff;
@@ -39,7 +39,8 @@ header p {
   margin-bottom: 20px;
 }
 
-.btn {
+/* ========== الأزرار العامة ========== */
+.btn, .map-link {
   background-color: #e67e22;
   color: white;
   padding: 10px 25px;
@@ -49,21 +50,26 @@ header p {
   transition: 0.3s;
 }
 
-.btn:hover {
+.btn:hover, .map-link:hover {
   background-color: #d35400;
 }
 
-/* المنتجات */
+.map-button {
+  text-align: center;
+  margin: 30px 0;
+}
+
+/* ========== قسم المنتجات ========== */
 #products {
   padding: 40px 20px;
   text-align: center;
 }
 
-.product-list {
+.products {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 20px;
+  justify-content: center;
 }
 
 .product-card {
@@ -72,6 +78,12 @@ header p {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 15px;
   width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .product-card img {
@@ -81,6 +93,7 @@ header p {
 
 .product-card h3 {
   margin: 10px 0 5px;
+  color: #444;
 }
 
 .product-card p {
@@ -88,20 +101,7 @@ header p {
   font-weight: bold;
 }
 
-/* التواصل */
-#contact {
-  background-color: #f9f2ec;
-  text-align: center;
-  padding: 30px 20px;
-}
-
-/* الفوتر */
-footer {
-  background-color: #8B4513;
-  color: white;
-  text-align: center;
-  padding: 15px;
-}
+/* صور المنتجات */
 .product-img {
   width: 250px;
   height: auto;
@@ -113,31 +113,46 @@ footer {
 .product-img:hover {
   transform: scale(1.05);
 }
-.products {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-.map-button {
+
+/* ========== قسم التواصل ========== */
+#contact {
+  background-color: #f9f2ec;
   text-align: center;
-  margin: 30px 0;
+  padding: 30px 20px;
 }
 
-.map-link {
-  background-color: #ff6600;
+/* ========== الفوتر ========== */
+footer {
+  background-color: #8B4513;
   color: white;
-  padding: 15px 25px;
-  text-decoration: none;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  text-align: center;
+  padding: 15px;
 }
 
-.map-link:hover {
-  background-color: #e65c00;
+/* ========== أنماط إضافية عامة ========== */
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #8B4513;
 }
+
+h3 {
+  color: #444;
+}
+
+/* ========== تأثيرات الانيميشن ========== */
+.hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== تصميم متجاوب ========== */
 @media (max-width: 600px) {
   .product-card {
     width: 100%;
@@ -154,20 +169,5 @@ footer {
     font-size: 1.5em;
   }
 }
-.product-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #8B4513;
-}
-
-h3 {
-  color: #444;
-}
+/* ✅ لاحقًا هنا يمكننا إضافة تصميم فاتورة جاهزة للطباعة */
