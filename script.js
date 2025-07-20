@@ -1,520 +1,66 @@
-// ========== Global Variables ==========
-let cart = JSON.parse(localStorage.getItem('allaf_cart')) || [];
-let currentProduct = null;
+/* ========== إعدادات عامة ========== */ body { font-family: 'Arial', sans-serif; background-color: #fff8f0; color: #333; margin: 0; padding: 0; direction: rtl; }
 
-// ========== DOM Content Loaded ==========
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🌟 مرحباً بك في مخبزة علاّف المحسنة! نتمنى لك تجربة ممتعة 👨‍🍳');
-    
-    initializeWebsite();
-    updateCartDisplay();
-    setupEventListeners();
-    setupScrollAnimations();
-    hideLoadingScreen();
-});
+/* ========== الشعار ========== */ .logo { width: 100px; height: auto; margin-bottom: 10px; }
 
-// ========== Website Initialization ==========
-function initializeWebsite() {
-    // Setup smooth scrolling for navigation links
-    setupSmoothScrolling();
-    
-    // Setup header scroll effect
-    setupHeaderScrollEffect();
-    
-    // Setup product category filtering
-    setupProductFiltering();
-    
-    // Setup back to top button
-    setupBackToTop();
-    
-    // Setup intersection observer for animations
-    setupIntersectionObserver();
-}
+/* ========== الهيدر ========== */ header { background-color: #8B4513; color: white; padding: 20px; text-align: center; }
 
-// ========== Loading Screen ==========
-function hideLoadingScreen() {
-    setTimeout(() => {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }
-    }, 1500);
-}
+header h1 { margin: 0; font-size: 2em; }
 
-// ========== Smooth Scrolling ==========
-function setupSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = document.getElementById('main-header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Update active navigation link
-                updateActiveNavLink(this.getAttribute('href'));
-                
-                // Close mobile menu if open
-                closeMobileMenu();
-            }
-        });
-    });
-}
+header p { margin: 5px 0 0; font-size: 1.1em; }
 
-// ========== Header Scroll Effect ==========
-function setupHeaderScrollEffect() {
-    window.addEventListener('scroll', function() {
-        const header = document.getElementById('main-header');
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-}
+/* ========== قسم البطل ========== */ .hero { background: url('images/bakery-bg.jpg') no-repeat center center/cover; color: #fff; text-align: center; padding: 60px 20px; }
 
-// ========== Navigation ==========
-function updateActiveNavLink(href) {
-    // Remove active class from all nav links
-    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-        link.classList.remove('active');
-    });
-    
-    // Add active class to current link
-    document.querySelectorAll(`a[href="${href}"]`).forEach(link => {
-        link.classList.add('active');
-    });
-}
+.hero h2 { font-size: 2em; margin-bottom: 20px; }
 
-// ========== Mobile Menu ==========
-function toggleMobileMenu() {
-    const mobileNav = document.getElementById('mobile-nav');
-    mobileNav.classList.toggle('active');
-}
+/* ========== الأزرار العامة ========== */ .btn, .map-link, .cart-btn { background-color: #e67e22; color: white; padding: 10px 25px; text-decoration: none; border-radius: 25px; font-weight: bold; transition: 0.3s; border: none; cursor: pointer; }
 
-function closeMobileMenu() {
-    const mobileNav = document.getElementById('mobile-nav');
-    mobileNav.classList.remove('active');
-}
+.btn:hover, .map-link:hover, .cart-btn:hover { background-color: #d35400; }
 
-// ========== Product Filtering ==========
-function setupProductFiltering() {
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    const productCards = document.querySelectorAll('.product-card');
-    
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            
-            // Update active button
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Filter products
-            filterProducts(category, productCards);
-        });
-    });
-}
+.map-button { text-align: center; margin: 30px 0; }
 
-function filterProducts(category, productCards) {
-    productCards.forEach(card => {
-        const productCategory = card.getAttribute('data-category');
-        
-        if (category === 'all' || productCategory === category) {
-            card.style.display = 'block';
-            setTimeout(() => {
-                card.classList.remove('hidden');
-            }, 100);
-        } else {
-            card.classList.add('hidden');
-            setTimeout(() => {
-                card.style.display = 'none';
-            }, 300);
-        }
-    });
-}
+/* ========== قسم المنتجات ========== */ #products { padding: 40px 20px; text-align: center; }
 
-// ========== Cart Functionality ==========
-function addToCart(productName, price, image = '') {
-    const existingItem = cart.find(item => item.name === productName);
-    
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        cart.push({
-            name: productName,
-            price: price,
-            image: image,
-            quantity: 1
-        });
-    }
-    
-    updateCartDisplay();
-    saveCartToStorage();
-    showSuccessMessage(`تم إضافة ${productName} إلى السلة!`);
-}
+.products { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
 
-function addToCartFromModal() {
-    if (currentProduct) {
-        const quantity = parseInt(document.getElementById('modal-quantity').value);
-        const existingItem = cart.find(item => item.name === currentProduct.name);
-        
-        if (existingItem) {
-            existingItem.quantity += quantity;
-        } else {
-            cart.push({
-                name: currentProduct.name,
-                price: currentProduct.price,
-                image: currentProduct.image,
-                quantity: quantity
-            });
-        }
-        
-        updateCartDisplay();
-        saveCartToStorage();
-        closeProductModal();
-        showSuccessMessage(`تم إضافة ${currentProduct.name} إلى السلة!`);
-    }
-}
+.product-card { background-color: #fff; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 15px; width: 200px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
 
-function removeFromCart(productName) {
-    cart = cart.filter(item => item.name !== productName);
-    updateCartDisplay();
-    saveCartToStorage();
-}
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
 
-function updateCartItemQuantity(productName, newQuantity) {
-    const item = cart.find(item => item.name === productName);
-    if (item) {
-        if (newQuantity <= 0) {
-            removeFromCart(productName);
-        } else {
-            item.quantity = newQuantity;
-            updateCartDisplay();
-            saveCartToStorage();
-        }
-    }
-}
+.product-card img { width: 100%; border-radius: 10px; }
 
-function clearCart() {
-    cart = [];
-    updateCartDisplay();
-    saveCartToStorage();
-    showSuccessMessage('تم إفراغ السلة!');
-}
+.product-card h3 { margin: 10px 0 5px; color: #444; }
 
-function updateCartDisplay() {
-    const cartCount = document.getElementById('cart-count');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    
-    let totalItems = 0;
-    let totalPrice = 0;
-    
-    // Clear cart items
-    cartItems.innerHTML = '';
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = `
-            <div class="empty-cart">
-                <i class="fas fa-shopping-cart"></i>
-                <p>السلة فارغة</p>
-                <p class="empty-cart-subtitle">أضف بعض المنتجات الشهية!</p>
-            </div>
-        `;
-    } else {
-        cart.forEach(item => {
-            totalItems += item.quantity;
-            totalPrice += item.price * item.quantity;
-            
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                <div class="cart-item-info">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-price">${item.price} درهم</div>
-                </div>
-                <div class="cart-item-controls">
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="updateCartItemQuantity('${item.name}', ${item.quantity - 1})">-</button>
-                        <span class="quantity-display">${item.quantity}</span>
-                        <button class="quantity-btn" onclick="updateCartItemQuantity('${item.name}', ${item.quantity + 1})">+</button>
-                    </div>
-                    <button class="remove-item" onclick="removeFromCart('${item.name}')">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `;
-            cartItems.appendChild(cartItem);
-        });
-    }
-    
-    cartCount.textContent = totalItems;
-    cartTotal.textContent = totalPrice.toFixed(2);
-    
-    // Update cart button visibility
-    const cartButton = document.querySelector('.cart-button');
-    if (totalItems > 0) {
-        cartButton.classList.add('has-items');
-    } else {
-        cartButton.classList.remove('has-items');
-    }
-}
+.product-card p { color: #e67e22; font-weight: bold; }
 
-function saveCartToStorage() {
-    localStorage.setItem('allaf_cart', JSON.stringify(cart));
-}
+/* صور المنتجات */ .product-img { width: 250px; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s ease-in-out; }
 
-function showCart() {
-    const cartPopup = document.getElementById('cart-popup');
-    cartPopup.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
+.product-img:hover { transform: scale(1.05); }
 
-function closeCart() {
-    const cartPopup = document.getElementById('cart-popup');
-    cartPopup.classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
+/* ========== قسم التواصل ========== */ #contact { background-color: #f9f2ec; text-align: center; padding: 30px 20px; }
 
-// ========== Product Modal ==========
-function showProductDetails(name, image, description, price) {
-    currentProduct = { name, image, description, price };
-    
-    document.getElementById('modal-product-name').textContent = name;
-    document.getElementById('modal-product-image').src = image;
-    document.getElementById('modal-product-image').alt = name;
-    document.getElementById('modal-product-description').textContent = description;
-    document.getElementById('modal-product-price').textContent = price;
-    document.getElementById('modal-quantity').value = 1;
-    
-    const productModal = document.getElementById('product-modal');
-    productModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
+/* ========== الفوتر ========== */ footer { background-color: #8B4513; color: white; text-align: center; padding: 15px; }
 
-function closeProductModal() {
-    const productModal = document.getElementById('product-modal');
-    productModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    currentProduct = null;
-}
+/* ========== عدد الزوار ========== */ #visitor-count { font-weight: bold; font-size: 1.2em; color: #e67e22; margin-top: 5px; }
 
-function increaseQuantity() {
-    const quantityInput = document.getElementById('modal-quantity');
-    quantityInput.value = parseInt(quantityInput.value) + 1;
-}
+/* ========== السلة العائمة ========== */ .cart-icon { position: fixed; top: 20px; left: 20px; background-color: #e67e22; color: white; padding: 10px 15px; border-radius: 50%; font-size: 1.2em; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000; transition: background-color 0.3s ease; }
 
-function decreaseQuantity() {
-    const quantityInput = document.getElementById('modal-quantity');
-    const currentValue = parseInt(quantityInput.value);
-    if (currentValue > 1) {
-        quantityInput.value = currentValue - 1;
-    }
-}
+.cart-icon:hover { background-color: #d35400; }
 
-// ========== WhatsApp Integration ==========
-function generateWhatsAppInvoice() {
-    if (cart.length === 0) {
-        showSuccessMessage('السلة فارغة! أضف بعض المنتجات أولاً.');
-        return;
-    }
-    
-    const orderDetails = cart.map((item, index) =>
-        `${index + 1}. ${item.name} × ${item.quantity} = ${(item.price * item.quantity).toFixed(2)} درهم`
-    ).join('\n');
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    const message = `🧾 *طلب جديد من مخبزة علاّف*\n\n${orderDetails}\n\n💰 *المجموع الكلي:* ${total.toFixed(2)} درهم\n\n📦 شكراً لاختياركم مخبزة علاّف!\n🕐 سيتم تحضير طلبكم في أقرب وقت ممكن.`;
-    
-    const phone = "212681848262";
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    
-    window.open(url, '_blank');
-    closeCart();
-}
+/* ========== أنماط إضافية عامة ========== */ h2 { font-size: 2em; margin-bottom: 20px; color: #8B4513; }
 
-// ========== Event Listeners ==========
-function setupEventListeners() {
-    // Close modals when clicking outside
-    document.addEventListener('click', function(e) {
-        const cartPopup = document.getElementById('cart-popup');
-        const productModal = document.getElementById('product-modal');
-        
-        if (e.target === cartPopup) {
-            closeCart();
-        }
-        
-        if (e.target === productModal) {
-            closeProductModal();
-        }
-    });
-    
-    // Keyboard shortcuts
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeCart();
-            closeProductModal();
-            closeMobileMenu();
-        }
-    });
-    
-    // Hero scroll indicator
-    const scrollIndicator = document.querySelector('.hero-scroll-indicator');
-    if (scrollIndicator) {
-        scrollIndicator.addEventListener('click', function() {
-            const productsSection = document.getElementById('products');
-            if (productsSection) {
-                productsSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
-}
+h3 { color: #444; }
 
-// ========== Scroll Animations ==========
-function setupScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.feature-card, .product-card, .about-content, .contact-item');
-    
-    animatedElements.forEach(element => {
-        element.classList.add('fade-in');
-    });
-}
+/* ========== تأثيرات الانيميشن ========== */ .hidden { opacity: 0; transform: translateY(30px); transition: 0.6s ease; }
 
-function setupIntersectionObserver() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
-    });
-}
+.visible { opacity: 1; transform: translateY(0); }
 
-// ========== Back to Top ==========
-function setupBackToTop() {
-    const backToTopButton = document.getElementById('back-to-top');
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            backToTopButton.classList.add('visible');
-        } else {
-            backToTopButton.classList.remove('visible');
-        }
-    });
-}
+/* ========== تصميم متجاوب ========== */ @media (max-width: 600px) { .product-card { width: 100%; max-width: 300px; }
 
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
+.btn, .map-link { width: 100%; display: inline-block; box-sizing: border-box; }
 
-// ========== Success Messages ==========
-function showSuccessMessage(message) {
-    const successMessage = document.getElementById('success-message');
-    const successText = document.getElementById('success-text');
-    
-    successText.textContent = message;
-    successMessage.classList.add('show');
-    
-    setTimeout(() => {
-        successMessage.classList.remove('show');
-    }, 3000);
-}
+.hero h2 { font-size: 1.5em; }
 
-// ========== Utility Functions ==========
-function formatPrice(price) {
-    return parseFloat(price).toFixed(2);
-}
+.cart-icon { top: 10px; left: 10px; padding: 8px 12px; font-size: 1em; } }
 
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// ========== Performance Optimizations ==========
-// Lazy loading for images
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src || img.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// ========== Error Handling ==========
-window.addEventListener('error', function(e) {
-    console.error('خطأ في الموقع:', e.error);
-});
-
-// ========== Service Worker Registration (for future PWA features) ==========
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        // Service worker registration can be added here for PWA features
-        console.log('🔧 الموقع جاهز للتطوير إلى تطبيق ويب تقدمي (PWA)');
-    });
-}
-
-// ========== Analytics and Tracking ==========
-function trackEvent(eventName, eventData = {}) {
-    // Analytics tracking can be implemented here
-    console.log(`📊 تتبع الحدث: ${eventName}`, eventData);
-}
-
-// Track cart actions
-const originalAddToCart = addToCart;
-addToCart = function(productName, price, image) {
-    trackEvent('add_to_cart', { product: productName, price: price });
-    return originalAddToCart.call(this, productName, price, image);
-};
-
-// ========== Accessibility Improvements ==========
-document.addEventListener('keydown', function(e) {
-    // Tab navigation improvements
-    if (e.key === 'Tab') {
-        document.body.classList.add('keyboard-navigation');
-    }
-});
-
-document.addEventListener('mousedown', function() {
-    document.body.classList.remove('keyboard-navigation');
-});
-
-// ========== Final Initialization ==========
-console.log('✅ تم تحميل جميع وظائف الموقع بنجاح!');
-console.log('🚀 مخبزة علاّف - النسخة المحسنة جاهزة للاستخدام!');
+/* ✅ لاحقًا هنا يمكننا إضافة تصميم فاتورة جاهزة للطباعة */
 
