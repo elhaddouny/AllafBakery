@@ -1,4 +1,4 @@
-// عند الضغط على زر "تواصل معنا"، ينقلك مباشرة للقسم
+// 🟡 تمرير سلس عند الضغط على الروابط الداخلية
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -11,17 +11,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// رسالة ترحيبية تظهر في console للمبرمج فقط
+// 🟢 رسالة ترحيبية في console للمطور
 console.log("مرحبا بك في مخبزة علاّف 👋✨");
-// هذا هو الكود لعداد الزوار
-const counter = document.getElementById("visitor-count");
 
-fetch('https://api.countapi.xyz/update/elhadouny.com/visits/?amount=1')
-  .then(res => res.json())
-  .then(res => {
-    counter.innerText = res.value;
-  });
-  const counter = document.getElementById("visitor-count");
+// 🔵 عداد الزوار
+const counter = document.getElementById("visitor-count");
 
 if (counter) {
   fetch('https://api.countapi.xyz/update/elhadouny.com/visits/?amount=1')
@@ -33,7 +27,8 @@ if (counter) {
       console.error("فشل في جلب عدد الزوار:", err);
     });
 }
-// إظهار العناصر عند التمرير (ظهور تدريجي)
+
+// 🟣 إظهار تدريجي للعناصر عند التمرير (انيميشن ذكي)
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -46,6 +41,8 @@ document.querySelectorAll('.product-card, .map-button').forEach(el => {
   el.classList.add('hidden');
   observer.observe(el);
 });
+
+// 🧾 [سيتم لاحقًا هنا توليد الفاتورة عند تأكيد الطلب وإرسالها عبر واتساب]
 .hidden {
   opacity: 0;
   transform: translateY(30px);
