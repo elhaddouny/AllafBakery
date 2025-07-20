@@ -4,24 +4,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مخبزة وحلويات علاف | Allaf Bakery</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    header img.logo {
+      height: 60px;
+      vertical-align: middle;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #fff8f0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .cart-button {
+      background-color: #8B4513;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+  </style>
 </head>
-<body>  <header>
-    <h1>🥐 مخبزة وحلويات علاف</h1>
-    <p>المذاق الأصيل منذ 2024</p>
-    <a href="#" onclick="showCart()" class="btn">🛍️ السلة (<span id="cart-count">0</span>)</a>
+<body>
+  <header>
+    <div>
+      <img src="images/logo.png" alt="شعار المخبزة" class="logo">
+      <h1>🥐 مخبزة وحلويات علاف</h1>
+      <p>المذاق الأصيل منذ 2024</p>
+    </div>
+    <a href="#" onclick="showCart()" class="cart-button">🛍️ السلة (<span id="cart-count">0</span>)</a>
   </header>  <section class="hero">
     <h2>اكتشف ألذ الحلويات والمخبوزات</h2>
     <a href="#products" class="btn">تصفح المنتجات</a>
   </section>  <section id="products">
     <h2>منتجاتنا</h2>
-    <div class="product-list"><div class="product-card">
-    <img src="images/croissant.jpg" alt="كرواسون">
-    <h3>كرواسون زبدة</h3>
-    <p>2 دراهم</p>
-    <button onclick="addToCart('كرواسون زبدة', 2)">🛒 أضف إلى السلة</button>
-  </div>
-
-  <div class="product-card">
+    <div class="product-list">
+      <div class="product-card">
+        <img src="images/croissant.jpg" alt="كرواسون">
+        <h3>كرواسون زبدة</h3>
+        <p>2 دراهم</p>
+        <button onclick="addToCart('كرواسون زبدة', 2)">🛒 أضف إلى السلة</button>
+      </div><div class="product-card">
     <img src="images/msemen.jpg" alt="مسمن">
     <h3>مسمن معسل</h3>
     <p>3.5 دراهم</p>
@@ -34,7 +58,6 @@
     <p>40 درهم</p>
     <button onclick="addToCart('كيكة شوكولا', 40)">🛒 أضف إلى السلة</button>
   </div>
-
 </div>
 
   </section>  <section id="contact">
@@ -47,71 +70,12 @@
     </a>
   </div>  <footer>
     <p>جميع الحقوق محفوظة © 2025 | Allaf.com</p>
-    <136>عدد الزوار: <span id="visitor-count">0</span></p>
+    <p>👁️ عدد الزوار: <span id="visitor-count">0</span></p>
   </footer>  <div id="cart-popup" style="display:none; background:#fff8f0; padding:20px; border:2px solid #8B4513; position:fixed; top:10%; left:5%; width:90%; z-index:999; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
     <h2>🧺 محتوى السلة</h2>
     <ul id="cart-items"></ul>
     <p><strong>المجموع: <span id="cart-total">0</span> درهم</strong></p>
     <button onclick="closeCart()">❌ إغلاق</button>
     <button onclick="generateWhatsAppInvoice()">📤 إرسال الطلب عبر واتساب</button>
-  </div>  <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(`تمت إضافة ${name} إلى السلة!`);
-      updateCartCount();
-    }
-
-    function updateCartCount() {
-      document.getElementById('cart-count').innerText = cart.length;
-    }
-
-    function showCart() {
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-      cartItems.innerHTML = "";
-      let total = 0;
-
-      cart.forEach((item, index) => {
-        total += item.price;
-        cartItems.innerHTML += `<li>${item.name} - ${item.price} درهم <button onclick="removeFromCart(${index})">🗑️ حذف</button></li>`;
-      });
-
-      cartTotal.innerText = total.toFixed(2);
-      document.getElementById('cart-popup').style.display = 'block';
-    }
-
-    function closeCart() {
-      document.getElementById('cart-popup').style.display = 'none';
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      showCart();
-      updateCartCount();
-    }
-
-    function generateWhatsAppInvoice() {
-      if(cart.length === 0) return alert("السلة فارغة!");
-
-      let invoiceText = "🧾 *طلب جديد من موقع Allaf Bakery*\n\n";
-      let total = 0;
-
-      cart.forEach((item, i) => {
-        invoiceText += `• ${item.name} - ${item.price} درهم\n`;
-        total += item.price;
-      });
-
-      invoiceText += `\n📦 *المجموع:* ${total.toFixed(2)} درهم`;
-      invoiceText += "\n\n📍 يرجى تأكيد الطلب للمتابعة.";
-
-      const whatsappURL = `https://wa.me/212681848262?text=${encodeURIComponent(invoiceText)}`;
-      window.open(whatsappURL, '_blank');
-    }
-
-    updateCartCount();
-  </script>  <script src="script.js"></script></body>
+  </div>  <script src="script.js"></script></body>
 </html>
