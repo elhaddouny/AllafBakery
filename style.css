@@ -1,158 +1,211 @@
-// ========== Global Variables ==========
-let cart = JSON.parse(localStorage.getItem('allaf_cart')) || [];
-let currentProduct = null;
-
-// ========== DOM Content Loaded ==========
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🌟 مرحباً بك في مخبزة علاّف المحسنة! نتمنى لك تجربة ممتعة 👨‍🍳');
-
-    initializeWebsite();
-    updateCartDisplay();
-    setupEventListeners();
-    setupScrollAnimations();
-    hideLoadingScreen();
-    updateVisitorCount(); // ✅ عداد الزوار يعمل الآن
-});
-
-// ========== Website Initialization ==========
-function initializeWebsite() {
-    setupSmoothScrolling();
-    setupHeaderScrollEffect();
-    setupProductFiltering();
-    setupBackToTop();
-    setupIntersectionObserver();
+/* ========== إعدادات عامة ========== */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff8f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
 }
 
-// ========== Loading Screen ==========
-function hideLoadingScreen() {
-    setTimeout(() => {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }
-    }, 1500);
+/* ========== الهيدر ========== */
+header {
+  background-color: #8B4513;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+.logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+header p {
+  margin: 5px 0 0;
+  font-size: 1.1em;
 }
 
-// ========== Smooth Scrolling ==========
-function setupSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = document.getElementById('main-header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-
-                updateActiveNavLink(this.getAttribute('href'));
-                closeMobileMenu();
-            }
-        });
-    });
+/* ========== قسم الهيرو ========== */
+.hero {
+  background: url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=2070') no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+}
+.hero h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 }
 
-// ========== Header Scroll Effect ==========
-function setupHeaderScrollEffect() {
-    window.addEventListener('scroll', function() {
-        const header = document.getElementById('main-header');
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+/* ========== الأزرار العامة ========== */
+.btn, .map-link, .cart-btn {
+  display: inline-block;
+  background-color: #e67e22;
+  color: white;
+  padding: 12px 30px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: 0.3s;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+.btn:hover, .map-link:hover, .cart-btn:hover {
+  background-color: #d35400;
+  transform: translateY(-2px);
+}
+.map-button {
+  text-align: center;
+  margin: 30px 0;
 }
 
-// ========== Navigation ==========
-function updateActiveNavLink(href) {
-    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-        link.classList.remove('active');
-    });
-    document.querySelectorAll(`a[href="${href}"]`).forEach(link => {
-        link.classList.add('active');
-    });
+/* ========== قسم المنتجات ========== */
+section {
+  padding: 40px 20px;
+  text-align: center;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+.product-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 220px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.product-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.product-card h3 {
+  margin: 15px 0 5px;
+  color: #444;
+  font-size: 1.2em;
+}
+.product-card p {
+  color: #e67e22;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
-function toggleMobileMenu() {
-    const mobileNav = document.getElementById('mobile-nav');
-    mobileNav.classList.toggle('active');
+/* ========== قسم التواصل ========== */
+#contact {
+  background-color: #f9f2ec;
+  text-align: center;
+  padding: 40px 20px;
 }
 
-function closeMobileMenu() {
-    const mobileNav = document.getElementById('mobile-nav');
-    mobileNav.classList.remove('active');
+/* ========== الفوتر ========== */
+footer {
+  background-color: #8B4513;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+#visitor-count {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #e67e22;
+  margin-top: 5px;
 }
 
-// ========== Product Filtering ==========
-function setupProductFiltering() {
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    const productCards = document.querySelectorAll('.product-card');
-
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            filterProducts(category, productCards);
-        });
-    });
+/* ========== السلة العائمة ========== */
+.cart-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #e67e22;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 1.5em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.cart-icon:hover {
+  background-color: #d35400;
+  transform: scale(1.1);
+}
+.cart-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #d35400;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.6em;
+    font-weight: bold;
 }
 
-function filterProducts(category, productCards) {
-    productCards.forEach(card => {
-        const productCategory = card.getAttribute('data-category');
+/* ========== نافذة السلة المنبثقة ========== */
+#cart-popup {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+    background-color: #fff8f0;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    padding: 25px;
+}
+#cart-popup h2 { margin-top: 0; }
+#cart-items { list-style: none; padding: 0; max-height: 200px; overflow-y: auto; }
+#cart-items li { padding: 8px 0; border-bottom: 1px solid #eee; }
+.cart-actions { margin-top: 20px; display: flex; gap: 10px; justify-content: center; }
 
-        if (category === 'all' || productCategory === category) {
-            card.style.display = 'block';
-            setTimeout(() => {
-                card.classList.remove('hidden');
-            }, 100);
-        } else {
-            card.classList.add('hidden');
-            setTimeout(() => {
-                card.style.display = 'none';
-            }, 300);
-        }
-    });
+/* ========== أنماط إضافية عامة ========== */
+h2 {
+  font-size: 2.2em;
+  margin-bottom: 30px;
+  color: #8B4513;
 }
 
-// ========== Visitor Counter ==========
-function updateVisitorCount() {
-    const counter = document.getElementById("visitor-count");
-    if (!counter) return;
-
-    fetch('https://api.countapi.xyz/hit/allaf-bakery/visits')
-        .then(res => res.json())
-        .then(data => {
-            counter.textContent = data.value;
-        })
-        .catch(err => {
-            console.error("فشل عداد الزوار:", err);
-            counter.textContent = "؟";
-        });
+/* ========== تأثيرات الانيميشن ========== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-// ========== Cart Display ==========
-function updateCartDisplay() {
-    const cartCounter = document.getElementById('cart-count');
-    if (!cartCounter) return;
-
-    cartCounter.textContent = cart.length;
-
-    const cartItemsContainer = document.getElementById('cart-items');
-    if (cartItemsContainer) {
-        cartItemsContainer.innerHTML = '';
-        cart.forEach((item, index) => {
-            const li = document.createElement('li');
-            li.textContent = `${item.name} × ${item.quantity}`;
-            cartItemsContainer.appendChild(li);
-        });
-    }
+/* ========== تصميم متجاوب ========== */
+@media (max-width: 600px) {
+  .product-card {
+    width: 80%;
+    max-width: 300px;
+  }
+  .btn, .map-link {
+    width: 80%;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  .hero h2 { font-size: 1.8em; }
+  .cart-icon { top: 15px; left: 15px; padding: 12px; font-size: 1.2em; }
 }
