@@ -3,673 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مخبزة وحلويات علاّف | طعم لا يُنسى</title>
+    <meta name="description" content="مخبزة وحلويات علاّف - أجود المخبوزات والحلويات الطازجة يومياً. طعم أصيل لا يُنسى">
+    <meta name="keywords" content="مخبزة, حلويات, خبز, كيك, مسمن, كرواسون, علاّف">
+    <meta name="author" content="مخبزة وحلويات علاّف">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="مخبزة وحلويات علاّف - طعم أصيل لا يُنسى">
+    <meta property="og:description" content="أجود المخبوزات والحلويات الطازجة يومياً">
+    <meta property="og:image" content="images/og-image.jpg">
+    <meta property="og:url" content="https://allaf-bakery.com">
+    <meta property="og:type" content="website">
+    
+    <title>مخبزة وحلويات علاّف | طعم أصيل لا يُنسى</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <style>
-        /* ===== CSS Variables ===== */
-        :root {
-            --primary-color: #8B4513;
-            --secondary-color: #D2691E;
-            --accent-color: #FFD700;
-            --text-dark: #2C1810;
-            --text-light: #6B4423;
-            --bg-cream: #FFF8F0;
-            --bg-white: #FFFFFF;
-            --shadow-light: rgba(139, 69, 19, 0.1);
-            --shadow-medium: rgba(139, 69, 19, 0.2);
-            --gradient-warm: linear-gradient(135deg, #FFE4B5 0%, #DEB887 100%);
-            --font-arabic: 'Cairo', sans-serif;
-            --font-elegant: 'Amiri', serif;
-        }
-
-        /* ===== Global Styles ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-arabic);
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* ===== Loading Animation ===== */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--primary-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 4px solid var(--accent-color);
-            border-top: 4px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* ===== Header ===== */
-        .header {
-            background: var(--bg-white);
-            box-shadow: 0 2px 20px var(--shadow-light);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .header.scrolled {
-            box-shadow: 0 4px 30px var(--shadow-medium);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent-color);
-        }
-
-        .brand-text h1 {
-            font-family: var(--font-elegant);
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 0.2rem;
-        }
-
-        .brand-text p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--secondary-color);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .cart-icon {
-            position: relative;
-            background: var(--gradient-warm);
-            padding: 0.8rem;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            border: none;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        .cart-icon:hover {
-            transform: scale(1.1);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--secondary-color);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-
-        /* ===== Hero Section ===== */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072') center/cover;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero h2 {
-            font-family: var(--font-elegant);
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            background: var(--accent-color);
-            color: var(--primary-color);
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-        }
-
-        /* ===== Sections ===== */
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: var(--font-elegant);
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        /* ===== Products Grid ===== */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .product-card {
-            background: var(--bg-white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px var(--shadow-light);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--shadow-medium);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .product-description {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .add-to-cart:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        /* ===== Cart Modal ===== */
-        .cart-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .cart-content {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .cart-title {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .close-cart {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-
-        .cart-items {
-            margin-bottom: 1.5rem;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-total {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            background: var(--accent-color);
-            color: var(--primary-color);
-            border: none;
-            padding: 1rem;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .checkout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        /* ===== Contact Section ===== */
-        .contact-section {
-            background: var(--gradient-warm);
-            text-align: center;
-        }
-
-        .contact-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .contact-btn {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contact-btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-
-        /* ===== Footer ===== */
-        .footer {
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .social-links {
-            margin: 1rem 0;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* ===== Animations ===== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== Responsive Design ===== */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .hero h2 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .section {
-                padding: 3rem 1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader"></div>
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="images/logo.png" alt="شعار مخبزة علاّف">
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+            <p class="loading-text">جاري تحضير أشهى المخبوزات...</p>
+        </div>
     </div>
 
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="nav-container">
-            <div class="logo-section">
-                <img src="images/logo.png" alt="شعار مخبزة علاّف" class="logo">
-                <div class="brand-text">
-                    <h1>مخبزة علاّف</h1>
-                    <p>طعم لا يُنسى</p>
+    <!-- Header & Navigation -->
+    <header id="main-header" class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo Section -->
+                <div class="logo-section">
+                    <img src="images/logo.png" alt="شعار مخبزة علاّف" class="logo">
+                    <div class="brand-info">
+                        <h1 class="brand-name">مخبزة علاّف</h1>
+                        <span class="brand-tagline">طعم أصيل لا يُنسى</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active" data-section="home">
+                            <i class="fas fa-home"></i>
+                            <span>الرئيسية</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#products" class="nav-link" data-section="products">
+                            <i class="fas fa-bread-slice"></i>
+                            <span>منتجاتنا</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#gallery" class="nav-link" data-section="gallery">
+                            <i class="fas fa-images"></i>
+                            <span>معرض الصور</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link" data-section="about">
+                            <i class="fas fa-info-circle"></i>
+                            <span>قصتنا</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link" data-section="contact">
+                            <i class="fas fa-phone"></i>
+                            <span>تواصل معنا</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Search Button -->
+                    <button class="search-btn" id="search-btn" aria-label="البحث">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <!-- Cart Button -->
+                    <button class="cart-btn" id="cart-btn" aria-label="سلة التسوق">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </button>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" id="theme-toggle" aria-label="تغيير المظهر">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="القائمة">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
             </div>
-            
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="#hero" class="nav-link">الرئيسية</a></li>
-                    <li><a href="#products" class="nav-link">منتجاتنا</a></li>
-                    <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
-                </ul>
-            </nav>
-            
-            <button class="cart-icon" onclick="toggleCart()">
-                <i class="fas fa-shopping-basket"></i>
-                <span class="cart-count" id="cartCount">0</span>
-            </button>
+        </nav>
+
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="search-overlay">
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="ابحث عن منتجاتك المفضلة...">
+                <button class="search-close" id="search-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-results" id="search-results"></div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h2>نخبز بحب، نقدم بشغف</h2>
-            <p>اكتشف تشكيلتنا الفريدة من المخبوزات الطازجة والحلويات الشهية المصنوعة يدوياً كل يوم</p>
-            <a href="#products" class="cta-button">
-                <i class="fas fa-arrow-down"></i>
-                اكتشف منتجاتنا
-            </a>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-background">
+                <div class="hero-overlay"></div>
+                <video class="hero-video" autoplay muted loop>
+                    <source src="images/bakery-video.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="hero-title">نخبز بحب، نقدم بشغف</h2>
+                    <p class="hero-subtitle">اكتشف تشكيلتنا الفريدة من المخبوزات الطازجة والحلويات الشهية المصنوعة يدوياً كل يوم</p>
+                    <div class="hero-buttons">
+                        <a href="#products" class="cta-primary">
+                            <i class="fas fa-shopping-bag"></i>
+                            تصفح منتجاتنا
+                        </a>
+                        <a href="#about" class="cta-secondary">
+                            <i class="fas fa-play"></i>
+                            اكتشف قصتنا
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="15">0</span>
+                        <span class="stat-label">سنة خبرة</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="50">0</span>
+                        <span class="stat-label">نوع منتج</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="1000">0</span>
+                        <span class="stat-label">عميل سعيد</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
 
-    <!-- Products Section -->
-    <section class="section" id="products">
-        <h2 class="section-title fade-in">منتجاتنا المميزة</h2>
-        <div class="products-grid">
-            <div class="product-card fade-in">
-                <img src="images/croissant.jpg" alt="كرواسون بالزبدة" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-name">كرواسون بالزبدة الفرنسية</h3>
-                    <p class="product-description">مخبوز طازج يومياً بأجود أنواع الزبدة الفرنسية</p>
-                    <div class="product-price">2.00 درهم</div>
-                    <button class="add-to-cart" onclick="addToCart('كرواسون بالزبدة الفرنسية', 2.00)">
+        <!-- Featured Products Section -->
+        <section class="featured-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">منتجاتنا المميزة</h2>
+                    <p class="section-subtitle">تذوق أشهى المخبوزات والحلويات الطازجة</p>
+                </div>
+                <div class="featured-grid">
+                    <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-image">
+                            <img src="images/featured-bread.jpg" alt="خبز طازج">
+                            <div class="card-overlay">
+                                <button class="quick-view-btn" data-product="bread">
+                                    <i class="fas fa-eye"></i>
+                                    عرض سريع
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">مخبوزات طازجة</h3>
+                            <p class="card-description">خبز يومي طازج بأجود المكونات</p>
+                        </div>
+                    </div>
+                    <div class="featured-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-image">
+                            <img src="images/featured-sweets.jpg" alt="حلويات">
+                            <div class="card-overlay">
+                                <button class="quick-view-btn" data-product="sweets">
+                                    <i class="fas fa-eye"></i>
+                                    عرض سريع
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">حلويات شرقية</h3>
+                            <p class="card-description">حلويات تقليدية بنكهات أصيلة</p>
+                        </div>
+                    </div>
+                    <div class="featured-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-image">
+                            <img src="images/featured-cakes.jpg" alt="كيك">
+                            <div class="card-overlay">
+                                <button class="quick-view-btn" data-product="cakes">
+                                    <i class="fas fa-eye"></i>
+                                    عرض سريع
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">كيك وتورتات</h3>
+                            <p class="card-description">كيك مخصص لجميع المناسبات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">جميع منتجاتنا</h2>
+                    <p class="section-subtitle">اختر من تشكيلتنا الواسعة</p>
+                </div>
+                
+                <!-- Product Categories Filter -->
+                <div class="category-filter" data-aos="fade-up" data-aos-delay="100">
+                    <button class="filter-btn active" data-category="all">
+                        <i class="fas fa-th"></i>
+                        الكل
+                    </button>
+                    <button class="filter-btn" data-category="bread">
+                        <i class="fas fa-bread-slice"></i>
+                        مخبوزات
+                    </button>
+                    <button class="filter-btn" data-category="sweets">
+                        <i class="fas fa-cookie-bite"></i>
+                        حلويات
+                    </button>
+                    <button class="filter-btn" data-category="cakes">
+                        <i class="fas fa-birthday-cake"></i>
+                        كيك وتورتات
+                    </button>
+                    <button class="filter-btn" data-category="drinks">
+                        <i class="fas fa-coffee"></i>
+                        مشروبات
+                    </button>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="products-grid">
+                    <!-- Product items will be dynamically loaded here -->
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container" data-aos="fade-up">
+                    <button class="load-more-btn" id="load-more-btn">
                         <i class="fas fa-plus"></i>
-                        أضف إلى السلة
+                        عرض المزيد
                     </button>
                 </div>
             </div>
+        </section>
 
-            <div class="product-card fade-in">
-                <img src="images/msemen.jpg" alt="مسمن بلدي" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-name">مسمن بلدي معسل</h3>
-                    <p class="product-description">مسمن تقليدي مغربي بالعسل الطبيعي</p>
-                    <div class="product-price">3.50 درهم</div>
-                    <button class="add-to-cart" onclick="addToCart('مسمن بلدي معسل', 3.50)">
-                        <i class="fas fa-plus"></i>
-                        أضف إلى السلة
-                    </button>
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">معرض إبداعاتنا</h2>
+                    <p class="section-subtitle">شاهد أجمل ما نصنعه لكم</p>
+                </div>
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- Gallery items will be dynamically loaded here -->
                 </div>
             </div>
+        </section>
 
-            <div class="product-card fade-in">
-                <img src="images/cake.jpg" alt="كيكة الشوكولاتة" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-name">كيكة الشوكولاتة الغنية</h3>
-                    <p class="product-description">كيكة شوكولاتة فاخرة بطبقات كريمية</p>
-                    <div class="product-price">40.00 درهم</div>
-                    <button class="add-to-cart" onclick="addToCart('كيكة الشوكولاتة الغنية', 40.00)">
-                        <i class="fas fa-plus"></i>
-                        أضف إلى السلة
-                    </button>
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text" data-aos="fade-right">
+                        <div class="section-header">
+                            <h2 class="section-title">قصتنا</h2>
+                            <p class="section-subtitle">رحلة من الشغف إلى الإتقان</p>
+                        </div>
+                        <div class="about-description">
+                            <p>منذ عام 2008، ونحن في مخبزة علاّف نضع قلوبنا في كل ما نخبزه. بدأت رحلتنا بحلم بسيط: مشاركة العالم طعم المخبوزات الأصيلة المصنوعة من مكونات طبيعية وبلمسة من الحب.</p>
+                            <p>نؤمن بأن كل قطعة خبز، وكل حبة حلوى، وكل كيكة نصنعها تحمل في طياتها قصة من الشغف والإتقان. فريقنا من الخبازين المهرة يعمل بلا كلل لضمان أن كل منتج يخرج من أفراننا يلبي أعلى معايير الجودة والطعم.</p>
+                        </div>
+                        <div class="about-features">
+                            <div class="feature-item">
+                                <i class="fas fa-leaf"></i>
+                                <span>مكونات طبيعية 100%</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>طازج يومياً</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-heart"></i>
+                                <span>مصنوع بحب</span>
+                            </div>
+                        </div>
+                        <a href="#contact" class="cta-primary">
+                            <i class="fas fa-phone"></i>
+                            تواصل معنا
+                        </a>
+                    </div>
+                    <div class="about-media" data-aos="fade-left">
+                        <div class="media-container">
+                            <img src="images/about-image.jpg" alt="داخل المخبزة" class="about-image">
+                            <div class="play-button" id="play-video">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="about-stats">
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <span class="stat-number" data-count="5000">0</span>
+                                <span class="stat-label">عميل راضٍ</span>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-award"></i>
+                                <span class="stat-number" data-count="10">0</span>
+                                <span class="stat-label">جائزة محلية</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="product-card fade-in">
-                <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=400" alt="خبز بلدي" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-name">خبز بلدي طازج</h3>
-                    <p class="product-description">خبز مغربي تقليدي مخبوز في فرن الحطب</p>
-                    <div class="product-price">1.50 درهم</div>
-                    <button class="add-to-cart" onclick="addToCart('خبز بلدي طازج', 1.50)">
-                        <i class="fas fa-plus"></i>
-                        أضف إلى السلة
-                    </button>
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">آراء عملائنا</h2>
+                    <p class="section-subtitle">ما يقوله عملاؤنا الكرام عنا</p>
+                </div>
+                <div class="testimonials-slider" id="testimonials-slider">
+                    <!-- Testimonial items will be dynamically loaded here -->
                 </div>
             </div>
+        </section>
 
-            <div class="product-card fade-in">
-                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=400" alt="دونات" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-name">دونات محشية</h3>
-                    <p class="product-description">دونات طرية محشية بالكريمة والمربى</p>
-                    <div class="product-price">4.00 درهم</div>
-                    <button class="add-to-cart" onclick="addToCart('دونات محشية', 4.00)">
-                        <i class="fas fa-plus"></i>
-                        أضف إلى السلة
-                    </button>
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">تواصل معنا</h2>
+                    <p class="section-subtitle">نحن هنا لخدمتكم</p>
                 </div>
-            </div>
-
-            <div class="product-card fade-in">
-                <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?q=80&w=400" alt="معجنات" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-name">معجنات متنوعة</h3>
-                    <p class="product-description">تشكيلة من المعجنات الشهية بحشوات مختلفة</p>
-                    <div class="product-price">5.00 درهم</div>
-                    <button class="add-to-cart" onclick="addToCart('معجنات متنوعة', 5.00)">
-                        <i class="fas fa-plus"></i>
-                        أضف إلى السلة
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-   
+                <div class="contact-content">
+                    <div class="contact-info" data-aos="fade-right">
+                        <div class="info-card">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>موقعنا</h3>
+                            <p>شارع الرئيسي، المدينة، المغرب</p>
+                            <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="info-link">
+                                عرض على الخريطة
+                            </a>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-phone"></i>
+                            <h3>هاتفنا</h3>
+                            <p dir="ltr">+212 681 848 262</p>
+                            <a href="tel:+212681848262" class="info-link">
+                                اتصل بنا الآن
+                            </a>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>ساعات العمل</h3>
+                            <p>السبت - الخميس: 6:00 ص - 10:00 م</p>
+                            <p>الجمعة: 2:00 م - 10:00 م</p>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="فيسبوك">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="إنستغرام">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="تيك توك">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://wa.me/212681848262" class="social-link whatsapp" aria-label="واتساب">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+         
