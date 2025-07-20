@@ -1,510 +1,85 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>مخبزة وحلويات علاّف | Allaf Bakery - جودة تتذوقها</title>
-
-    <!-- Google Fonts for elegant typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marhey:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <style>
-        /* CSS Variables for easy theme management */
-        :root {
-            --primary-color: #6D4C41; /* بني داكن */
-            --secondary-color: #FFC107; /* أصفر ذهبي */
-            --background-color: #FBF8F1; /* أبيض كريمي */
-            --text-color: #4E342E;
-            --white-color: #FFFFFF;
-            --heading-font: 'Marhey', cursive;
-            --body-font: 'Noto Sans Arabic', sans-serif;
-            --header-height: 80px;
-        }
-
-        /* General Body Styles */
-        *, *::before, *::after { box-sizing: border-box; }
-        body {
-            font-family: var(--body-font);
-            margin: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-        }
-
-        /* Loading Screen */
-        #loading-screen {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: var(--primary-color);
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s ease-out;
-        }
-        #loading-screen.hidden { opacity: 0; }
-        .loader {
-            border: 5px solid var(--background-color);
-            border-top: 5px solid var(--secondary-color);
-            border-radius: 50%;
-            width: 50px; height: 50px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* Header */
-        #main-header {
-            background-color: var(--white-color);
-            padding: 0 5%;
-            height: var(--header-height);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        #main-header.scrolled {
-            height: 70px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .logo-container { display: flex; align-items: center; gap: 10px; }
-        .logo-container img { height: 50px; transition: height 0.3s ease; }
-        #main-header.scrolled .logo-container img { height: 40px; }
-        .logo-container h1 { font-family: var(--heading-font); color: var(--primary-color); font-size: 24px; margin: 0; }
-
-        /* Navigation */
-        .main-nav { display: flex; gap: 30px; }
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            position: relative;
-            padding: 5px 0;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0; right: 0;
-            width: 0; height: 2px;
-            background-color: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-
-        /* Header Actions */
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        .cart-icon {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            position: relative;
-        }
-        #cart-count {
-            position: absolute;
-            top: -8px; right: -12px;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-        .mobile-menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
-
-        /* Mobile Navigation */
-        #mobile-nav {
-            position: fixed;
-            top: 0; left: -100%;
-            width: 80%; height: 100%;
-            background-color: var(--primary-color);
-            z-index: 9999;
-            padding: 100px 40px;
-            transition: left 0.4s ease;
-        }
-        #mobile-nav.active { left: 0; }
-        .mobile-nav-links { display: flex; flex-direction: column; gap: 25px; }
-        .mobile-nav-link {
-            color: var(--white-color);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        .mobile-nav-link.active { color: var(--secondary-color); }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 5%;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072') no-repeat center center/cover;
-            color: var(--white-color);
-        }
-        .hero h2 { font-family: var(--heading-font); font-size: 4rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.2rem; max-width: 600px; margin: 20px auto 30px; }
-        .btn {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        .btn:hover { background-color: transparent; border-color: var(--secondary-color); color: var(--white-color); transform: translateY(-3px); }
-
-        /* General Section Styling */
-        section { padding: 80px 5%; }
-        .section-title {
-            text-align: center;
-            font-family: var(--heading-font);
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 50px;
-        }
-
-        /* Products Section */
-        .category-filters { text-align: center; margin-bottom: 40px; }
-        .category-btn {
-            background: none;
-            border: 2px solid #ddd;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        .category-btn:hover, .category-btn.active {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            border-color: var(--primary-color);
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .product-card {
-            background-color: var(--white-color);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .product-card.hidden { opacity: 0; transform: scale(0.9); }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; height: 220px; object-fit: cover; }
-        .product-content { padding: 20px; text-align: center; }
-        .product-content h3 { font-family: var(--heading-font); font-size: 1.5rem; margin: 10px 0; }
-        .product-content .price { font-size: 1.2rem; font-weight: bold; color: var(--secondary-color); margin-bottom: 15px; }
-        .add-to-cart-btn {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            padding: 10px 25px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .add-to-cart-btn:hover { background-color: #4E342E; }
-
-        /* Footer */
-        footer {
-            background-color: var(--primary-color);
-            color: var(--background-color);
-            padding: 50px 5%;
-            text-align: center;
-        }
-        .footer-logo { height: 60px; margin-bottom: 15px; }
-        .social-links a { color: var(--white-color); margin: 0 15px; font-size: 1.5rem; transition: color 0.3s; }
-        .social-links a:hover { color: var(--secondary-color); }
-        .footer-text { margin: 20px 0 0; }
-
-        /* Back to Top Button */
-        #back-to-top {
-            position: fixed;
-            bottom: 20px; right: 20px;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-        #back-to-top.visible { opacity: 1; visibility: visible; }
-
-        /* Animation on Scroll */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .main-nav { display: none; }
-            .mobile-menu-toggle { display: block; }
-        }
-        @media (max-width: 768px) {
-            .hero h2 { font-size: 3rem; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مخبزة وحلويات علاّف | Allaf Bakery - الطعم الأصيل</title>
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Linking the external CSS file -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader"></div>
+  <header class="fade-in">
+    <img src="images/logo.png" alt="شعار مخبزة علاّف" class="logo" />
+    <h1>مخبزة وحلويات علاّف</h1>
+    <p>المذاق الأصيل الذي لا يُنسى</p>
+  </header>
+
+  <div onclick="showCart()" class="cart-icon">
+    <i class="fas fa-shopping-basket"></i>
+    <span id="cart-count-badge" class="cart-count-badge">0</span>
+  </div>
+
+  <main>
+    <section class="hero fade-in">
+      <h2>نخبز لكم السعادة كل يوم</h2>
+      <a href="#products" class="btn">اكتشف منتجاتنا</a>
+    </section>
+
+    <section id="products" class="fade-in">
+      <h2>منتجاتنا الطازجة</h2>
+      <div class="products">
+        <div class="product-card">
+          <img src="images/croissant.jpg" alt="كرواسون" />
+          <h3>كرواسون بالزبدة</h3>
+          <p>2 دراهم</p>
+          <button class="cart-btn" onclick="addToCart('كرواسون بالزبدة', 2)">أضف للسلة</button>
+        </div>
+        <div class="product-card">
+          <img src="images/msemen.jpg" alt="مسمن" />
+          <h3>مسمن بلدي معسل</h3>
+          <p>3.5 دراهم</p>
+          <button class="cart-btn" onclick="addToCart('مسمن بلدي معسل', 3.5)">أضف للسلة</button>
+        </div>
+        <div class="product-card">
+          <img src="images/cake.jpg" alt="كيك" />
+          <h3>كيكة الشوكولاتة</h3>
+          <p>40 درهم</p>
+          <button class="cart-btn" onclick="addToCart('كيكة الشوكولاتة', 40)">أضف للسلة</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+      <h2>تواصل معنا أو تفضل بزيارتنا</h2>
+      <div class="map-button">
+        <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="map-link">📍 موقعنا على الخريطة</a>
+        <a href="https://wa.me/212681848262" target="_blank" class="btn">💬 الطلب عبر واتساب</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fade-in">
+    <p>جميع الحقوق محفوظة © 2025 | Allaf.com</p>
+    <p>عدد الزوار: <span id="visitor-count">0</span></p>
+  </footer>
+
+  <div id="cart-popup">
+    <h2><i class="fas fa-shopping-basket"></i> سلة التسوق</h2>
+    <ul id="cart-items"><li>السلة فارغة حاليًا.</li></ul>
+    <p><strong>المجموع: <span id="cart-total">0.00</span> درهم</strong></p>
+    <div class="cart-actions">
+        <button class="btn" onclick="closeCart()">إغلاق</button>
+        <button class="cart-btn" onclick="generateWhatsAppInvoice()">إرسال الطلب</button>
     </div>
+  </div>
 
-    <!-- Header -->
-    <header id="main-header">
-        <div class="logo-container">
-            <img src="images/logo.png" alt="شعار مخبزة علاّف" class="logo">
-            <h1>علاّف</h1>
-        </div>
-        <nav class="main-nav">
-            <a href="#hero" class="nav-link active">الرئيسية</a>
-            <a href="#products" class="nav-link">المنتجات</a>
-            <a href="#about" class="nav-link">قصتنا</a>
-            <a href="#contact" class="nav-link">تواصل</a>
-        </nav>
-        <div class="header-actions">
-            <div class="cart-icon" onclick="alert('سيتم فتح نافذة السلة هنا')">
-                <i class="fas fa-shopping-basket"></i>
-                <span id="cart-count">0</span>
-            </div>
-            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </header>
+  <!-- Linking the external JavaScript file -->
+  <script src="script.js"></script>
 
-    <!-- Mobile Navigation -->
-    <div id="mobile-nav">
-        <nav class="mobile-nav-links">
-            <a href="#hero" class="mobile-nav-link active">الرئيسية</a>
-            <a href="#products" class="mobile-nav-link">المنتجات</a>
-            <a href="#about" class="mobile-nav-link">قصتنا</a>
-            <a href="#contact" class="mobile-nav-link">تواصل</a>
-        </nav>
-    </div>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <h2 class="animate-on-scroll">نخبز بحب، نقدم بشغف</h2>
-            <p class="animate-on-scroll">اكتشف تشكيلتنا الفريدة من المخبوزات الطازجة والحلويات الشهية المصنوعة يدوياً كل يوم.</p>
-            <a href="#products" class="btn animate-on-scroll">تصفح قائمة الطعام</a>
-        </section>
-
-        <!-- Products Section -->
-        <section id="products">
-            <h2 class="section-title animate-on-scroll">منتجاتنا</h2>
-            <div class="category-filters animate-on-scroll">
-                <button class="category-btn active" data-category="all">الكل</button>
-                <button class="category-btn" data-category="bakery">مخبوزات</button>
-                <button class="category-btn" data-category="sweets">حلويات</button>
-                <button class="category-btn" data-category="cakes">كيك</button>
-            </div>
-            <div class="product-grid">
-                <!-- Product 1 -->
-                <div class="product-card animate-on-scroll" data-category="bakery">
-                    <img src="images/croissant.jpg" alt="كرواسون">
-                    <div class="product-content">
-                        <h3>كرواسون بالزبدة</h3>
-                        <p class="price">2 دراهم</p>
-                        <button class="add-to-cart-btn" onclick="addToCart('كرواسون بالزبدة', 2, 1)">أضف للسلة</button>
-                    </div>
-                </div>
-                <!-- Product 2 -->
-                <div class="product-card animate-on-scroll" data-category="bakery">
-                    <img src="images/msemen.jpg" alt="مسمن">
-                    <div class="product-content">
-                        <h3>مسمن بلدي</h3>
-                        <p class="price">3.5 دراهم</p>
-                        <button class="add-to-cart-btn" onclick="addToCart('مسمن بلدي', 3.5, 1)">أضف للسلة</button>
-                    </div>
-                </div>
-                <!-- Product 3 -->
-                <div class="product-card animate-on-scroll" data-category="cakes">
-                    <img src="images/cake.jpg" alt="كيك">
-                    <div class="product-content">
-                        <h3>كيك الشوكولاتة</h3>
-                        <p class="price">40 درهم</p>
-                        <button class="add-to-cart-btn" onclick="addToCart('كيك الشوكولاتة', 40, 1)">أضف للسلة</button>
-                    </div>
-                </div>
-                 <!-- Add more products with data-category -->
-            </div>
-        </section>
-        
-        <!-- About Section (Placeholder) -->
-        <section id="about" style="background-color: var(--white-color);">
-            <h2 class="section-title animate-on-scroll">قصتنا</h2>
-            <p style="text-align:center; max-width: 700px; margin: auto;" class="animate-on-scroll">
-                منذ عام 2024، ونحن في مخبزة علاّف نضع قلوبنا في كل ما نخبزه. بدأت رحلتنا بحلم بسيط: مشاركة العالم طعم المخبوزات الأصيلة المصنوعة من مكونات طبيعية وبلمسة من الحب.
-            </p>
-        </section>
-
-        <!-- Contact Section (Placeholder) -->
-        <section id="contact">
-            <h2 class="section-title animate-on-scroll">تواصل معنا</h2>
-            <div style="text-align:center;" class="animate-on-scroll">
-                <a href="https://wa.me/212681848262" class="btn">اطلب عبر واتساب</a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <img src="images/logo.png" alt="شعار مخبزة علاّف" class="footer-logo">
-        <div class="social-links">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p class="footer-text">جميع الحقوق محفوظة © 2025 | مخبزة وحلويات علاّف</p>
-        <p>عدد الزوار: <span id="visitor-count">...</span></p>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <div id="back-to-top"><i class="fas fa-arrow-up"></i></div>
-
-    <script>
-    // ========== Global Variables ==========
-    let cart = JSON.parse(localStorage.getItem('allaf_cart_v3')) || [];
-
-    // ========== DOM Content Loaded ==========
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('🌟 مرحباً بك في مخبزة علاّف المحسنة! نتمنى لك تجربة ممتعة 👨‍🍳');
-        initializeWebsite();
-    });
-
-    // ========== Website Initialization ==========
-    function initializeWebsite() {
-        hideLoadingScreen();
-        setupSmoothScrolling();
-        setupHeaderScrollEffect();
-        setupProductFiltering();
-        setupBackToTop();
-        setupIntersectionObserver();
-        updateCartDisplay();
-        updateVisitorCount();
-        setupEventListeners();
-    }
-
-    // ========== Event Listeners ==========
-    function setupEventListeners() {
-        // This is a placeholder for future event listeners if needed
-    }
-
-    // ========== Loading Screen ==========
-    function hideLoadingScreen() {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            setTimeout(() => {
-                loadingScreen.classList.add('hidden');
-                setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
-            }, 500); // Reduced time for faster loading feel
-        }
-    }
-
-    // ========== Smooth Scrolling & Active Nav Link ==========
-    function setupSmoothScrolling() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
-                if (target) {
-                    const headerHeight = document.getElementById('main-header').offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                    updateActiveNavLink(targetId);
-                    closeMobileMenu();
-                }
-            });
-        });
-    }
-
-    // ========== Header & Back-to-Top Scroll Effects ==========
-    function setupHeaderScrollEffect() {
-        const header = document.getElementById('main-header');
-        const backToTopBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-                backToTopBtn.classList.add('visible');
-            } else {
-                header.classList.remove('scrolled');
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-    }
-
-    // ========== Navigation ==========
-    function updateActiveNavLink(href) {
-        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === href) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    function toggleMobileMenu() {
-        document.getElementById('mobile-nav').classList.toggle('active');
-    }
-
-    function closeMobileMenu() {
-        document.getElementById('mobile-nav').classList.remove('active');
-    }
-
-    // ========== Product Filtering ==========
-    function setupProductFiltering() {
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const category = this.getAttribute('data-category');
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                filterProducts(category);
-            });
-        });
-    }
-
-    function filterProducts(category) {
-        const productCards = document.querySelectorAll('.product-card');
-        productCards.forEach(card => {
-            const productCategory = card.getAttribute('data-category');
-            const shouldShow = (category === 'all' || productCategory === category);
-            
-            card.style.transition = 'opacity 0.3s, transform 0.3s';
-            card.classList.add('hidden');
-
-            setTimeout(() => {
-                card.style.display = shouldShow ? 'block' : 'none';
-                if(shouldShow) {
-                    setTimeout(() => card.classList.remove('hidden'), 20);
-                }
-            }, 300);
-        });
-    }
-
-    // ========== Visitor Counter ==========
-    function
+</body>
+</html>
