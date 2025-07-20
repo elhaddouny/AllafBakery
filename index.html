@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="مخبزة وحلويات علاف - أفضل المخبوزات والحلويات الطازجة يومياً. المذاق الأصيل منذ 2024">
+  <meta name="keywords" content="مخبزة, حلويات, كرواسون, مسمن, كيك, علاف, مخبوزات طازجة">
+  <meta name="author" content="مخبزة علاف">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="مخبزة وحلويات علاف | Allaf Bakery">
+  <meta property="og:description" content="أفضل المخبوزات والحلويات الطازجة يومياً">
+  <meta property="og:image" content="images/logo.png">
+  <meta property="og:url" content="https://allaf.com">
+  <meta property="og:type" content="website">
+  
+  <title>مخبزة وحلويات علاف | Allaf Bakery</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style_improved.css">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <img src="images/logo.png" alt="شعار مخبزة علاف" class="loading-logo">
+      <div class="loading-spinner"></div>
+      <p>جاري تحضير أشهى المخبوزات...</p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header id="main-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="images/logo.png" alt="شعار مخبزة علاف" class="logo">
+          <div class="brand-info">
+            <h1>مخبزة وحلويات علاف</h1>
+            <p class="tagline">المذاق الأصيل منذ 2024</p>
+          </div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="#products" class="nav-link"><i class="fas fa-bread-slice"></i> منتجاتنا</a></li>
+            <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> عنا</a></li>
+            <li><a href="#contact" class="nav-link"><i class="fas fa-phone"></i> تواصل معنا</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Cart and Mobile Menu -->
+        <div class="header-actions">
+          <button class="cart-button" onclick="showCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-text">السلة</span>
+            <span class="cart-count" id="cart-count">0</span>
+          </button>
+          <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <ul class="mobile-nav-list">
+      <li><a href="#home" class="mobile-nav-link"><i class="fas fa-home"></i> الرئيسية</a></li>
+      <li><a href="#products" class="mobile-nav-link"><i class="fas fa-bread-slice"></i> منتجاتنا</a></li>
+      <li><a href="#about" class="mobile-nav-link"><i class="fas fa-info-circle"></i> عنا</a></li>
+      <li><a href="#contact" class="mobile-nav-link"><i class="fas fa-phone"></i> تواصل معنا</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h2 class="hero-title">اكتشف ألذ الحلويات والمخبوزات</h2>
+      <p class="hero-subtitle">نقدم لك أفضل المخبوزات الطازجة والحلويات الشهية المصنوعة بحب وعناية</p>
+      <div class="hero-buttons">
+        <a href="#products" class="btn btn-primary">
+          <i class="fas fa-eye"></i> تصفح المنتجات
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          <i class="fas fa-phone"></i> اطلب الآن
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>طازج يومياً</h3>
+          <p>نخبز منتجاتنا طازجة كل يوم لضمان أفضل جودة ومذاق</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>مصنوع بحب</h3>
+          <p>كل منتج يُصنع بعناية فائقة وحب لتقديم أفضل تجربة</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3>مكونات طبيعية</h3>
+          <p>نستخدم أجود المكونات الطبيعية والطازجة في جميع منتجاتنا</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shipping-fast"></i>
+          </div>
+          <h3>توصيل سريع</h3>
+          <p>خدمة توصيل سريعة لضمان وصول منتجاتنا طازجة إليك</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">منتجاتنا المميزة</h2>
+        <p class="section-subtitle">اختر من مجموعة واسعة من المخبوزات والحلويات الشهية</p>
+      </div>
+      
+      <!-- Product Categories -->
+      <div class="product-categories">
+        <button class="category-btn active" data-category="all">
+          <i class="fas fa-th"></i> جميع المنتجات
+        </button>
+        <button class="category-btn" data-category="bakery">
+          <i class="fas fa-bread-slice"></i> مخبوزات
+        </button>
+        <button class="category-btn" data-category="sweets">
+          <i class="fas fa-birthday-cake"></i> حلويات
+        </button>
+        <button class="category-btn" data-category="drinks">
+          <i class="fas fa-coffee"></i> مشروبات
+        </button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="products-grid">
+        <!-- Bakery Products -->
+        <div class="product-card" data-category="bakery">
+          <div class="product-image">
+            <img src="images/croissant.jpg" alt="كرواسون زبدة" loading="lazy">
+            <div class="product-overlay">
+              <button class="quick-view-btn" onclick="showProductDetails('كرواسون زبدة', 'images/croissant.jpg', 'كرواسون طازج ومقرمش محشو بالزبدة الطبيعية', 2)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">كرواسون زبدة</h3>
+            <p class="product-description">كرواسون طازج ومقرمش محشو بالزبدة الطبيعية</p>
+            <div class="product-rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-text">(4.9)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">2 درهم</span>
+              <button class="add-to-cart-btn" onclick="addToCart('كرواسون زبدة', 2, 'images/croissant.jpg')">
+                <i class="fas fa-cart-plus"></i> أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="bakery">
+          <div class="product-image">
+            <img src="images/msemen.jpg" alt="مسمن معسل" loading="lazy">
+            <div class="product-overlay">
+              <button class="quick-view-btn" onclick="showProductDetails('مسمن معسل', 'images/msemen.jpg', 'مسمن تقليدي مغربي معسل بالعسل الطبيعي', 3.5)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">مسمن معسل</h3>
+            <p class="product-description">مسمن تقليدي مغربي معسل بالعسل الطبيعي</p>
+            <div class="product-rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-text">(4.8)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">3.5 درهم</span>
+              <button class="add-to-cart-btn" onclick="addToCart('مسمن معسل', 3.5, 'images/msemen.jpg')">
+                <i class="fas fa-cart-plus"></i> أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="sweets">
+          <div class="product-image">
+            <img src="images/cake.jpg" alt="كيكة شوكولا" loading="lazy">
+            <div class="product-overlay">
+              <button class="quick-view-btn" onclick="showProductDetails('كيكة شوكولا', 'images/cake.jpg', 'كيكة شوكولا فاخرة مزينة بأجمل التصاميم', 40)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">كيكة شوكولا</h3>
+            <p class="product-description">كيكة شوكولا فاخرة مزينة بأجمل التصاميم</p>
+            <div class="product-rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-text">(5.0)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">40 درهم</span>
+              <button class="add-to-cart-btn" onclick="addToCart('كيكة شوكولا', 40, 'images/cake.jpg')">
+                <i class="fas fa-cart-plus"></i> أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Products -->
+        <div class="product-card" data-category="bakery">
+          <div class="product-image">
+            <img src="images/croissant.jpg" alt="خبز فرنسي" loading="lazy">
+            <div class="product-overlay">
+              <button class="quick-view-btn" onclick="showProductDetails('خبز فرنسي', 'images/croissant.jpg', 'خبز فرنسي طازج ومقرمش من الخارج وطري من الداخل', 1.5)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">خبز فرنسي</h3>
+            <p class="product-description">خبز فرنسي طازج ومقرمش من الخارج وطري من الداخل</p>
+            <div class="product-rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-text">(4.7)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">1.5 درهم</span>
+              <button class="add-to-cart-btn" onclick="addToCart('خبز فرنسي', 1.5, 'images/croissant.jpg')">
+                <i class="fas fa-cart-plus"></i> أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="sweets">
+          <div class="product-image">
+            <img src="images/cake.jpg" alt="تارت الفواكه" loading="lazy">
+            <div class="product-overlay">
+              <button class="quick-view-btn" onclick="showProductDetails('تارت الفواكه', 'images/cake.jpg', 'تارت لذيذة مزينة بالفواكه الطازجة والكريمة', 25)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">تارت الفواكه</h3>
+            <p class="product-description">تارت لذيذة مزينة بالفواكه الطازجة والكريمة</p>
+            <div class="product-rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-text">(4.9)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">25 درهم</span>
+              <button class="add-to-cart-btn" onclick="addToCart('تارت الفواكه', 25, 'images/cake.jpg')">
+                <i class="fas fa-cart-plus"></i> أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="drinks">
+          <div class="product-image">
+            <img src="images/croissant.jpg" alt="قهوة عربية" loading="lazy">
+            <div class="product-overlay">
+              <button class="quick-view-btn" onclick="showProductDetails('قهوة عربية', 'images/croissant.jpg', 'قهوة عربية أصيلة محضرة بأجود أنواع البن', 8)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">قهوة عربية</h3>
+            <p class="product-description">قهوة عربية أصيلة محضرة بأجود أنواع البن</p>
+            <div class="product-rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-text">(4.6)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">8 درهم</span>
+              <button class="add-to-cart-btn" onclick="addToCart('قهوة عربية', 8, 'images/croissant.jpg')">
+                <i class="fas fa-cart-plus"></i> أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2 class="section-title">قصتنا</h2>
+          <p class="about-description">
+            منذ تأسيسنا في عام 2024، نحن في مخبزة علاف نسعى لتقديم أفضل المخبوزات والحلويات الطازجة. 
+            نؤمن بأن الطعام الجيد يجمع الناس ويخلق ذكريات جميلة. لذلك نحرص على استخدام أجود المكونات 
+            الطبيعية وأحدث تقنيات الخبز لضمان حصولكم على أفضل تجربة طعام.
+          </p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <div class="stat-number">1000+</div>
+              <div class="stat-label">عميل سعيد</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">منتج مميز</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">365</div>
+              <div class="stat-label">يوم في السنة</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="images/bakery-bg.jpg" alt="مخبزة علاف" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">تواصل معنا</h2>
+        <p class="section-subtitle">نحن هنا لخدمتكم في أي وقت</p>
+      </div>
+      
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-details">
+              <h3>اتصل بنا</h3>
+              <p>+212 681 848 262</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-details">
+              <h3>موقعنا</h3>
+              <p>المغرب، الدار البيضاء</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-details">
+              <h3>أوقات العمل</h3>
+              <p>يومياً: 6:00 ص - 11:00 م</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="contact-details">
+              <h3>واتساب</h3>
+              <p>للطلب السريع</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-actions">
+          <a href="https://wa.me/212681848262" target="_blank" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> اطلب عبر واتساب
+          </a>
+          <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="btn btn-map">
+            <i class="fas fa-map-marker-alt"></i> موقعنا على الخريطة
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <img src="images/logo.png" alt="شعار مخبزة علاف">
+            <h3>مخبزة وحلويات علاف</h3>
+          </div>
+          <p class="footer-description">
+            نقدم أفضل المخبوزات والحلويات الطازجة بجودة عالية وأسعار مناسبة
+          </p>
+        </div>
+        
+        <div class="footer-section">
+          <h4>روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#products">منتجاتنا</a></li>
+            <li><a href="#about">عنا</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>تواصل معنا</h4>
+          <div class="footer-contact">
+            <p><i class="fas fa-phone"></i> +212 681 848 262</p>
+            <p><i class="fas fa-map-marker-alt"></i> المغرب، الدار البيضاء</p>
+            <p><i class="fas fa-clock"></i> يومياً: 6:00 ص - 11:00 م</p>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h4>تابعنا</h4>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/212681848262" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 مخبزة وحلويات علاف. جميع الحقوق محفوظة | Allaf.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Popup -->
+  <div id="cart-popup" class="cart-popup">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h2><i class="fas fa-shopping-cart"></i> سلة التسوق</h2>
+        <button class="close-cart" onclick="closeCart()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="cart-body">
+        <div id="cart-items" class="cart-items">
+          <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <p>السلة فارغة</p>
+            <p class="empty-cart-subtitle">أضف بعض المنتجات الشهية!</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cart-footer">
+        <div class="cart-total">
+          <strong>المجموع: <span id="cart-total">0</span> درهم</strong>
+        </div>
+        <div class="cart-actions">
+          <button class="btn btn-secondary" onclick="clearCart()">
+            <i class="fas fa-trash"></i> إفراغ السلة
+          </button>
+          <button class="btn btn-whatsapp" onclick="generateWhatsAppInvoice()">
+            <i class="fab fa-whatsapp"></i> إرسال الطلب
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Details Modal -->
+  <div id="product-modal" class="product-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-product-name"></h2>
+        <button class="close-modal" onclick="closeProductModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image">
+          <img id="modal-product-image" src="" alt="">
+        </div>
+        <div class="modal-info">
+          <p id="modal-product-description"></p>
+          <div class="modal-price">
+            <span id="modal-product-price"></span> درهم
+          </div>
+          <div class="modal-actions">
+            <div class="quantity-selector">
+              <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+              <input type="number" id="modal-quantity" value="1" min="1">
+              <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+            </div>
+            <button class="btn btn-primary" onclick="addToCartFromModal()">
+              <i class="fas fa-cart-plus"></i> أضف للسلة
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" onclick="scrollToTop()">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Success Message -->
+  <div id="success-message" class="success-message">
+    <i class="fas fa-check-circle"></i>
+    <span id="success-text">تم إضافة المنتج للسلة بنجاح!</span>
+  </div>
+
+  <script src="script_improved.js"></script>
+</body>
+</html>
+
