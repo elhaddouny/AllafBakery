@@ -1,80 +1,60 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مخبزة وحلويات علاف | Allaf Bakery</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-  <header>
+<body>  <header>
     <h1>🥐 مخبزة وحلويات علاف</h1>
     <p>المذاق الأصيل منذ 2024</p>
     <a href="#" onclick="showCart()" class="btn">🛍️ السلة (<span id="cart-count">0</span>)</a>
-  </header>
-
-  <section class="hero">
+  </header>  <section class="hero">
     <h2>اكتشف ألذ الحلويات والمخبوزات</h2>
     <a href="#products" class="btn">تصفح المنتجات</a>
-  </section>
-
-  <section id="products">
+  </section>  <section id="products">
     <h2>منتجاتنا</h2>
-    <div class="product-list">
+    <div class="product-list"><div class="product-card">
+    <img src="images/croissant.jpg" alt="كرواسون">
+    <h3>كرواسون زبدة</h3>
+    <p>2 دراهم</p>
+    <button onclick="addToCart('كرواسون زبدة', 2)">🛒 أضف إلى السلة</button>
+  </div>
 
-      <div class="product-card">
-        <img src="images/croissant.jpg" alt="كرواسون">
-        <h3>كرواسون زبدة</h3>
-        <p>2 دراهم</p>
-        <button onclick="addToCart('كرواسون زبدة', 2)">🛒 أضف إلى السلة</button>
-      </div>
+  <div class="product-card">
+    <img src="images/msemen.jpg" alt="مسمن">
+    <h3>مسمن معسل</h3>
+    <p>3.5 دراهم</p>
+    <button onclick="addToCart('مسمن معسل', 3.5)">🛒 أضف إلى السلة</button>
+  </div>
 
-      <div class="product-card">
-        <img src="images/msemen.jpg" alt="مسمن">
-        <h3>مسمن معسل</h3>
-        <p>3.5 دراهم</p>
-        <button onclick="addToCart('مسمن معسل', 3.5)">🛒 أضف إلى السلة</button>
-      </div>
+  <div class="product-card">
+    <img src="images/cake.jpg" alt="كيك">
+    <h3>كيكة شوكولا</h3>
+    <p>40 درهم</p>
+    <button onclick="addToCart('كيكة شوكولا', 40)">🛒 أضف إلى السلة</button>
+  </div>
 
-      <div class="product-card">
-        <img src="images/cake.jpg" alt="كيك">
-        <h3>كيكة شوكولا</h3>
-        <p>40 درهم</p>
-        <button onclick="addToCart('كيكة شوكولا', 40)">🛒 أضف إلى السلة</button>
-      </div>
+</div>
 
-    </div>
-  </section>
-
-  <section id="contact">
+  </section>  <section id="contact">
     <h2>تواصل معنا</h2>
     <p>للطلب أو الاستفسار راسلنا على واتساب:</p>
     <a href="https://wa.me/212681848262" target="_blank" class="btn">💬 واتساب</a>
-  </section>
-
-  <!-- زر عرض موقع المخبزة على الخريطة -->
-  <div class="map-button">
+  </section>  <div class="map-button">
     <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="map-link">
       📍 موقع المخبزة على الخريطة
     </a>
-  </div>
-
-  <footer>
+  </div>  <footer>
     <p>جميع الحقوق محفوظة © 2025 | Allaf.com</p>
     <p>عدد الزوار: <span id="visitor-count">0</span></p>
-  </footer>
-
-  <!-- سلة الشراء -->
-  <div id="cart-popup" style="display:none; background:#fff8f0; padding:20px; border:2px solid #8B4513; position:fixed; top:20%; left:10%; width:80%; z-index:999;">
+  </footer>  <div id="cart-popup" style="display:none; background:#fff8f0; padding:20px; border:2px solid #8B4513; position:fixed; top:10%; left:5%; width:90%; z-index:999; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
     <h2>🧺 محتوى السلة</h2>
     <ul id="cart-items"></ul>
     <p><strong>المجموع: <span id="cart-total">0</span> درهم</strong></p>
     <button onclick="closeCart()">❌ إغلاق</button>
-  </div>
-
-  <!-- سكربت السلة -->
-  <script>
+    <button onclick="generateWhatsAppInvoice()">📤 إرسال الطلب عبر واتساب</button>
+  </div>  <script>
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function addToCart(name, price) {
@@ -114,12 +94,24 @@
       updateCartCount();
     }
 
-    // عند تحميل الصفحة
+    function generateWhatsAppInvoice() {
+      if(cart.length === 0) return alert("السلة فارغة!");
+
+      let invoiceText = "🧾 *طلب جديد من موقع Allaf Bakery*\n\n";
+      let total = 0;
+
+      cart.forEach((item, i) => {
+        invoiceText += `• ${item.name} - ${item.price} درهم\n`;
+        total += item.price;
+      });
+
+      invoiceText += `\n📦 *المجموع:* ${total.toFixed(2)} درهم`;
+      invoiceText += "\n\n📍 يرجى تأكيد الطلب للمتابعة.";
+
+      const whatsappURL = `https://wa.me/212681848262?text=${encodeURIComponent(invoiceText)}`;
+      window.open(whatsappURL, '_blank');
+    }
+
     updateCartCount();
-  </script>
-
-  <!-- سكربت الزوار -->
-  <script src="script.js"></script>
-
-</body>
+  </script>  <script src="script.js"></script></body>
 </html>
