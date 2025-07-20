@@ -598,3 +598,555 @@ const NavigationManager = {
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(en
+// ===== GLOBAL VARIABLES & CONFIGURATION =====
+const CONFIG = {
+    WHATSAPP_NUMBER: '212681848262',
+    ANIMATION_DURATION: 300,
+    SCROLL_THRESHOLD: 100,
+    PRODUCTS_PER_PAGE: 12,
+    GALLERY_ITEMS_PER_PAGE: 9,
+    TESTIMONIALS_AUTO_PLAY: true,
+    TESTIMONIALS_INTERVAL: 5000,
+    SEARCH_DEBOUNCE_DELAY: 300,
+    CART_STORAGE_KEY: 'allaf_cart',
+    VISITOR_STORAGE_KEY: 'allaf_visitor_count',
+    THEME_STORAGE_KEY: 'allaf_theme'
+};
+
+// Global state management
+const AppState = {
+    cart: JSON.parse(localStorage.getItem(CONFIG.CART_STORAGE_KEY)) || [],
+    currentProductPage: 1,
+    currentGalleryPage: 1,
+    currentTestimonial: 0,
+    isCartOpen: false,
+    isSearchOpen: false,
+    isQuickViewOpen: false,
+    currentTheme: localStorage.getItem(CONFIG.THEME_STORAGE_KEY) || 'light',
+    searchResults: [],
+    filteredProducts: [],
+    currentCategory: 'all'
+};
+
+// Sample data (in a real application, this would come from an API)
+const PRODUCTS_DATA = [
+    {
+        id: 1,
+        name: 'خبز طازج',
+        description: 'خبز يومي طازج مخبوز بأجود المكونات الطبيعية',
+        price: 2.50,
+        category: 'bread',
+        image: 'images/bread-1.jpg',
+        featured: true,
+        ingredients: ['دقيق قمح', 'خميرة طبيعية', 'ملح البحر', 'زيت زيتون'],
+        nutritionFacts: { calories: 250, protein: 8, carbs: 45, fat: 2 }
+    },
+    {
+        id: 2,
+        name: 'كرواسون بالزبدة',
+        description: 'كرواسون فرنسي أصيل بالزبدة الطبيعية',
+        price: 4.00,
+        category: 'bread',
+        image: 'images/croissant-1.jpg',
+        featured: false,
+        ingredients: ['دقيق فرنسي', 'زبدة طبيعية', 'خميرة', 'سكر', 'ملح'],
+        nutritionFacts: { calories: 350, protein: 6, carbs: 35, fat: 18 }
+    },
+    {
+        id: 3,
+        name: 'بقلاوة بالفستق',
+        description: 'بقلاوة تقليدية محشوة بالفستق الحلبي الفاخر',
+        price: 15.00,
+        category: 'sweets',
+        image: 'images/baklava-1.jpg',
+        featured: true,
+        ingredients: ['عجينة فيلو', 'فستق حلبي', 'عسل طبيعي', 'سكر', 'ماء ورد'],
+        nutritionFacts: { calories: 450, protein: 8, carbs: 55, fat: 22 }
+    },
+    {
+        id: 4,
+        name: 'كيكة الشوكولاتة',
+        description: 'كيكة شوكولاتة غنية ومثالية لجميع المناسبات',
+        price: 45.00,
+        category: 'cakes',
+        image: 'images/chocolate-cake-1.jpg',
+        featured: true,
+        ingredients: ['شوكولاتة بلجيكية', 'دقيق', 'بيض طازج', 'زبدة', 'سكر'],
+        nutritionFacts: { calories: 380, protein: 5, carbs: 48, fat: 18 }
+    },
+    {
+        id: 5,
+        name: 'مسمن بالعسل',
+        description: 'مسمن مغربي تقليدي محلى بالعسل الطبيعي',
+        price: 3.50,
+        category: 'bread',
+        image: 'images/msemen-1.jpg',
+        featured: false,
+        ingredients: ['دقيق', 'سميد', 'زيت أركان', 'ملح', 'عسل طبيعي'],
+        nutritionFacts: { calories: 280, protein: 6, carbs: 42, fat: 8 }
+    },
+    {
+        id: 6,
+        name: 'قهوة عربية',
+        description: 'قهوة عربية أصيلة محمصة طازجة',
+        price: 8.00,
+        category: 'drinks',
+        image: 'images/arabic-coffee-1.jpg',
+        featured: false,
+        ingredients: ['حبوب قهوة عربية', 'هيل', 'زعفران'],
+        nutritionFacts: { calories: 5, protein: 0, carbs: 1, fat: 0 }
+    },
+    {
+        id: 7,
+        name: 'تورتة الفراولة',
+        description: 'تورتة طازجة بالفراولة والكريمة الطبيعية',
+        price: 55.00,
+        category: 'cakes',
+        image: 'images/strawberry-cake-1.jpg',
+        featured: false,
+        ingredients: ['فراولة طازجة', 'كريمة طبيعية', 'بسكويت', 'جيلاتين', 'سكر'],
+        nutritionFacts: { calories: 320, protein: 4, carbs: 38, fat: 16 }
+    },
+    {
+        id: 8,
+        name: 'معمول بالتمر',
+        description: 'معمول تقليدي محشو بالتمر الطبيعي',
+        price: 12.00,
+        category: 'sweets',
+        image: 'images/maamoul-1.jpg',
+        featured: false,
+        ingredients: ['دقيق', 'سميد', 'تمر طبيعي', 'زبدة', 'ماء زهر'],
+        nutritionFacts: { calories: 290, protein: 4, carbs: 45, fat: 10 }
+    }
+];
+
+const GALLERY_DATA = [
+    { id: 1, image: 'images/gallery-1.jpg', title: 'مخبوزات طازجة', category: 'bread' },
+    { id: 2, image: 'images/gallery-2.jpg', title: 'حلويات شرقية', category: 'sweets' },
+    { id: 3, image: 'images/gallery-3.jpg', title: 'كيك وتورتات', category: 'cakes' },
+    { id: 4, image: 'images/gallery-4.jpg', title: 'معجنات متنوعة', category: 'bread' },
+    { id: 5, image: 'images/gallery-5.jpg', title: 'حلويات العيد', category: 'sweets' },
+    { id: 6, image: 'images/gallery-6.jpg', title: 'كيك الأطفال', category: 'cakes' },
+    { id: 7, image: 'images/gallery-7.jpg', title: 'خبز الصباح', category: 'bread' },
+    { id: 8, image: 'images/gallery-8.jpg', title: 'حلويات رمضان', category: 'sweets' },
+    { id: 9, image: 'images/gallery-9.jpg', title: 'تورتات الزفاف', category: 'cakes' }
+];
+
+const TESTIMONIALS_DATA = [
+    {
+        id: 1,
+        name: 'أحمد المرابط',
+        role: 'عميل دائم',
+        text: 'أفضل مخبزة في المدينة! الخبز طازج دائماً والحلويات لذيذة جداً. أنصح الجميع بتجربة منتجاتهم.',
+        avatar: 'images/testimonial-1.jpg',
+        rating: 5
+    },
+    {
+        id: 2,
+        name: 'فاطمة الزهراء',
+        role: 'ربة منزل',
+        text: 'منذ اكتشفت مخبزة علاّف وأنا لا أشتري من مكان آخر. الجودة ممتازة والأسعار معقولة جداً.',
+        avatar: 'images/testimonial-2.jpg',
+        rating: 5
+    },
+    {
+        id: 3,
+        name: 'محمد الإدريسي',
+        role: 'صاحب مطعم',
+        text: 'نتعامل مع مخبزة علاّف لتوريد الخبز لمطعمنا. الخدمة ممتازة والالتزام بالمواعيد رائع.',
+        avatar: 'images/testimonial-3.jpg',
+        rating: 5
+    }
+];
+
+// ===== UTILITY FUNCTIONS =====
+const Utils = {
+    // Debounce function for search
+    debounce: (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+
+    // Format price in Moroccan Dirham
+    formatPrice: (price) => {
+        return `${price.toFixed(2)} درهم`;
+    },
+
+    // Generate unique ID
+    generateId: () => {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    },
+
+    // Smooth scroll to element
+    scrollToElement: (element, offset = 0) => {
+        const elementPosition = element.offsetTop - offset;
+        window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+        });
+    },
+
+    // Check if element is in viewport
+    isInViewport: (element) => {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    },
+
+    // Animate number counting
+    animateNumber: (element, start, end, duration = 2000) => {
+        const startTime = performance.now();
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const current = Math.floor(start + (end - start) * progress);
+            element.textContent = current;
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+        requestAnimationFrame(animate);
+    },
+
+    // Show notification
+    showNotification: (message, type = 'success') => {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+};
+
+// ===== CART MANAGEMENT =====
+const CartManager = {
+    // Add item to cart
+    addItem: (productId, quantity = 1) => {
+        const product = PRODUCTS_DATA.find(p => p.id === productId);
+        if (!product) return false;
+
+        const existingItem = AppState.cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            AppState.cart.push({
+                id: productId,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                quantity: quantity
+            });
+        }
+        
+        CartManager.saveCart();
+        CartManager.updateCartUI();
+        Utils.showNotification(`تم إضافة ${product.name} إلى السلة`);
+        return true;
+    },
+
+    // Remove item from cart
+    removeItem: (productId) => {
+        AppState.cart = AppState.cart.filter(item => item.id !== productId);
+        CartManager.saveCart();
+        CartManager.updateCartUI();
+        Utils.showNotification('تم حذف المنتج من السلة');
+    },
+
+    // Update item quantity
+    updateQuantity: (productId, quantity) => {
+        const item = AppState.cart.find(item => item.id === productId);
+        if (item) {
+            if (quantity <= 0) {
+                CartManager.removeItem(productId);
+            } else {
+                item.quantity = quantity;
+                CartManager.saveCart();
+                CartManager.updateCartUI();
+            }
+        }
+    },
+
+    // Clear cart
+    clearCart: () => {
+        AppState.cart = [];
+        CartManager.saveCart();
+        CartManager.updateCartUI();
+        Utils.showNotification('تم إفراغ السلة');
+    },
+
+    // Get cart total
+    getTotal: () => {
+        return AppState.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    },
+
+    // Get cart item count
+    getItemCount: () => {
+        return AppState.cart.reduce((count, item) => count + item.quantity, 0);
+    },
+
+    // Save cart to localStorage
+    saveCart: () => {
+        localStorage.setItem(CONFIG.CART_STORAGE_KEY, JSON.stringify(AppState.cart));
+    },
+
+    // Update cart UI
+    updateCartUI: () => {
+        const cartCount = document.getElementById('cart-count');
+        const cartBody = document.getElementById('cart-body');
+        const cartTotal = document.getElementById('cart-total');
+        
+        if (cartCount) {
+            const count = CartManager.getItemCount();
+            cartCount.textContent = count;
+            cartCount.style.display = count > 0 ? 'flex' : 'none';
+        }
+        
+        if (cartBody) {
+            CartManager.renderCartItems();
+        }
+        
+        if (cartTotal) {
+            cartTotal.textContent = Utils.formatPrice(CartManager.getTotal());
+        }
+    },
+
+    // Render cart items
+    renderCartItems: () => {
+        const cartBody = document.getElementById('cart-body');
+        if (!cartBody) return;
+
+        if (AppState.cart.length === 0) {
+            cartBody.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>السلة فارغة</p>
+                    <p>أضف بعض المنتجات اللذيذة!</p>
+                </div>
+            `;
+            return;
+        }
+
+        cartBody.innerHTML = AppState.cart.map(item => `
+            <div class="cart-item" data-id="${item.id}">
+                <div class="item-image">
+                    <img src="${item.image}" alt="${item.name}" onerror="this.src='images/placeholder.jpg'">
+                </div>
+                <div class="item-info">
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-price">${Utils.formatPrice(item.price)}</div>
+                </div>
+                <div class="item-controls">
+                    <button class="quantity-btn" onclick="CartManager.updateQuantity(${item.id}, ${item.quantity - 1})">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="quantity-display">${item.quantity}</span>
+                    <button class="quantity-btn" onclick="CartManager.updateQuantity(${item.id}, ${item.quantity + 1})">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="remove-btn" onclick="CartManager.removeItem(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    },
+
+    // Generate WhatsApp order message
+    generateWhatsAppMessage: () => {
+        if (AppState.cart.length === 0) {
+            Utils.showNotification('السلة فارغة! أضف منتجات أولاً', 'error');
+            return;
+        }
+
+        let message = '🛒 *طلب جديد من موقع مخبزة علاّف*\n\n';
+        message += '📋 *تفاصيل الطلب:*\n';
+        
+        AppState.cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.name}\n`;
+            message += `   الكمية: ${item.quantity}\n`;
+            message += `   السعر: ${Utils.formatPrice(item.price * item.quantity)}\n\n`;
+        });
+        
+        message += `💰 *المجموع الإجمالي: ${Utils.formatPrice(CartManager.getTotal())}*\n\n`;
+        message += '📞 يرجى التواصل معي لتأكيد الطلب وتحديد موعد الاستلام.\n\n';
+        message += '🙏 شكراً لكم!';
+
+        const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        // Close cart modal after sending
+        ModalManager.closeCart();
+    }
+};
+
+// ===== MODAL MANAGEMENT =====
+const ModalManager = {
+    // Open cart modal
+    openCart: () => {
+        const cartModal = document.getElementById('cart-modal');
+        if (cartModal) {
+            AppState.isCartOpen = true;
+            cartModal.classList.add('active');
+            CartManager.updateCartUI();
+            document.body.style.overflow = 'hidden';
+        }
+    },
+
+    // Close cart modal
+    closeCart: () => {
+        const cartModal = document.getElementById('cart-modal');
+        if (cartModal) {
+            AppState.isCartOpen = false;
+            cartModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    },
+
+    // Open quick view modal
+    openQuickView: (productId) => {
+        const product = PRODUCTS_DATA.find(p => p.id === productId);
+        if (!product) return;
+
+        const quickViewModal = document.getElementById('quick-view-modal');
+        const quickViewBody = document.getElementById('quick-view-body');
+        
+        if (quickViewModal && quickViewBody) {
+            AppState.isQuickViewOpen = true;
+            
+            quickViewBody.innerHTML = `
+                <div class="quick-view-product">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='images/placeholder.jpg'">
+                    </div>
+                    <div class="product-details">
+                        <h2 class="product-title">${product.name}</h2>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${Utils.formatPrice(product.price)}</div>
+                        
+                        <div class="product-ingredients">
+                            <h4>المكونات:</h4>
+                            <ul>
+                                ${product.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="nutrition-facts">
+                            <h4>القيم الغذائية (لكل 100 جرام):</h4>
+                            <div class="nutrition-grid">
+                                <div class="nutrition-item">
+                                    <span>السعرات الحرارية</span>
+                                    <span>${product.nutritionFacts.calories}</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span>البروتين</span>
+                                    <span>${product.nutritionFacts.protein}g</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span>الكربوهيدرات</span>
+                                    <span>${product.nutritionFacts.carbs}g</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span>الدهون</span>
+                                    <span>${product.nutritionFacts.fat}g</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="quantity-selector">
+                            <label for="quantity">الكمية:</label>
+                            <div class="quantity-controls">
+                                <button type="button" onclick="this.nextElementSibling.stepDown()">-</button>
+                                <input type="number" id="quantity" min="1" value="1">
+                                <button type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+                        </div>
+                        
+                        <button class="add-to-cart-btn" onclick="ModalManager.addToCartFromQuickView(${product.id})">
+                            <i class="fas fa-shopping-basket"></i>
+                            إضافة إلى السلة
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            quickViewModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    },
+
+    // Close quick view modal
+    closeQuickView: () => {
+        const quickViewModal = document.getElementById('quick-view-modal');
+        if (quickViewModal) {
+            AppState.isQuickViewOpen = false;
+            quickViewModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    },
+
+    // Add to cart from quick view
+    addToCartFromQuickView: (productId) => {
+        const quantityInput = document.getElementById('quantity');
+        const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+        
+        if (CartManager.addItem(productId, quantity)) {
+            ModalManager.closeQuickView();
+        }
+    }
+};
+
+// ===== SEARCH FUNCTIONALITY =====
+const SearchManager = {
+    // Initialize search
+    init: () => {
+        const searchBtn = document.getElementById('search-btn');
+        const searchOverlay = document.getElementById('search-overlay');
+        const searchInput = document.getElementById('search-input');
+        const searchClose = document.getElementById('search-close');
+        const searchResults = document.getElementById('search-results');
+
+        if (searchBtn) {
+            searchBtn.addEventListener('click', SearchManager.openSearch);
+        }
+
+        if (searchClose) {
+            searchClose.addEventListener('click', SearchManager.closeSearch);
+        }
+
+        if (searchOverlay) {
+            searchOverlay.addEventListener('click', (e) => {
+                if (e.target === searchOverlay) {
+                    SearchManager.closeSearch();
+                }
+            });
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', 
