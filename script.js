@@ -18,7 +18,7 @@ const PRODUCTS = [
   {
     id: 2,
     name: 'مسمن  ',
-    price: 3.5,
+    price: 3,
     image: 'images/msemen.jpg',
     category: 'bakery',
     badge: 'تقليدي'
@@ -34,7 +34,7 @@ const PRODUCTS = [
   {
     id: 4,
     name: 'شنيك',
-    price: 1.5,
+    price: 2,
     image: 'images/Shenik.png',
     category: 'bakery',
     badge: 'طازج'
@@ -42,7 +42,7 @@ const PRODUCTS = [
   {
     id: 5,
     name: 'بالمي',
-    price: 2.5,
+    price: 2,
     image: 'images/Palmier.png',
     category: 'sweets',
     badge: 'حلو'
@@ -50,7 +50,7 @@ const PRODUCTS = [
   {
     id: 6,
     name: 'كعب غزال',
-    price: 4,
+    price: غير محدد,
     image: 'images/cake.jpg',
     category: 'sweets',
     badge: 'أصيل'
