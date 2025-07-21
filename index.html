@@ -1,266 +1,90 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>مخبزة وحلويات علاّف | Allaf Bakery - الطعم الأصيل الذي لا يُنسى</title>
-  <meta name="description" content="نخبز لكم يوميًا تشكيلة من أشهى المخبوزات والحلويات المصنوعة بحب وشغف من أجود المكونات الطبيعية في مخبزة علاّف."/>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;700&family=Readex+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Custom CSS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مخبزة وحلويات علاف | Allaf Bakery</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4E3GVNDGF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+
+    gtag("config", "G-R4E3GVNDGF");
+  </script>
+  <style>
+    header img.logo {
+      height: 60px;
+      vertical-align: middle;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #fff8f0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .cart-button {
+      background-color: #8B4513;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Loading Screen -->
-  <div id="loading-screen" class="loading-screen">
-    <div class="loading-content">
-      <img src="images/logo.png" alt="شعار مخبزة علاّف" class="loading-logo" />
-      <div class="loading-spinner"></div>
-      <p>جاري تحضير أشهى المخبوزات...</p>
+  <header>
+    <div>
+      <img src="images/logo.png" alt="شعار المخبزة" class="logo">
+      <h1>🥐 مخبزة وحلويات علاف</h1>
+      <p>المذاق الأصيل منذ 2024</p>
     </div>
+    <a href="#" onclick="showCart()" class="cart-button">🛍️ السلة (<span id="cart-count">0</span>)</a>
+  </header>  <section class="hero">
+    <h2>اكتشف ألذ الحلويات والمخبوزات</h2>
+    <a href="#products" class="btn">تصفح المنتجات</a>
+  </section>  <section id="products">
+    <h2>منتجاتنا</h2>
+    <div class="product-list">
+      <div class="product-card">
+        <img src="images/croissant.jpg" alt="كرواسون">
+        <h3>كرواسون زبدة</h3>
+        <p>2 دراهم</p>
+        <button onclick="addToCart("كرواسون زبدة", 2)">🛒 أضف إلى السلة</button>
+      </div><div class="product-card">
+    <img src="images/msemen.jpg" alt="مسمن">
+    <h3>مسمن معسل</h3>
+    <p>3.5 دراهم</p>
+    <button onclick="addToCart("مسمن معسل", 3.5)">🛒 أضف إلى السلة</button>
   </div>
 
-  <!-- Header -->
-  <header id="header" class="header">
-    <div class="container">
-      <div class="header-content">
-        <a href="#" class="logo">
-          <img src="images/logo.png" alt="شعار المخبزة" />
-          <h1>مخبزة علاّف</h1>
-        </a>
-        
-        <nav class="nav" id="nav">
-          <ul class="nav-list">
-            <li><a href="#hero" class="nav-link active">الرئيسية</a></li>
-            <li><a href="#products" class="nav-link">منتجاتنا</a></li>
-            <li><a href="#about" class="nav-link">قصتنا</a></li>
-            <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
-          </ul>
-        </nav>
-        
-        <div class="header-actions">
-          <button id="cart-btn" class="cart-btn">
-            <i class="fas fa-shopping-basket"></i>
-            <span class="cart-text">السلة</span>
-            <span id="cart-count" class="cart-count">0</span>
-          </button>
-          <button id="menu-toggle" class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="hero" class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="container">
-      <div class="hero-content">
-        <h2 class="hero-title">الطعم الأصيل الذي لا يُنسى</h2>
-        <p class="hero-subtitle">نخبز لكم يوميًا تشكيلة من أشهى المخبوزات والحلويات المصنوعة بحب وشغف من أجود المكونات الطبيعية.</p>
-        <div class="hero-buttons">
-          <a href="#products" class="btn btn-primary">
-            <i class="fas fa-bread-slice"></i>
-            اكتشف منتجاتنا
-          </a>
-          <a href="#contact" class="btn btn-secondary">
-            <i class="fab fa-whatsapp"></i>
-            اطلب الآن
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <i class="fas fa-chevron-down"></i>
-    </div>
-  </section>
-
-  <!-- Products Section -->
-  <section id="products" class="products-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>
-          <i class="fas fa-cookie-bite"></i>
-          منتجاتنا المميزة
-        </h2>
-        <p>كل قطعة نخبزها هي تحفة فنية مصنوعة من أجود المكونات</p>
-      </div>
-      
-      <div class="filter-tabs">
-        <button class="filter-btn active" data-filter="all">الكل</button>
-        <button class="filter-btn" data-filter="bakery">مخبوزات</button>
-        <button class="filter-btn" data-filter="sweets">حلويات</button>
-        <button class="filter-btn" data-filter="cakes">كيك</button>
-      </div>
-      
-      <div id="products-grid" class="products-grid">
-        <!-- Products will be loaded here by JavaScript -->
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="about-section">
-    <div class="container">
-      <div class="about-content">
-       <div class="about-image">
-  <img src="images/baker-working.jpg" alt="الخباز في العمل - مخبزة علاّف" />
-  <div class="about-badge">
-    <i class="fas fa-award"></i>
-    <span>منذ 2024</span>
+  <div class="product-card">
+    <img src="images/cake.jpg" alt="كيك">
+    <h3>كيكة شوكولا</h3>
+    <p>40 درهم</p>
+    <button onclick="addToCart("كيكة شوكولا", 40)">🛒 أضف إلى السلة</button>
   </div>
 </div>
-        <div class="about-text">
-          <h2>
-            <i class="fas fa-heart"></i>
-            قصتنا
-          </h2>
-          <h3>حكاية بدأت بشغف</h3>
-          <p>في مخبزة علاّف، بدأت حكايتنا عام 2024 بشغف لصنع مخبوزات تجمع بين الأصالة المغربية وأفضل تقنيات الخبز الحديثة. نحن نؤمن بأن المكونات الطازجة والحب هما سر كل قطعة لذيذة تخرج من فرننا.</p>
-          <div class="about-features">
-            <div class="feature">
-              <i class="fas fa-leaf"></i>
-              <span>مكونات طبيعية 100%</span>
-            </div>
-            <div class="feature">
-              <i class="fas fa-clock"></i>
-              <span>طازج يومياً</span>
-            </div>
-            <div class="feature">
-              <i class="fas fa-handshake"></i>
-              <span>خدمة عملاء مميزة</span>
-            </div>
-          </div>
-          <a href="#contact" class="btn btn-primary">
-            <i class="fas fa-comments"></i>
-            تحدث مع الخباز
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>
-          <i class="fas fa-map-marker-alt"></i>
-          زورونا أو تواصلوا معنا
-        </h2>
-        <p>نحن بانتظاركم في موقعنا، أو يمكنكم إرسال طلباتكم واستفساراتكم مباشرة</p>
-      </div>
-      
-      <div class="contact-buttons">
-        <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="btn btn-primary">
-          <i class="fas fa-location-arrow"></i>
-          موقعنا على الخريطة
-        </a>
-        <a href="https://wa.me/212681848262" target="_blank" class="btn btn-whatsapp">
-          <i class="fab fa-whatsapp"></i>
-          الطلب عبر واتساب
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-info">
-          <div class="logo">
-            <img src="images/logo.png" alt="شعار المخبزة" />
-            <h3>مخبزة علاّف</h3>
-          </div>
-          <p>الطعم الأصيل الذي لا يُنسى</p>
-        </div>
-        
-        <div class="footer-links">
-          <h4>روابط سريعة</h4>
-          <ul>
-            <li><a href="#hero">الرئيسية</a></li>
-            <li><a href="#products">منتجاتنا</a></li>
-            <li><a href="#about">قصتنا</a></li>
-            <li><a href="#contact">تواصل معنا</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-social">
-          <h4>تابعونا</h4>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; <span id="current-year"></span> مخبزة وحلويات علاّف. جميع الحقوق محفوظة</p>
-        <p class="visitor-counter">
-          <i class="fas fa-eye"></i>
-          أنت الزائر رقم: <span id="visitor-count">...</span>
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Cart Sidebar -->
-  <div id="cart-overlay" class="cart-overlay"></div>
-  <div id="cart-sidebar" class="cart-sidebar">
-    <div class="cart-header">
-      <h3>
-        <i class="fas fa-shopping-basket"></i>
-        سلة التسوق
-      </h3>
-      <button id="close-cart" class="close-btn">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    
-    <div id="cart-items" class="cart-items">
-      <!-- Cart items will be loaded here -->
-    </div>
-    
-    <div class="cart-footer">
-      <div class="cart-total">
-        <span>المجموع:</span>
-        <span id="cart-total">0.00 درهم</span>
-      </div>
-      <button id="checkout-btn" class="btn btn-whatsapp btn-block">
-        <i class="fab fa-whatsapp"></i>
-        إتمام الطلب عبر واتساب
-      </button>
-    </div>
-  </div>
-
-  <!-- Toast Notification -->
-  <div id="toast" class="toast">
-    <div class="toast-content">
-      <i class="toast-icon"></i>
-      <span class="toast-message"></span>
-    </div>
-  </div>
-
-  <!-- Custom JavaScript -->
-  <script src="script.js"></script>
-<!-- Developer Message -->
-<div id="developer-message" class="developer-message">
-  المبرمج: محمد الهدوني
-</div>
-
-</body>
+  </section>  <section id="contact">
+    <h2>تواصل معنا</h2>
+    <p>للطلب أو الاستفسار راسلنا على واتساب:</p>
+    <a href="https://wa.me/212681848262" target="_blank" class="btn">💬 واتساب</a>
+  </section>  <div class="map-button">
+    <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="map-link">
+      📍 موقعنا على الخريطة
+    </a>
+  </div>  <footer>
+    <p>جميع الحقوق محفوظة © 2025 | Allaf.com</p>
+    <p>👁️ عدد الزوار: <span id="visitor-count">0</span></p>
+  </footer>  <div id="cart-popup" style="display:none; background:#fff8f0; padding:20px; border:2px solid #8B4513; position:fixed; top:10%; left:5%; width:90%; z-index:999; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+    <h2>🧺 محتوى السلة</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>المجموع: <span id="cart-total">0</span> درهم</strong></p>
+    <button onclick="closeCart()">❌ إغلاق</button>
+    <button onclick="generateWhatsAppInvoice()">📤 إرسال الطلب عبر واتساب</button>
+  </div>  <script src="script.js"></script></body>
 </html>
