@@ -603,3 +603,51 @@ function showDeveloperMessage() {
 // يمكنك وضع هذا السطر في نهاية دالة initializeApp() أو في نهاية ملف script.js
 // تأكد من استدعائها بعد تحميل DOM بالكامل
 showDeveloperMessage();
+// ===== PROGRAMMER CREDIT MESSAGE =====
+function showProgrammerCredit() {
+  // إنشاء عنصر الرسالة
+  const creditElement = document.createElement('div');
+  creditElement.className = 'programmer-credit';
+  creditElement.innerHTML = `
+    <div class="credit-text">
+      <i class="fas fa-code credit-icon"></i>
+      <span>برمجة وتطوير: محمد الهدوني</span>
+      <i class="fas fa-heart credit-icon" style="color: #ff6b6b;"></i>
+    </div>
+  `;
+  
+  // إضافة الرسالة إلى الصفحة
+  document.body.appendChild(creditElement);
+  
+  // إظهار الرسالة بعد ثانية واحدة
+  setTimeout(() => {
+    creditElement.classList.add('show');
+  }, 1000);
+  
+  // إخفاء الرسالة بعد 5 ثوانٍ
+  setTimeout(() => {
+    creditElement.classList.remove('show');
+    // حذف العنصر بعد انتهاء الحركة
+    setTimeout(() => {
+      if (creditElement.parentNode) {
+        creditElement.parentNode.removeChild(creditElement);
+      }
+    }, 500);
+  }, 6000); // 5 ثوانٍ + ثانية للظهور
+  
+  // إضافة حدث النقر لإخفاء الرسالة
+  creditElement.addEventListener('click', () => {
+    creditElement.classList.remove('show');
+    setTimeout(() => {
+      if (creditElement.parentNode) {
+        creditElement.parentNode.removeChild(creditElement);
+      }
+    }, 500);
+  });
+}
+
+// تشغيل الرسالة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+  // تأخير لمدة 3 ثوانٍ بعد تحميل الصفحة
+  setTimeout(showProgrammerCredit, 3000);
+});
