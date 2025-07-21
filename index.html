@@ -6,27 +6,24 @@
     <title>مخبزة وحلويات علاّف | طعم أصيل لا يُنسى</title>
     
     <!-- Meta Tags -->
-    <meta name="description" content="مخبزة وحلويات علاّف - أجود المخبوزات والحلويات الطازجة يومياً. طعم أصيل لا يُنسى">
+    <meta name="description" content="مخبزة وحلويات علاّف - أجود المخبوزات والحلويات الطازجة يومياً">
     <meta name="keywords" content="مخبزة, حلويات, خبز, كيك, مسمن, كرواسون, علاّف">
-    <meta name="author" content="مخبزة وحلويات علاّف">
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- External Libraries -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
+    <div id="loadingScreen" class="loading-screen">
         <div class="loading-content">
-            <div class="loading-logo">
-                <div class="logo-placeholder">🍞</div>
+            <div class="bakery-logo">
+                <div class="bread-icon">🍞</div>
+                <h2>مخبزة علاّف</h2>
             </div>
             <div class="loading-spinner">
                 <div class="spinner"></div>
@@ -36,84 +33,54 @@
     </div>
 
     <!-- Header -->
-    <header id="main-header" class="main-header">
+    <header class="main-header" id="mainHeader">
         <nav class="navbar">
             <div class="nav-container">
-                <!-- Logo Section -->
+                <!-- Logo -->
                 <div class="logo-section">
                     <div class="logo">🍞</div>
-                    <div class="brand-info">
-                        <h1 class="brand-name">مخبزة علاّف</h1>
-                        <span class="brand-tagline">طعم أصيل لا يُنسى</span>
+                    <div class="brand-text">
+                        <h1>مخبزة علاّف</h1>
+                        <span>طعم أصيل لا يُنسى</span>
                     </div>
                 </div>
 
                 <!-- Navigation Menu -->
-                <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link active">
-                            <i class="fas fa-home"></i>
-                            <span>الرئيسية</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#products" class="nav-link">
-                            <i class="fas fa-bread-slice"></i>
-                            <span>منتجاتنا</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#gallery" class="nav-link">
-                            <i class="fas fa-images"></i>
-                            <span>معرض الصور</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link">
-                            <i class="fas fa-info-circle"></i>
-                            <span>قصتنا</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link">
-                            <i class="fas fa-phone"></i>
-                            <span>تواصل معنا</span>
-                        </a>
-                    </li>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link active">الرئيسية</a></li>
+                    <li><a href="#products" class="nav-link">منتجاتنا</a></li>
+                    <li><a href="#gallery" class="nav-link">معرض الصور</a></li>
+                    <li><a href="#about" class="nav-link">قصتنا</a></li>
+                    <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
                 </ul>
 
                 <!-- Header Actions -->
                 <div class="header-actions">
-                    <!-- Search Button -->
-                    <button class="search-btn" id="search-btn">
+                    <button class="search-btn" id="searchBtn">
                         <i class="fas fa-search"></i>
                     </button>
-                    
-                    <!-- Cart Button -->
-                    <button class="cart-btn" id="cart-btn">
+                    <button class="cart-btn" id="cartBtn">
                         <i class="fas fa-shopping-basket"></i>
-                        <span class="cart-count" id="cart-count">0</span>
+                        <span class="cart-count" id="cartCount">0</span>
                     </button>
-                    
-                    <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
                 </div>
             </div>
         </nav>
 
         <!-- Search Overlay -->
-        <div class="search-overlay" id="search-overlay">
+        <div class="search-overlay" id="searchOverlay">
             <div class="search-container">
-                <input type="text" class="search-input" id="search-input" placeholder="ابحث عن منتجاتك المفضلة...">
-                <button class="search-close" id="search-close">
+                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن منتجاتك المفضلة...">
+                <button class="search-close" id="searchClose">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="search-results" id="search-results"></div>
+            <div class="search-results" id="searchResults"></div>
         </div>
     </header>
 
@@ -121,57 +88,50 @@
     <main class="main-content">
         <!-- Hero Section -->
         <section id="home" class="hero-section">
-            <div class="hero-background">
-                <div class="hero-overlay"></div>
-            </div>
+            <div class="hero-background"></div>
             <div class="hero-content">
-                <div class="hero-text">
+                <div class="hero-text" data-aos="fade-up">
                     <h2 class="hero-title">نخبز بحب، نقدم بشغف</h2>
-                    <p class="hero-subtitle">اكتشف تشكيلتنا الفريدة من المخبوزات الطازجة والحلويات الشهية المصنوعة يدوياً كل يوم</p>
+                    <p class="hero-subtitle">اكتشف تشكيلتنا الفريدة من المخبوزات الطازجة والحلويات الشهية</p>
                     <div class="hero-buttons">
-                        <a href="#products" class="cta-primary">
+                        <a href="#products" class="btn-primary">
                             <i class="fas fa-shopping-bag"></i>
                             تصفح منتجاتنا
                         </a>
-                        <a href="#about" class="cta-secondary">
+                        <a href="#about" class="btn-secondary">
                             <i class="fas fa-play"></i>
                             اكتشف قصتنا
                         </a>
                     </div>
                 </div>
-                <div class="hero-stats">
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
                     <div class="stat-item">
-                        <span class="stat-number" data-count="15">0</span>
+                        <span class="stat-number" data-target="15">0</span>
                         <span class="stat-label">سنة خبرة</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number" data-count="50">0</span>
+                        <span class="stat-number" data-target="50">0</span>
                         <span class="stat-label">نوع منتج</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number" data-count="1000">0</span>
+                        <span class="stat-number" data-target="1000">0</span>
                         <span class="stat-label">عميل سعيد</span>
                     </div>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <div class="scroll-arrow">
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
         </section>
 
-        <!-- Featured Products Section -->
+        <!-- Featured Products -->
         <section class="featured-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header" data-aos="fade-up">
                     <h2 class="section-title">منتجاتنا المميزة</h2>
                     <p class="section-subtitle">تذوق أشهى المخبوزات والحلويات الطازجة</p>
                 </div>
                 <div class="featured-grid">
-                    <div class="featured-card">
+                    <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="card-image">
-                            <div class="image-placeholder">🥖</div>
+                            <div class="product-emoji">🥖</div>
                             <div class="card-overlay">
                                 <button class="quick-view-btn" onclick="openQuickView(1)">
                                     <i class="fas fa-eye"></i>
@@ -180,13 +140,13 @@
                             </div>
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title">مخبوزات طازجة</h3>
-                            <p class="card-description">خبز يومي طازج بأجود المكونات</p>
+                            <h3>مخبوزات طازجة</h3>
+                            <p>خبز يومي طازج بأجود المكونات</p>
                         </div>
                     </div>
-                    <div class="featured-card">
+                    <div class="featured-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="card-image">
-                            <div class="image-placeholder">🧁</div>
+                            <div class="product-emoji">🧁</div>
                             <div class="card-overlay">
                                 <button class="quick-view-btn" onclick="openQuickView(2)">
                                     <i class="fas fa-eye"></i>
@@ -195,13 +155,13 @@
                             </div>
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title">حلويات شرقية</h3>
-                            <p class="card-description">حلويات تقليدية بنكهات أصيلة</p>
+                            <h3>حلويات شرقية</h3>
+                            <p>حلويات تقليدية بنكهات أصيلة</p>
                         </div>
                     </div>
-                    <div class="featured-card">
+                    <div class="featured-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="card-image">
-                            <div class="image-placeholder">🎂</div>
+                            <div class="product-emoji">🎂</div>
                             <div class="card-overlay">
                                 <button class="quick-view-btn" onclick="openQuickView(3)">
                                     <i class="fas fa-eye"></i>
@@ -210,8 +170,8 @@
                             </div>
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title">كيك وتورتات</h3>
-                            <p class="card-description">كيك مخصص لجميع المناسبات</p>
+                            <h3>كيك وتورتات</h3>
+                            <p>كيك مخصص لجميع المناسبات</p>
                         </div>
                     </div>
                 </div>
@@ -221,13 +181,13 @@
         <!-- Products Section -->
         <section id="products" class="products-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header" data-aos="fade-up">
                     <h2 class="section-title">جميع منتجاتنا</h2>
                     <p class="section-subtitle">اختر من تشكيلتنا الواسعة</p>
                 </div>
                 
-                <!-- Product Categories Filter -->
-                <div class="category-filter">
+                <!-- Category Filter -->
+                <div class="category-filter" data-aos="fade-up" data-aos-delay="100">
                     <button class="filter-btn active" data-category="all">
                         <i class="fas fa-th"></i>
                         الكل
@@ -242,7 +202,7 @@
                     </button>
                     <button class="filter-btn" data-category="cakes">
                         <i class="fas fa-birthday-cake"></i>
-                        كيك وتورتات
+                        كيك
                     </button>
                     <button class="filter-btn" data-category="drinks">
                         <i class="fas fa-coffee"></i>
@@ -251,7 +211,7 @@
                 </div>
 
                 <!-- Products Grid -->
-                <div class="products-grid" id="products-grid">
+                <div class="products-grid" id="productsGrid">
                     <!-- Products will be loaded here by JavaScript -->
                 </div>
             </div>
@@ -260,12 +220,12 @@
         <!-- Gallery Section -->
         <section id="gallery" class="gallery-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header" data-aos="fade-up">
                     <h2 class="section-title">معرض إبداعاتنا</h2>
                     <p class="section-subtitle">شاهد أجمل ما نصنعه لكم</p>
                 </div>
-                <div class="gallery-grid" id="gallery-grid">
-                    <!-- Gallery items will be loaded here by JavaScript -->
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Gallery items will be loaded here -->
                 </div>
             </div>
         </section>
@@ -274,14 +234,14 @@
         <section id="about" class="about-section">
             <div class="container">
                 <div class="about-content">
-                    <div class="about-text">
+                    <div class="about-text" data-aos="fade-right">
                         <div class="section-header">
                             <h2 class="section-title">قصتنا</h2>
                             <p class="section-subtitle">رحلة من الشغف إلى الإتقان</p>
                         </div>
                         <div class="about-description">
-                            <p>منذ عام 2008، ونحن في مخبزة علاّف نضع قلوبنا في كل ما نخبزه. بدأت رحلتنا بحلم بسيط: مشاركة العالم طعم المخبوزات الأصيلة المصنوعة من مكونات طبيعية وبلمسة من الحب.</p>
-                            <p>نؤمن بأن كل قطعة خبز، وكل حبة حلوى، وكل كيكة نصنعها تحمل في طياتها قصة من الشغف والإتقان. فريقنا من الخبازين المهرة يعمل بلا كلل لضمان أن كل منتج يخرج من أفراننا يلبي أعلى معايير الجودة والطعم.</p>
+                            <p>منذ عام 2008، ونحن في مخبزة علاّف نضع قلوبنا في كل ما نخبزه. بدأت رحلتنا بحلم بسيط: مشاركة العالم طعم المخبوزات الأصيلة.</p>
+                            <p>نؤمن بأن كل قطعة خبز، وكل حبة حلوى، وكل كيكة نصنعها تحمل في طياتها قصة من الشغف والإتقان.</p>
                         </div>
                         <div class="about-features">
                             <div class="feature-item">
@@ -297,24 +257,24 @@
                                 <span>مصنوع بحب</span>
                             </div>
                         </div>
-                        <a href="#contact" class="cta-primary">
+                        <a href="#contact" class="btn-primary">
                             <i class="fas fa-phone"></i>
                             تواصل معنا
                         </a>
                     </div>
-                    <div class="about-media">
-                        <div class="media-container">
-                            <div class="image-placeholder about-image">🏪</div>
+                    <div class="about-media" data-aos="fade-left">
+                        <div class="about-image">
+                            <div class="image-placeholder">🏪</div>
                         </div>
                         <div class="about-stats">
                             <div class="stat-card">
                                 <i class="fas fa-users"></i>
-                                <span class="stat-number" data-count="5000">0</span>
+                                <span class="stat-number" data-target="5000">0</span>
                                 <span class="stat-label">عميل راضٍ</span>
                             </div>
                             <div class="stat-card">
                                 <i class="fas fa-award"></i>
-                                <span class="stat-number" data-count="10">0</span>
+                                <span class="stat-number" data-target="10">0</span>
                                 <span class="stat-label">جائزة محلية</span>
                             </div>
                         </div>
@@ -326,12 +286,12 @@
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header" data-aos="fade-up">
                     <h2 class="section-title">تواصل معنا</h2>
                     <p class="section-subtitle">نحن هنا لخدمتكم</p>
                 </div>
                 <div class="contact-content">
-                    <div class="contact-info">
+                    <div class="contact-info" data-aos="fade-right">
                         <div class="info-card">
                             <i class="fas fa-map-marker-alt"></i>
                             <h3>موقعنا</h3>
@@ -355,13 +315,13 @@
                             <p>الجمعة: 2:00 م - 10:00 م</p>
                         </div>
                         <div class="social-links">
-                            <a href="#" class="social-link">
+                            <a href="#" class="social-link facebook">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="social-link">
+                            <a href="#" class="social-link instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="social-link">
+                            <a href="#" class="social-link tiktok">
                                 <i class="fab fa-tiktok"></i>
                             </a>
                             <a href="https://wa.me/212681848262" class="social-link whatsapp">
@@ -369,8 +329,8 @@
                             </a>
                         </div>
                     </div>
-                    <div class="contact-form">
-                        <form id="contact-form" class="form">
+                    <div class="contact-form" data-aos="fade-left">
+                        <form id="contactForm" class="form">
                             <div class="form-group">
                                 <input type="text" id="name" name="name" required>
                                 <label for="name">الاسم الكامل</label>
@@ -423,4 +383,30 @@
                             نخبز بحب ونقدم بشغف أجود المخبوزات والحلويات الطازجة يومياً
                         </p>
                         <div class="footer-social">
-                            <a href="#" class="social-link">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://wa.me/212681848262" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h4 class="footer-title">روابط سريعة</h4>
+                        <ul class="footer-links">
+                            <li><a href="#home">الرئيسية</a></li>
+                            <li><a href="#products">منتجاتنا</a></li>
+                            <li><a href="#gallery">معرض الصور</a></li>
+                            <li><a href="#about">قصتنا</a></li>
+                            <li><a href="#contact">تواصل معنا</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4 class="footer-title">منتجاتنا</h4>
+                        <ul class="footer-links">
+                            <li><a href="#products">مخبوزات طازجة</a></li>
+                            <li><a href="#products">حلويات شرقية</a></li>
+                            <li><a href="#products">كيك وتورتات</a></li>
+                            <li><a href="#products">معجنات</a></li>
+                            <li><a href="#products">مشروبات</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section
