@@ -1036,70 +1036,123 @@ section {
     padding: 20px;
   }
 }
-/* ===== DEVELOPER MESSAGE ===== */
-.developer-message {
+/* ===== PROGRAMMER CREDIT MESSAGE WITH PROFILE ===== */
+.programmer-credit {
   position: fixed;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.8);
+  right: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 15px 30px;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-weight: bold;
+  padding: 15px 20px;
+  border-radius: 60px;
+  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
   z-index: 9999;
+  font-family: 'El Messiri', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease-in-out, bottom 0.5s ease-in-out;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(50px) scale(0.8);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  min-width: 280px;
 }
 
-.developer-message.show {
+.programmer-credit.show {
   opacity: 1;
-  visibility: visible;
-  bottom: 40px;
-}
-/* --- Programmer Profile Image --- */
-.programmer-credit .profile-pic {
-  width: 40px; /* حجم الصورة */
-  height: 40px; /* حجم الصورة */
-  border-radius: 50%; /* لجعل الصورة دائرية */
-  object-fit: cover; /* لضمان ملء الصورة للمساحة */
-  margin-left: 10px; /* مسافة بين الصورة والنص */
-  border: 2px solid rgba(255, 255, 255, 0.7); /* إطار أبيض خفيف */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(0) scale(1);
 }
 
-/* تعديل بسيط لترتيب العناصر داخل الرسالة */
-.programmer-credit .credit-text {
+.programmer-credit:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 20px 45px rgba(102, 126, 234, 0.5);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.programmer-credit .credit-content {
   display: flex;
   align-items: center;
-  gap: 8px; /* مسافة بين العناصر */
+  gap: 15px;
 }
 
-/* تعديل ليكون النص بجانب الصورة */
-.programmer-credit .credit-text > div {
+.programmer-credit .profile-image {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  object-fit: cover;
+  animation: profileGlow 3s ease-in-out infinite alternate;
+}
+
+.programmer-credit .credit-info {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* لمحاذاة النص لليسار */
+  gap: 2px;
 }
 
-/* تعديل حجم الأيقونات لتكون متناسقة */
+.programmer-credit .credit-title {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.programmer-credit .credit-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .programmer-credit .credit-icon {
-  font-size: 1.2rem; /* حجم الأيقونات */
+  font-size: 1rem;
+  animation: iconPulse 2s ease-in-out infinite;
 }
 
+@keyframes profileGlow {
+  0% { 
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: scale(1);
+  }
+  100% { 
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .programmer-credit .profile-pic {
-    width: 30px;
-    height: 30px;
+  .programmer-credit {
+    bottom: 15px;
+    right: 15px;
+    left: 15px;
+    min-width: auto;
+    padding: 12px 18px;
+    border-radius: 50px;
   }
-  .programmer-credit .credit-text {
-    flex-direction: row; /* إبقاء العناصر في صف واحد على الجوال */
-    justify-content: center;
+  
+  .programmer-credit .profile-image {
+    width: 40px;
+    height: 40px;
   }
-  .programmer-credit .credit-text > div {
-    align-items: center; /* محاذاة النص في المنتصف على الجوال */
+  
+  .programmer-credit .credit-name {
+    font-size: 1rem;
+  }
+  
+  .programmer-credit .credit-title {
+    font-size: 0.8rem;
   }
 }
