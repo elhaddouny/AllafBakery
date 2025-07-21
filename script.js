@@ -355,7 +355,7 @@ function generateWhatsAppOrder() {
   
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   message += `💰 المجموع الإجمالي: ${total.toFixed(2)} درهم\n\n`;
-  message += 'شكراً لكم! 🙏';
+  message += 'شكراً لكم! ❤️';
   
   const whatsappUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
   window.open(whatsappUrl, '_blank');
