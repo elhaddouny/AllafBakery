@@ -2,11 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // --- CONFIGURATION ---
   const WHATSAPP_NUMBER = "212681848262";
-  const VISITOR_API_NAMESPACE = "allafbakery.com"; // معرف فريد لموقعك
+  const VISITOR_API_NAMESPACE = "allafbakery-site"; // معرف فريد لموقعك
   const VISITOR_API_KEY = "visits"; // اسم العداد
 
   // --- PRODUCT DATA ---
-  // استخدم صورك الحقيقية هنا. سأستخدم الصور المتاحة كمثال
   const products = [
     { id: 1, name: 'كرواسون بالزبدة', price: 2, image: 'images/croissant.jpg', category: 'bakery' },
     { id: 2, name: 'مسمن بلدي معسل', price: 3.5, image: 'images/msemen.jpg', category: 'bakery' },
@@ -36,16 +35,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- CART STATE ---
   let cart = JSON.parse(localStorage.getItem('allafBakeryCart')) || [];
 
-  // --- FUNCTIONS ---
-
-  // Render Products
-  const renderProducts = (filter = 'all') => {
-    productListEl.innerHTML = '';
-    const filteredProducts = products.filter(p => filter === 'all' || p.category === filter);
-    
-    if (filteredProducts.length === 0) {
-      productListEl.innerHTML = `<p class="empty-category-msg">لا توجد منتجات في هذه الفئة حاليًا.</p>`;
-      return;
-    }
-
-    filteredProducts.forEach(product => {
+  // --- FUNCTIONS
