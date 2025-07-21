@@ -426,3 +426,136 @@
     <script src="script.js"></script>
 </body>
 </html>
+// ===== ADDITIONAL JAVASCRIPT ENHANCEMENTS =====
+
+// Enhanced form validation
+function validateForm(form) {
+    const fields = form.querySelectorAll('input[required], textarea[required]');
+    let isValid = true;
+    
+    fields.forEach(field => {
+        const formGroup = field.closest('.form-group');
+        const errorElement = formGroup.querySelector('.form-error');
+        
+        if (!field.value.trim()) {
+            formGroup.classList.add('error');
+            formGroup.classList.remove('success');
+            if (errorElement) {
+                errorElement.textContent = 'هذا الحقل مطلوب';
+            }
+            isValid = false;
+        } else if (field.type === 'email' && !isValidEmail(field.value)) {
+            formGroup.classList.add('error');
+            formGroup.classList.remove('success');
+            if (errorElement) {
+                errorElement.textContent = 'يرجى إدخال بريد إلكتروني صحيح';
+            }
+            isValid = false;
+        } else if (field.type === 'tel' && !isValidPhone(field.value)) {
+            formGroup.classList.add('error');
+            formGroup.classList.remove('success');
+            if (errorElement) {
+                errorElement.textContent = 'يرجى إدخال رقم هاتف صحيح';
+            }
+            isValid = false;
+        } else {
+            formGroup.classList.remove('error');
+            formGroup.classList.add('success');
+        }
+    });
+    
+    return isValid;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function isValidPhone(phone) {
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    return phoneRegex.test(phone);
+}
+
+// Enhanced error handling with retry mechanism
+function withRetry(fn, maxRetries = 3) {
+    return async function(...args) {
+        let lastError;
+        
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                return await fn.apply(this, args);
+            } catch (error) {
+                lastError = error;
+                if (i < maxRetries - 1) {
+                    await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+                }
+            }
+        }
+        
+        throw lastError;
+    };
+}
+
+// Performance monitoring
+function measurePerformance(name, fn) {
+    return function(...args) {
+        const start = performance.now();
+        const result = fn.apply(this, args);
+        const end = performance.now();
+        console.log(`⏱️ ${name}: ${Math.round(end - start)}ms`);
+        return result;
+    };
+}
+
+// Add to global scope for enhanced functionality
+window.validateForm = validateForm;
+window.isValidEmail = isValidEmail;
+window.isValidPhone = isValidPhone;
+window.withRetry = withRetry;
+window.measurePerformance = measurePerformance;
+
+// Auto-cleanup for better memory management
+window.addEventListener('beforeunload', () => {
+    // Clear any intervals or timeouts
+    clearInterval(window.testimonialsInterval);
+    clearInterval(window.autoSaveInterval);
+    
+    // Save final state
+    saveCart();
+});
+
+// Enhanced accessibility
+function enhanceAccessibility() {
+    // Add ARIA labels to interactive elements
+    const buttons = document.querySelectorAll('button:not([aria-label])');
+    buttons.forEach(button => {
+        const text = button.textContent.trim();
+        if (text) {
+            button.setAttribute('aria-label', text);
+        }
+    });
+    
+    // Add role attributes where needed
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+    });
+    
+    // Enhance keyboard navigation
+    const focusableElements = document.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    
+    focusableElements.forEach((element, index) => {
+        element.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                // Custom tab handling if needed
+            }
+        });
+    });
+}
+
+// Call accessibility enhancements after DOM is loaded
+document.addEventListener('DOMContentLoaded', enhanceAccessibility);
