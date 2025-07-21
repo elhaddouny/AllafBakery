@@ -647,3 +647,66 @@ function showEnhancedProgrammerCredit() {
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(showEnhancedProgrammerCredit, 3000);
 });
+// ===== ENHANCED PROGRAMMER CREDIT WITH PROFILE =====
+function showProgrammerCreditWithProfile() {
+  // إنشاء عنصر الرسالة
+  const creditElement = document.createElement('div');
+  creditElement.className = 'programmer-credit';
+  creditElement.innerHTML = `
+    <div class="credit-content">
+      <img src="images/mohamed-profile.png" alt="محمد الهدوني" class="profile-image" />
+      <div class="credit-info">
+        <div class="credit-title">مطور الموقع</div>
+        <div class="credit-name">
+          محمد الهدوني
+          <i class="fas fa-star credit-icon" style="color: #ffd700;"></i>
+        </div>
+      </div>
+      <i class="fas fa-code credit-icon" style="color: #64ffda;"></i>
+    </div>
+  `;
+  
+  // إضافة الرسالة إلى الصفحة
+  document.body.appendChild(creditElement);
+  
+  // إظهار الرسالة بعد ثانيتين
+  setTimeout(() => {
+    creditElement.classList.add('show');
+  }, 2000);
+  
+  // إخفاء الرسالة بعد 6 ثوانٍ
+  setTimeout(() => {
+    creditElement.classList.remove('show');
+    // حذف العنصر بعد انتهاء الحركة
+    setTimeout(() => {
+      if (creditElement.parentNode) {
+        creditElement.parentNode.removeChild(creditElement);
+      }
+    }, 600);
+  }, 8000); // 6 ثوانٍ + ثانيتين للظهور
+  
+  // إضافة حدث النقر لإخفاء الرسالة
+  creditElement.addEventListener('click', () => {
+    creditElement.classList.remove('show');
+    setTimeout(() => {
+      if (creditElement.parentNode) {
+        creditElement.parentNode.removeChild(creditElement);
+      }
+    }, 600);
+  });
+  
+  // تأثير hover إضافي
+  creditElement.addEventListener('mouseenter', () => {
+    creditElement.style.transform = 'translateY(-10px) scale(1.08)';
+  });
+  
+  creditElement.addEventListener('mouseleave', () => {
+    creditElement.style.transform = 'translateY(-8px) scale(1.05)';
+  });
+}
+
+// تشغيل الرسالة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+  // تأخير لمدة 4 ثوانٍ بعد تحميل الصفحة
+  setTimeout(showProgrammerCreditWithProfile, 4000);
+});
