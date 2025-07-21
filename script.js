@@ -4,8 +4,9 @@ const CONFIG = {
     ANIMATION_DURATION: 300,
     SCROLL_THRESHOLD: 100,
     SEARCH_DEBOUNCE_DELAY: 300,
-    CART_STORAGE_KEY: 'allaf_cart_v2',
-    VISITOR_STORAGE_KEY: 'allaf_visitor_count_v2'
+    CART_STORAGE_KEY: 'allaf_cart_v3',
+    VISITOR_STORAGE_KEY: 'allaf_visitor_count_v3',
+    LOADING_DURATION: 2000
 };
 
 // ===== GLOBAL STATE =====
@@ -17,7 +18,9 @@ let appState = {
     currentCategory: 'all',
     searchResults: [],
     filteredProducts: [],
-    isLoading: true
+    isLoading: true,
+    currentTestimonial: 0,
+    isMenuOpen: false
 };
 
 // ===== SAMPLE DATA =====
@@ -25,95 +28,119 @@ const PRODUCTS_DATA = [
     {
         id: 1,
         name: 'خبز طازج',
-        description: 'خبز يومي طازج مخبوز بأجود المكونات الطبيعية',
+        description: 'خبز يومي طازج مخبوز بأجود المكونات الطبيعية، يتميز بقشرة ذهبية ونكهة لا تُقاوم',
         price: 2.50,
         category: 'bread',
         emoji: '🥖',
         featured: true,
-        ingredients: ['دقيق قمح', 'خميرة طبيعية', 'ملح البحر', 'زيت زيتون']
+        ingredients: ['دقيق قمح عالي الجودة', 'خميرة طبيعية', 'ملح البحر', 'زيت زيتون بكر']
     },
     {
         id: 2,
         name: 'كرواسون بالزبدة',
-        description: 'كرواسون فرنسي أصيل بالزبدة الطبيعية',
+        description: 'كرواسون فرنسي أصيل بالزبدة الطبيعية، مقرمش من الخارج وطري من الداخل',
         price: 4.00,
         category: 'bread',
         emoji: '🥐',
         featured: false,
-        ingredients: ['دقيق', 'زبدة فرنسية', 'خميرة', 'حليب']
+        ingredients: ['دقيق فرنسي', 'زبدة فرنسية أصلية', 'خميرة طازجة', 'حليب طبيعي']
     },
     {
         id: 3,
         name: 'بقلاوة بالفستق',
-        description: 'حلوى شرقية تقليدية بالفستق الحلبي',
-        price: 15.00,
+        description: 'حلوى شرقية تقليدية محشوة بالفستق الحلبي الفاخر ومغطاة بالعسل الطبيعي',
+        price: 8.00,
         category: 'sweets',
-        emoji: '🧁',
+        emoji: '🥮',
         featured: true,
-        ingredients: ['عجينة فيلو', 'فستق حلبي', 'عسل طبيعي', 'سمن بلدي']
+        ingredients: ['عجينة الفيلو', 'فستق حلبي', 'عسل طبيعي', 'سمن بلدي']
     },
     {
         id: 4,
         name: 'كيكة الشوكولاتة',
-        description: 'كيكة شوكولاتة غنية ولذيذة',
+        description: 'كيكة شوكولاتة غنية ورطبة مع طبقات من كريمة الشوكولاتة الفاخرة',
         price: 45.00,
         category: 'cakes',
-        emoji: '🎂',
+        emoji: '🍰',
         featured: true,
-        ingredients: ['شوكولاتة بلجيكية', 'دقيق', 'بيض طازج', 'زبدة']
+        ingredients: ['شوكولاتة بلجيكية', 'دقيق فاخر', 'بيض طازج', 'كريمة طبيعية']
     },
     {
         id: 5,
-        name: 'مسمن بالعسل',
-        description: 'مسمن مغربي تقليدي بالعسل الطبيعي',
+        name: 'مسمن معسل',
+        description: 'مسمن مغربي تقليدي محضر بالطريقة الأصيلة ومقدم مع العسل الطبيعي',
         price: 3.50,
         category: 'bread',
-        emoji: '🥞',
+        emoji: '🫓',
         featured: false,
-        ingredients: ['دقيق', 'سميد', 'عسل طبيعي', 'زبدة']
+        ingredients: ['دقيق محلي', 'سمن بلدي', 'عسل جبلي', 'ملح']
     },
     {
         id: 6,
         name: 'قهوة عربية',
-        description: 'قهوة عربية أصيلة بالهيل',
-        price: 8.00,
+        description: 'قهوة عربية أصيلة محمصة بعناية وتقدم مع التمر والحلويات الشرقية',
+        price: 6.00,
         category: 'drinks',
         emoji: '☕',
         featured: false,
-        ingredients: ['قهوة عربية', 'هيل', 'سكر', 'ماء']
+        ingredients: ['حبوب قهوة عربية', 'هيل', 'زعفران', 'ماء نقي']
     },
     {
         id: 7,
         name: 'كيكة الفراولة',
-        description: 'كيكة طازجة بالفراولة الطبيعية',
-        price: 50.00,
+        description: 'كيكة إسفنجية طرية مزينة بالفراولة الطازجة وكريمة الفانيليا',
+        price: 40.00,
         category: 'cakes',
-        emoji: '🍰',
+        emoji: '🍓',
         featured: false,
-        ingredients: ['فراولة طازجة', 'كريمة', 'دقيق', 'سكر']
+        ingredients: ['فراولة طازجة', 'كريمة فانيليا', 'بسكويت', 'جيلاتين']
     },
     {
         id: 8,
         name: 'معمول بالتمر',
-        description: 'معمول تقليدي محشو بالتمر الفاخر',
-        price: 12.00,
+        description: 'معمول شامي أصيل محشو بالتمر الطبيعي ومرشوش بالسكر البودرة',
+        price: 5.50,
         category: 'sweets',
-        emoji: '🥮',
+        emoji: '🧁',
         featured: false,
-        ingredients: ['دقيق', 'تمر مجهول', 'سمن', 'ماء الورد']
+        ingredients: ['دقيق سميد', 'تمر مجهول', 'سمن بلدي', 'ماء الورد']
+    }
+];
+
+const TESTIMONIALS_DATA = [
+    {
+        id: 1,
+        name: 'أحمد المرابط',
+        role: 'عميل دائم',
+        text: 'مخبزة علاّف هي المكان الوحيد الذي أثق به لشراء الخبز والحلويات. جودة عالية وطعم لا يُنسى!',
+        avatar: '👨'
+    },
+    {
+        id: 2,
+        name: 'فاطمة الزهراء',
+        role: 'ربة منزل',
+        text: 'أطلب من مخبزة علاّف دائماً لجميع المناسبات. الكيك والحلويات دائماً طازجة ولذيذة.',
+        avatar: '👩'
+    },
+    {
+        id: 3,
+        name: 'محمد الإدريسي',
+        role: 'صاحب مطعم',
+        text: 'نتعامل مع مخبزة علاّف منذ سنوات. الخدمة ممتازة والجودة لا تتغير أبداً.',
+        avatar: '👨‍🍳'
     }
 ];
 
 const GALLERY_DATA = [
-    { id: 1, emoji: '🍞', title: 'خبز طازج' },
+    { id: 1, emoji: '🥖', title: 'خبز طازج' },
     { id: 2, emoji: '🥐', title: 'كرواسون' },
-    { id: 3, emoji: '🧁', title: 'حلويات' },
-    { id: 4, emoji: '🎂', title: 'كيك' },
-    { id: 5, emoji: '🥞', title: 'مسمن' },
-    { id: 6, emoji: '☕', title: 'مشروبات' },
-    { id: 7, emoji: '🍰', title: 'تورتات' },
-    { id: 8, emoji: '🥮', title: 'معمول' },
-    { id: 9, emoji: '🍪', title: 'بسكويت' }
+    { id: 3, emoji: '🍰', title: 'كيك شوكولاتة' },
+    { id: 4, emoji: '🥮', title: 'بقلاوة' },
+    { id: 5, emoji: '🫓', title: 'مسمن' },
+    { id: 6, emoji: '☕', title: 'قهوة عربية' },
+    { id: 7, emoji: '🍓', title: 'كيكة فراولة' },
+    { id: 8, emoji: '🧁', title: 'معمول' },
+    { id: 9, emoji: '🍯', title: 'عسل طبيعي' }
 ];
 
 // ===== DOM ELEMENTS =====
@@ -121,21 +148,25 @@ let elements = {};
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🍞 مرحباً بك في مخبزة علاّف! نتمنى لك تجربة ممتعة');
+    console.log('🍞 مرحباً بكم في مخبزة علاّف! جاري تحضير الموقع...');
     
-    // Initialize elements
-    initializeElements();
-    
-    // Load cart from storage
-    loadCartFromStorage();
-    
-    // Initialize all components
-    initializeApp();
-    
-    // Hide loading screen
-    setTimeout(hideLoadingScreen, 1500);
+    try {
+        initializeElements();
+        initializeApp();
+        setupEventListeners();
+        loadInitialData();
+        
+        // Hide loading screen after delay
+        setTimeout(hideLoadingScreen, CONFIG.LOADING_DURATION);
+        
+        console.log('✅ تم تحميل الموقع بنجاح!');
+    } catch (error) {
+        console.error('❌ خطأ في تحميل الموقع:', error);
+        hideLoadingScreen();
+    }
 });
 
+// ===== ELEMENT INITIALIZATION =====
 function initializeElements() {
     elements = {
         // Loading
@@ -143,50 +174,62 @@ function initializeElements() {
         
         // Header
         mainHeader: document.getElementById('mainHeader'),
-        navMenu: document.getElementById('navMenu'),
-        mobileToggle: document.getElementById('mobileToggle'),
+        searchBtn: document.getElementById('searchBtn'),
+        cartBtn: document.getElementById('cartBtn'),
+        cartCounter: document.getElementById('cartCounter'),
+        menuToggle: document.getElementById('menuToggle'),
         
         // Search
-        searchBtn: document.getElementById('searchBtn'),
         searchOverlay: document.getElementById('searchOverlay'),
         searchInput: document.getElementById('searchInput'),
         searchClose: document.getElementById('searchClose'),
         searchResults: document.getElementById('searchResults'),
         
-        // Cart
-        cartBtn: document.getElementById('cartBtn'),
-        cartCount: document.getElementById('cartCount'),
-        cartModal: document.getElementById('cartModal'),
-        cartClose: document.getElementById('cartClose'),
-        cartBody: document.getElementById('cartBody'),
-        cartTotal: document.getElementById('cartTotal'),
-        cartClear: document.getElementById('cartClear'),
-        cartCheckout: document.getElementById('cartCheckout'),
-        
         // Products
+        featuredGrid: document.getElementById('featuredGrid'),
         productsGrid: document.getElementById('productsGrid'),
+        loadMoreBtn: document.getElementById('loadMoreBtn'),
         
         // Gallery
         galleryGrid: document.getElementById('galleryGrid'),
+        
+        // Testimonials
+        testimonialsSlider: document.getElementById('testimonialsSlider'),
+        
+        // Cart
+        cartModal: document.getElementById('cartModal'),
+        cartClose: document.getElementById('cartClose'),
+        cartItems: document.getElementById('cartItems'),
+        emptyCart: document.getElementById('emptyCart'),
+        cartTotal: document.getElementById('cartTotal'),
+        clearCart: document.getElementById('clearCart'),
+        cartCheckout: document.getElementById('cartCheckout'),
         
         // Quick View
         quickViewModal: document.getElementById('quickViewModal'),
         quickViewClose: document.getElementById('quickViewClose'),
         quickViewBody: document.getElementById('quickViewBody'),
         
-        // Contact Form
-        contactForm: document.getElementById('contactForm'),
-        
-        // Footer
+        // Other
+        backToTop: document.getElementById('backToTop'),
         visitorCount: document.getElementById('visitorCount'),
-        
-        // Floating buttons
-        backToTop: document.getElementById('backToTop')
+        contactForm: document.getElementById('contactForm')
     };
 }
 
+// ===== APP INITIALIZATION =====
 function initializeApp() {
-    // Initialize AOS (Animate On Scroll)
+    loadCart();
+    updateCartDisplay();
+    updateCartCounter();
+    updateVisitorCount();
+    initializeAOS();
+    setupScrollEffects();
+    setupNavigation();
+}
+
+// ===== AOS INITIALIZATION =====
+function initializeAOS() {
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 800,
@@ -195,78 +238,65 @@ function initializeApp() {
             offset: 100
         });
     }
-    
-    // Setup event listeners
-    setupEventListeners();
-    
-    // Load products
-    loadProducts();
-    
-    // Load gallery
-    loadGallery();
-    
-    // Update visitor count
-    updateVisitorCount();
-    
-    // Setup scroll effects
-    setupScrollEffects();
-    
-    // Setup counter animations
-    setupCounterAnimations();
-    
-    // Update cart display
-    updateCartDisplay();
 }
 
+// ===== EVENT LISTENERS =====
 function setupEventListeners() {
-    // Mobile menu toggle
-    if (elements.mobileToggle) {
-        elements.mobileToggle.addEventListener('click', toggleMobileMenu);
-    }
-    
-    // Search functionality
+    // Search
     if (elements.searchBtn) {
-        elements.searchBtn.addEventListener('click', openSearch);
+        elements.searchBtn.addEventListener('click', toggleSearch);
     }
     if (elements.searchClose) {
-        elements.searchClose.addEventListener('click', closeSearch);
+        elements.searchClose.addEventListener('click', toggleSearch);
     }
     if (elements.searchInput) {
         elements.searchInput.addEventListener('input', debounce(handleSearch, CONFIG.SEARCH_DEBOUNCE_DELAY));
     }
-    if (elements.searchOverlay) {
-        elements.searchOverlay.addEventListener('click', function(e) {
-            if (e.target === elements.searchOverlay) closeSearch();
-        });
-    }
     
-    // Cart functionality
+    // Cart
     if (elements.cartBtn) {
         elements.cartBtn.addEventListener('click', toggleCart);
     }
     if (elements.cartClose) {
-        elements.cartClose.addEventListener('click', closeCart);
+        elements.cartClose.addEventListener('click', toggleCart);
     }
-    if (elements.cartModal) {
-        elements.cartModal.addEventListener('click', function(e) {
-            if (e.target === elements.cartModal) closeCart();
-        });
-    }
-    if (elements.cartClear) {
-        elements.cartClear.addEventListener('click', clearCart);
+    if (elements.clearCart) {
+        elements.clearCart.addEventListener('click', clearCart);
     }
     if (elements.cartCheckout) {
-        elements.cartCheckout.addEventListener('click', checkoutCart);
+        elements.cartCheckout.addEventListener('click', sendWhatsAppOrder);
     }
     
-    // Quick view modal
+    // Quick View
     if (elements.quickViewClose) {
         elements.quickViewClose.addEventListener('click', closeQuickView);
     }
-    if (elements.quickViewModal) {
-        elements.quickViewModal.addEventListener('click', function(e) {
-            if (e.target === elements.quickViewModal) closeQuickView();
+    
+    // Filter buttons
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.dataset.category;
+            filterProducts(category);
         });
+    });
+    
+    // Navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = link.getAttribute('href');
+            if (target.startsWith('#')) {
+                scrollToSection(target);
+                updateActiveNavLink(link);
+            }
+        });
+    });
+    
+    // Back to top
+    if (elements.backToTop) {
+        elements.backToTop.addEventListener('click', scrollToTop);
     }
     
     // Contact form
@@ -274,376 +304,169 @@ function setupEventListeners() {
         elements.contactForm.addEventListener('submit', handleContactForm);
     }
     
-    // Back to top button
-    if (elements.backToTop) {
-        elements.backToTop.addEventListener('click', scrollToTop);
+    // Load more button
+    if (elements.loadMoreBtn) {
+        elements.loadMoreBtn.addEventListener('click', loadMoreProducts);
     }
     
-    // Category filters
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const category = this.dataset.category;
-            filterProducts(category);
-            
-            // Update active state
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
+    // Menu toggle
+    if (elements.menuToggle) {
+        elements.menuToggle.addEventListener('click', toggleMobileMenu);
+    }
     
-    // Navigation links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = this.getAttribute('href');
-            if (target.startsWith('#')) {
-                scrollToSection(target);
-                
-                // Update active state
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Close mobile menu if open
-                closeMobileMenu();
+    // Modal close on backdrop click
+    if (elements.cartModal) {
+        elements.cartModal.addEventListener('click', (e) => {
+            if (e.target === elements.cartModal) {
+                toggleCart();
             }
         });
-    });
+    }
     
-    // Keyboard shortcuts
-    document.addEventListener('keydown', handleKeyboardShortcuts);
+    if (elements.quickViewModal) {
+        elements.quickViewModal.addEventListener('click', (e) => {
+            if (e.target === elements.quickViewModal) {
+                closeQuickView();
+            }
+        });
+    }
+    
+    if (elements.searchOverlay) {
+        elements.searchOverlay.addEventListener('click', (e) => {
+            if (e.target === elements.searchOverlay) {
+                toggleSearch();
+            }
+        });
+    }
+    
+    // Keyboard events
+    document.addEventListener('keydown', handleKeyboardEvents);
+    
+    // Window events
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
 }
 
 // ===== LOADING SCREEN =====
 function hideLoadingScreen() {
     if (elements.loadingScreen) {
         elements.loadingScreen.classList.add('hidden');
-        appState.isLoading = false;
-        
         setTimeout(() => {
             elements.loadingScreen.style.display = 'none';
+            appState.isLoading = false;
         }, 500);
     }
 }
 
-// ===== MOBILE MENU =====
-function toggleMobileMenu() {
-    elements.navMenu.classList.toggle('active');
-    elements.mobileToggle.classList.toggle('active');
+// ===== DATA LOADING =====
+function loadInitialData() {
+    loadFeaturedProducts();
+    loadAllProducts();
+    loadGallery();
+    loadTestimonials();
 }
 
-function closeMobileMenu() {
-    elements.navMenu.classList.remove('active');
-    elements.mobileToggle.classList.remove('active');
-}
-
-// ===== SEARCH FUNCTIONALITY =====
-function openSearch() {
-    appState.isSearchOpen = true;
-    elements.searchOverlay.classList.add('active');
-    setTimeout(() => elements.searchInput.focus(), 100);
-}
-
-function closeSearch() {
-    appState.isSearchOpen = false;
-    elements.searchOverlay.classList.remove('active');
-    elements.searchInput.value = '';
-    elements.searchResults.innerHTML = '';
-}
-
-function handleSearch() {
-    const query = elements.searchInput.value.toLowerCase().trim();
+function loadFeaturedProducts() {
+    if (!elements.featuredGrid) return;
     
-    if (query.length < 2) {
-        elements.searchResults.innerHTML = '';
-        return;
-    }
-    
-    const results = PRODUCTS_DATA.filter(product => 
-        product.name.toLowerCase().includes(query) ||
-        product.description.toLowerCase().includes(query) ||
-        product.ingredients.some(ingredient => ingredient.toLowerCase().includes(query))
-    );
-    
-    displaySearchResults(results);
+    const featuredProducts = PRODUCTS_DATA.filter(product => product.featured);
+    elements.featuredGrid.innerHTML = featuredProducts.map(product => createProductCard(product)).join('');
 }
 
-function displaySearchResults(results) {
-    if (results.length === 0) {
-        elements.searchResults.innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-search"></i>
-                <p>لم يتم العثور على نتائج</p>
-            </div>
-        `;
-        return;
-    }
-    
-    elements.searchResults.innerHTML = results.map(product => `
-        <div class="search-result-item" onclick="openQuickView(${product.id})">
-            <div class="result-image">
-                <div class="product-emoji">${product.emoji}</div>
-            </div>
-            <div class="result-info">
-                <h4>${product.name}</h4>
-                <p>${product.description}</p>
-                <div class="result-price">${product.price.toFixed(2)} درهم</div>
-            </div>
-        </div>
-    `).join('');
-}
-
-// ===== PRODUCTS FUNCTIONALITY =====
-function loadProducts() {
+function loadAllProducts() {
     if (!elements.productsGrid) return;
     
-    elements.productsGrid.innerHTML = PRODUCTS_DATA.map(product => `
-        <div class="product-card" data-category="${product.category}">
-            <div class="product-image">
-                <div class="product-emoji">${product.emoji}</div>
-            </div>
-            <div class="product-info">
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-description">${product.description}</p>
-                <div class="product-price">${product.price.toFixed(2)} درهم</div>
-                <div class="product-actions">
-                    <button class="add-to-cart" onclick="addToCart(${product.id})">
-                        <i class="fas fa-shopping-basket"></i>
-                        أضف للسلة
-                    </button>
-                    <button class="quick-view" onclick="openQuickView(${product.id})">
-                        <i class="fas fa-eye"></i>
-                        عرض سريع
-                    </button>
-                </div>
-            </div>
-        </div>
-    `).join('');
+    elements.productsGrid.innerHTML = PRODUCTS_DATA.map(product => createProductCard(product)).join('');
+    appState.filteredProducts = [...PRODUCTS_DATA];
 }
 
-function filterProducts(category) {
-    appState.currentCategory = category;
-    const productCards = document.querySelectorAll('.product-card');
-    
-    productCards.forEach(card => {
-        const productCategory = card.dataset.category;
-        
-        if (category === 'all' || productCategory === category) {
-            card.classList.remove('hidden');
-            card.style.display = 'block';
-        } else {
-            card.classList.add('hidden');
-            setTimeout(() => {
-                if (card.classList.contains('hidden')) {
-                    card.style.display = 'none';
-                }
-            }, CONFIG.ANIMATION_DURATION);
-        }
-    });
-}
-
-// ===== GALLERY FUNCTIONALITY =====
 function loadGallery() {
     if (!elements.galleryGrid) return;
     
     elements.galleryGrid.innerHTML = GALLERY_DATA.map(item => `
-        <div class="gallery-item" onclick="openLightbox('${item.emoji}', '${item.title}')">
-            <div class="gallery-emoji">${item.emoji}</div>
+        <div class="gallery-item" onclick="openLightbox('${item.emoji}', '${item.title}')" data-aos="fade-up">
+            ${item.emoji}
         </div>
     `).join('');
 }
 
-function openLightbox(emoji, title) {
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-        <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox(this)">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="lightbox-image">
-                <div style="font-size: 8rem; text-align: center;">${emoji}</div>
+function loadTestimonials() {
+    if (!elements.testimonialsSlider) return;
+    
+    elements.testimonialsSlider.innerHTML = TESTIMONIALS_DATA.map(testimonial => `
+        <div class="testimonial-item" data-aos="fade-up">
+            <p class="testimonial-text">"${testimonial.text}"</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">${testimonial.avatar}</div>
+                <div class="author-info">
+                    <h4>${testimonial.name}</h4>
+                    <p>${testimonial.role}</p>
+                </div>
             </div>
-            <div class="lightbox-title">${title}</div>
+        </div>
+    `).join('');
+    
+    // Auto-rotate testimonials
+    setInterval(rotateTestimonials, 5000);
+}
+
+// ===== PRODUCT MANAGEMENT =====
+function createProductCard(product) {
+    return `
+        <div class="product-card" data-category="${product.category}" data-aos="fade-up">
+            <div class="product-image">${product.emoji}</div>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <div class="product-price">${product.price.toFixed(2)} درهم</div>
+            </div>
+            <div class="product-actions">
+                <button class="btn btn-secondary" onclick="openQuickView(${product.id})">
+                    <i class="fas fa-eye"></i>
+                    عرض سريع
+                </button>
+                <button class="btn btn-primary" onclick="addToCart(${product.id})">
+                    <i class="fas fa-cart-plus"></i>
+                    إضافة
+                </button>
+            </div>
         </div>
     `;
+}
+
+function filterProducts(category) {
+    appState.currentCategory = category;
     
-    document.body.appendChild(lightbox);
-    setTimeout(() => lightbox.classList.add('active'), 10);
+    let productsToShow = category === 'all' ? PRODUCTS_DATA : PRODUCTS_DATA.filter(p => p.category === category);
+    appState.filteredProducts = productsToShow;
+    
+    if (elements.productsGrid) {
+        elements.productsGrid.innerHTML = productsToShow.map(product => createProductCard(product)).join('');
+    }
+    
+    updateFilterButtons();
+    
+    // Reinitialize AOS for new elements
+    if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+    }
 }
 
-function closeLightbox(button) {
-    const lightbox = button.closest('.lightbox');
-    lightbox.classList.remove('active');
-    setTimeout(() => lightbox.remove(), CONFIG.ANIMATION_DURATION);
-}
-
-// ===== CART FUNCTIONALITY =====
-function loadCartFromStorage() {
-    const savedCart = localStorage.getItem(CONFIG.CART_STORAGE_KEY);
-    if (savedCart) {
-        try {
-            appState.cart = JSON.parse(savedCart);
-        } catch (e) {
-            console.error('خطأ في تحميل السلة:', e);
-            appState.cart = [];
+function updateFilterButtons() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.category === appState.currentCategory) {
+            btn.classList.add('active');
         }
-    }
+    });
 }
 
-function saveCartToStorage() {
-    localStorage.setItem(CONFIG.CART_STORAGE_KEY, JSON.stringify(appState.cart));
+function loadMoreProducts() {
+    // This would typically load more products from an API
+    showNotification('تم عرض جميع المنتجات المتاحة', 'info');
 }
 
-function addToCart(productId) {
-    const product = PRODUCTS_DATA.find(p => p.id === productId);
-    if (!product) return;
-    
-    const existingItem = appState.cart.find(item => item.id === productId);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        appState.cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            emoji: product.emoji,
-            quantity: 1
-        });
-    }
-    
-    saveCartToStorage();
-    updateCartDisplay();
-    showNotification('تم إضافة المنتج إلى السلة', 'success');
-}
-
-function removeFromCart(productId) {
-    appState.cart = appState.cart.filter(item => item.id !== productId);
-    saveCartToStorage();
-    updateCartDisplay();
-    updateCartModal();
-    showNotification('تم حذف المنتج من السلة', 'success');
-}
-
-function updateCartQuantity(productId, newQuantity) {
-    const item = appState.cart.find(item => item.id === productId);
-    if (item) {
-        if (newQuantity <= 0) {
-            removeFromCart(productId);
-        } else {
-            item.quantity = newQuantity;
-            saveCartToStorage();
-            updateCartDisplay();
-            updateCartModal();
-        }
-    }
-}
-
-function updateCartDisplay() {
-    const totalItems = appState.cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    if (elements.cartCount) {
-        elements.cartCount.textContent = totalItems;
-        elements.cartCount.classList.toggle('show', totalItems > 0);
-    }
-}
-
-function toggleCart() {
-    if (appState.isCartOpen) {
-        closeCart();
-    } else {
-        openCart();
-    }
-}
-
-function openCart() {
-    appState.isCartOpen = true;
-    elements.cartModal.classList.add('active');
-    updateCartModal();
-}
-
-function closeCart() {
-    appState.isCartOpen = false;
-    elements.cartModal.classList.remove('active');
-}
-
-function updateCartModal() {
-    if (appState.cart.length === 0) {
-        elements.cartBody.innerHTML = `
-            <div class="empty-cart">
-                <i class="fas fa-shopping-basket" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;"></i>
-                <p>السلة فارغة</p>
-                <p style="font-size: 0.9rem; opacity: 0.7;">أضف بعض المنتجات لتبدأ التسوق</p>
-            </div>
-        `;
-        elements.cartTotal.textContent = '0.00 درهم';
-        return;
-    }
-    
-    elements.cartBody.innerHTML = appState.cart.map(item => `
-        <div class="cart-item">
-            <div class="item-image">
-                <div class="product-emoji">${item.emoji}</div>
-            </div>
-            <div class="item-info">
-                <h4>${item.name}</h4>
-                <p>${item.price.toFixed(2)} درهم</p>
-            </div>
-            <div class="item-controls">
-                <button onclick="updateCartQuantity(${item.id}, ${item.quantity - 1})">-</button>
-                <span>${item.quantity}</span>
-                <button onclick="updateCartQuantity(${item.id}, ${item.quantity + 1})">+</button>
-            </div>
-            <button class="remove-item" onclick="removeFromCart(${item.id})">
-                <i class="fas fa-trash"></i>
-            </button>
-        </div>
-    `).join('');
-    
-    const total = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    elements.cartTotal.textContent = `${total.toFixed(2)} درهم`;
-}
-
-function clearCart() {
-    if (appState.cart.length === 0) return;
-    
-    if (confirm('هل أنت متأكد من إفراغ السلة؟')) {
-        appState.cart = [];
-        saveCartToStorage();
-        updateCartDisplay();
-        updateCartModal();
-        showNotification('تم إفراغ السلة', 'success');
-    }
-}
-
-function checkoutCart() {
-    if (appState.cart.length === 0) {
-        showNotification('السلة فارغة! أضف بعض المنتجات أولاً', 'error');
-        return;
-    }
-    
-    const total = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const orderDetails = appState.cart.map(item => 
-        `• ${item.name} × ${item.quantity} = ${(item.price * item.quantity).toFixed(2)} درهم`
-    ).join('\n');
-    
-    const message = `مرحباً، أود طلب المنتجات التالية من مخبزة علاّف:\n\n${orderDetails}\n\n*المجموع الإجمالي: ${total.toFixed(2)} درهم*\n\nشكراً لكم`;
-    
-    const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-}
-
-// ===== QUICK VIEW FUNCTIONALITY =====
-function openQuickView(productId) {
-    const product = PRODUCTS_DATA.find(p => p.id === productId);
-    if (!product) return;
-    
-    appState.isQuickViewOpen = true;
-    elements.quickViewModal.classList.add('active');
-    
-    elements.quickViewBody.innerHTML = `
-        <div class="quick-view-product">
-            <div class="product-image-section">
 // ===== CART MANAGEMENT =====
 function addToCart(productId, quantity = 1) {
     try {
@@ -671,6 +494,9 @@ function addToCart(productId, quantity = 1) {
         updateCartDisplay();
         updateCartCounter();
         showNotification(`تم إضافة ${product.name} إلى السلة`, 'success');
+        
+        // Add animation effect
+        animateCartButton();
     } catch (error) {
         console.error('خطأ في إضافة المنتج:', error);
         showNotification('حدث خطأ في إضافة المنتج', 'error');
@@ -679,11 +505,15 @@ function addToCart(productId, quantity = 1) {
 
 function removeFromCart(productId) {
     try {
-        appState.cart = appState.cart.filter(item => item.id !== productId);
-        saveCart();
-        updateCartDisplay();
-        updateCartCounter();
-        showNotification('تم حذف المنتج من السلة', 'success');
+        const itemIndex = appState.cart.findIndex(item => item.id === productId);
+        if (itemIndex > -1) {
+            const itemName = appState.cart[itemIndex].name;
+            appState.cart.splice(itemIndex, 1);
+            saveCart();
+            updateCartDisplay();
+            updateCartCounter();
+            showNotification(`تم حذف ${itemName} من السلة`, 'success');
+        }
     } catch (error) {
         console.error('خطأ في حذف المنتج:', error);
     }
@@ -710,6 +540,11 @@ function updateCartQuantity(productId, newQuantity) {
 
 function clearCart() {
     try {
+        if (appState.cart.length === 0) {
+            showNotification('السلة فارغة بالفعل', 'info');
+            return;
+        }
+        
         appState.cart = [];
         saveCart();
         updateCartDisplay();
@@ -742,23 +577,19 @@ function loadCart() {
 
 // ===== UI UPDATES =====
 function updateCartDisplay() {
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    const emptyCart = document.getElementById('emptyCart');
-
-    if (!cartItems || !cartTotal || !emptyCart) return;
+    if (!elements.cartItems || !elements.cartTotal || !elements.emptyCart) return;
 
     if (appState.cart.length === 0) {
-        cartItems.style.display = 'none';
-        emptyCart.style.display = 'block';
-        cartTotal.textContent = '0.00';
+        elements.cartItems.style.display = 'none';
+        elements.emptyCart.style.display = 'block';
+        elements.cartTotal.textContent = '0.00';
         return;
     }
 
-    cartItems.style.display = 'block';
-    emptyCart.style.display = 'none';
+    elements.cartItems.style.display = 'block';
+    elements.emptyCart.style.display = 'none';
 
-    cartItems.innerHTML = appState.cart.map(item => `
+    elements.cartItems.innerHTML = appState.cart.map(item => `
         <div class="cart-item">
             <div class="item-image">${item.emoji}</div>
             <div class="item-info">
@@ -766,10 +597,10 @@ function updateCartDisplay() {
                 <p>${item.price.toFixed(2)} درهم</p>
             </div>
             <div class="item-controls">
-                <button onclick="updateCartQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                <button onclick="updateCartQuantity(${item.id}, ${item.quantity - 1})" title="تقليل الكمية">-</button>
                 <span>${item.quantity}</span>
-                <button onclick="updateCartQuantity(${item.id}, ${item.quantity + 1})">+</button>
-                <button onclick="removeFromCart(${item.id})" class="remove-btn">
+                <button onclick="updateCartQuantity(${item.id}, ${item.quantity + 1})" title="زيادة الكمية">+</button>
+                <button onclick="removeFromCart(${item.id})" class="remove-btn" title="حذف المنتج">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
@@ -777,320 +608,41 @@ function updateCartDisplay() {
     `).join('');
 
     const total = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.textContent = total.toFixed(2);
+    elements.cartTotal.textContent = total.toFixed(2);
 }
 
 function updateCartCounter() {
-    const cartCounter = document.getElementById('cartCounter');
-    if (cartCounter) {
-        const totalItems = appState.cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCounter.textContent = totalItems;
-        cartCounter.style.display = totalItems > 0 ? 'block' : 'none';
+    if (!elements.cartCounter) return;
+    
+    const totalItems = appState.cart.reduce((sum, item) => sum + item.quantity, 0);
+    elements.cartCounter.textContent = totalItems;
+    elements.cartCounter.style.display = totalItems > 0 ? 'flex' : 'none';
+}
+
+function animateCartButton() {
+    if (elements.cartBtn) {
+        elements.cartBtn.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+            elements.cartBtn.style.transform = 'scale(1)';
+        }, 200);
     }
 }
 
 // ===== MODAL MANAGEMENT =====
 function toggleCart() {
-    const cartModal = document.getElementById('cartModal');
-    if (!cartModal) return;
-
+    if (!elements.cartModal) return;
+    
     appState.isCartOpen = !appState.isCartOpen;
     
     if (appState.isCartOpen) {
-        cartModal.classList.add('active');
+        elements.cartModal.classList.add('active');
         document.body.style.overflow = 'hidden';
         updateCartDisplay();
     } else {
-        cartModal.classList.remove('active');
+        elements.cartModal.classList.remove('active');
         document.body.style.overflow = '';
     }
 }
 
 function openQuickView(productId) {
-    const product = PRODUCTS_DATA.find(p => p.id === productId);
-    if (!product) return;
-
-    const quickViewModal = document.getElementById('quickViewModal');
-    const quickViewBody = document.getElementById('quickViewBody');
-    
-    if (!quickViewModal || !quickViewBody) return;
-
-    quickViewBody.innerHTML = `
-        <div class="quick-view-product">
-            <div class="product-image-large">${product.emoji}</div>
-            <div class="product-details">
-                <h2>${product.name}</h2>
-                <p class="product-description">${product.description}</p>
-                <div class="product-price">${product.price.toFixed(2)} درهم</div>
-                ${product.ingredients ? `
-                    <div class="product-ingredients">
-                        <h4>المكونات:</h4>
-                        <ul>
-                            ${product.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
-                        </ul>
-                    </div>
-                ` : ''}
-                <div class="quick-view-actions">
-                    <button class="btn-primary" onclick="addToCart(${product.id}); closeQuickView();">
-                        <i class="fas fa-cart-plus"></i>
-                        إضافة إلى السلة
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-
-    quickViewModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    appState.isQuickViewOpen = true;
-}
-
-function closeQuickView() {
-    const quickViewModal = document.getElementById('quickViewModal');
-    if (quickViewModal) {
-        quickViewModal.classList.remove('active');
-        document.body.style.overflow = '';
-        appState.isQuickViewOpen = false;
-    }
-}
-
-// ===== SEARCH FUNCTIONALITY =====
-function performSearch(query) {
-    if (!query.trim()) {
-        appState.searchResults = [];
-        return;
-    }
-
-    const searchTerm = query.toLowerCase().trim();
-    appState.searchResults = PRODUCTS_DATA.filter(product => 
-        product.name.toLowerCase().includes(searchTerm) ||
-        product.description.toLowerCase().includes(searchTerm) ||
-        (product.ingredients && product.ingredients.some(ingredient => 
-            ingredient.toLowerCase().includes(searchTerm)
-        ))
-    );
-
-    displaySearchResults();
-}
-
-function displaySearchResults() {
-    // This would update the products display with search results
-    // For now, we'll just filter the products
-    filterProducts('all', appState.searchResults);
-}
-
-// ===== PRODUCT FILTERING =====
-function filterProducts(category, customProducts = null) {
-    appState.currentCategory = category;
-    
-    let productsToShow = customProducts || PRODUCTS_DATA;
-    
-    if (category !== 'all') {
-        productsToShow = productsToShow.filter(product => product.category === category);
-    }
-
-    appState.filteredProducts = productsToShow;
-    displayProducts(productsToShow);
-    updateFilterButtons();
-}
-
-function displayProducts(products) {
-    const productsGrid = document.getElementById('productsGrid');
-    if (!productsGrid) return;
-
-    if (products.length === 0) {
-        productsGrid.innerHTML = '<div class="no-products">لا توجد منتجات متاحة</div>';
-        return;
-    }
-
-    productsGrid.innerHTML = products.map(product => `
-        <div class="product-card" data-aos="fade-up">
-            <div class="product-image">${product.emoji}</div>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                <div class="product-price">${product.price.toFixed(2)} درهم</div>
-            </div>
-            <div class="product-actions">
-                <button class="btn-secondary" onclick="openQuickView(${product.id})">
-                    <i class="fas fa-eye"></i>
-                    عرض سريع
-                </button>
-                <button class="btn-primary" onclick="addToCart(${product.id})">
-                    <i class="fas fa-cart-plus"></i>
-                    إضافة
-                </button>
-            </div>
-        </div>
-    `).join('');
-}
-
-function updateFilterButtons() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.category === appState.currentCategory) {
-            btn.classList.add('active');
-        }
-    });
-}
-
-// ===== WHATSAPP INTEGRATION =====
-function sendWhatsAppOrder() {
-    if (appState.cart.length === 0) {
-        showNotification('السلة فارغة! يرجى إضافة منتجات أولاً', 'error');
-        return;
-    }
-
-    const orderDetails = appState.cart.map(item => 
-        `• ${item.name} × ${item.quantity} = ${(item.price * item.quantity).toFixed(2)} درهم`
-    ).join('\n');
-
-    const total = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    const message = `مرحباً مخبزة علاّف 🍞
-    
-أود طلب المنتجات التالية:
-
-${orderDetails}
-
-💰 المجموع الإجمالي: ${total.toFixed(2)} درهم
-
-شكراً لكم 🙏`;
-
-    const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
-    showNotification('تم فتح واتساب لإرسال الطلب', 'success');
-}
-
-// ===== UTILITY FUNCTIONS =====
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-        <span>${message}</span>
-    `;
-
-    document.body.appendChild(notification);
-    
-    setTimeout(() => notification.classList.add('show'), 100);
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 300);
-    }, 3000);
-}
-
-function updateVisitorCount() {
-    try {
-        const visitorCountElement = document.getElementById('visitorCount');
-        if (!visitorCountElement) return;
-
-        let count = parseInt(localStorage.getItem(CONFIG.VISITOR_STORAGE_KEY) || '0');
-        count++;
-        localStorage.setItem(CONFIG.VISITOR_STORAGE_KEY, count.toString());
-        visitorCountElement.textContent = count;
-    } catch (error) {
-        console.error('خطأ في تحديث عداد الزوار:', error);
-    }
-}
-
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// ===== GLOBAL FUNCTIONS (for onclick handlers) =====
-window.addToCart = addToCart;
-window.removeFromCart = removeFromCart;
-window.updateCartQuantity = updateCartQuantity;
-window.clearCart = clearCart;
-window.toggleCart = toggleCart;
-window.openQuickView = openQuickView;
-window.closeQuickView = closeQuickView;
-window.filterProducts = filterProducts;
-window.sendWhatsAppOrder = sendWhatsAppOrder;
-
-// ===== ERROR HANDLING =====
-window.addEventListener('error', (e) => {
-    console.error('خطأ في التطبيق:', e.error);
-    showNotification('حدث خطأ غير متوقع', 'error');
-});
-
-// ===== PERFORMANCE MONITORING =====
-window.addEventListener('load', () => {
-    const loadTime = performance.now();
-    console.log(`⚡ تم تحميل الموقع في ${Math.round(loadTime)}ms`);
-});
-// ===== ADDITIONAL JAVASCRIPT ENHANCEMENTS =====
-
-// Enhanced search with debouncing
-const debouncedSearch = debounce(performSearch, CONFIG.SEARCH_DEBOUNCE_DELAY);
-
-// Auto-save cart periodically
-setInterval(() => {
-    if (appState.cart.length > 0) {
-        saveCart();
-    }
-}, 30000); // Save every 30 seconds
-
-// Keyboard navigation for modals
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        if (appState.isCartOpen) toggleCart();
-        if (appState.isQuickViewOpen) closeQuickView();
-    }
-    
-    if (e.key === 'Tab' && (appState.isCartOpen || appState.isQuickViewOpen)) {
-        // Keep focus within modal
-        const activeModal = document.querySelector('.modal.active');
-        if (activeModal) {
-            const focusableElements = activeModal.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
-            
-            if (e.shiftKey && document.activeElement === firstElement) {
-                e.preventDefault();
-                lastElement.focus();
-            } else if (!e.shiftKey && document.activeElement === lastElement) {
-                e.preventDefault();
-                firstElement.focus();
-            }
-        }
-    }
-});
-
-// Enhanced form validation
-function validateContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return true;
-    
-    const fields = form.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-    
-    fields.forEach(field => {
-        if (!field.value.trim()) {
-            field.style.borderColor = '#e74c3c';
-            isValid = false;
-        } else {
-            field.style.borderColor = '';
-        }
-    });
-    
-    return isValid;
-}
-
-// Add to global scope
-window.validateContactForm = validateContactForm;
-           
+    const product = PRODUCTS_DATA.find(p => p.id === product
