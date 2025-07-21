@@ -33,9 +33,9 @@ const PRODUCTS = [
   },
   {
     id: 4,
-    name: 'بغرير شهي',
+    name: 'شنيك',
     price: 1.5,
-    image: 'images/cake.jpg',
+    image: 'images/Shenik.png',
     category: 'bakery',
     badge: 'طازج'
   },
