@@ -149,24 +149,7 @@ async function initializeVisitorCounter() {
     const response = await fetch(`${CONFIG.visitorApiUrl}/get/${CONFIG.siteName}`);
     const data = await response.json();
     
-    // Increment count
-    const incrementResponse = await fetch(`${CONFIG.visitorApiUrl}/hit/${CONFIG.siteName}`);
-    const incrementData = await incrementResponse.json();
-    
-    // Display count
-    if (elements.visitorCount && incrementData.value) {
-      elements.visitorCount.textContent = incrementData.value.toLocaleString('ar-SA');
-    }
-  } catch (error) {
-    console.error('خطأ في عداد الزوار:', error);
-    // Fallback to localStorage
-    let count = parseInt(localStorage.getItem('visitor-count') || '0') + 1;
-    localStorage.setItem('visitor-count', count.toString());
-    if (elements.visitorCount) {
-      elements.visitorCount.textContent = count.toLocaleString('ar-SA');
-    }
-  }
-}
+  
 
 // ===== PRODUCTS =====
 function loadProducts(filter = 'all') {
