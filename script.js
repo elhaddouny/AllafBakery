@@ -603,13 +603,13 @@ function showDeveloperMessage() {
 // يمكنك وضع هذا السطر في نهاية دالة initializeApp() أو في نهاية ملف script.js
 // تأكد من استدعائها بعد تحميل DOM بالكامل
 showDeveloperMessage();
-// ===== ENHANCED PROGRAMMER CREDIT MESSAGE =====
+// ===== ENHANCED PROGRAMMER CREDIT MESSAGE WITH PROFILE PIC =====
 function showEnhancedProgrammerCredit() {
-  const creditElement = document.createElement('div');
-  creditElement.className = 'programmer-credit';
+  const creditElement = document.createElement("div");
+  creditElement.className = "programmer-credit";
   creditElement.innerHTML = `
     <div class="credit-text">
-      <i class="fas fa-laptop-code credit-icon"></i>
+      <img src="images/mohamed-profile.png" alt="صورة محمد الهدوني" class="profile-pic">
       <div style="line-height: 1.4;">
         <div style="font-size: 0.9rem; opacity: 0.8;">مطور الموقع</div>
         <div style="font-weight: 700;">محمد الهدوني</div>
@@ -617,24 +617,24 @@ function showEnhancedProgrammerCredit() {
       <i class="fas fa-star credit-icon" style="color: #ffd700;"></i>
     </div>
   `;
-  
+
   document.body.appendChild(creditElement);
-  
+
   setTimeout(() => {
-    creditElement.classList.add('show');
+    creditElement.classList.add("show");
   }, 1000);
-  
+
   setTimeout(() => {
-    creditElement.classList.remove('show');
+    creditElement.classList.remove("show");
     setTimeout(() => {
       if (creditElement.parentNode) {
         creditElement.parentNode.removeChild(creditElement);
       }
     }, 500);
   }, 6000);
-  
-  creditElement.addEventListener('click', () => {
-    creditElement.classList.remove('show');
+
+  creditElement.addEventListener("click", () => {
+    creditElement.classList.remove("show");
     setTimeout(() => {
       if (creditElement.parentNode) {
         creditElement.parentNode.removeChild(creditElement);
@@ -644,6 +644,6 @@ function showEnhancedProgrammerCredit() {
 }
 
 // تشغيل الرسالة
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   setTimeout(showEnhancedProgrammerCredit, 3000);
 });
