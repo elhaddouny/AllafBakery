@@ -603,39 +603,36 @@ function showDeveloperMessage() {
 // يمكنك وضع هذا السطر في نهاية دالة initializeApp() أو في نهاية ملف script.js
 // تأكد من استدعائها بعد تحميل DOM بالكامل
 showDeveloperMessage();
-// ===== PROGRAMMER CREDIT MESSAGE =====
-function showProgrammerCredit() {
-  // إنشاء عنصر الرسالة
+// ===== ENHANCED PROGRAMMER CREDIT MESSAGE =====
+function showEnhancedProgrammerCredit() {
   const creditElement = document.createElement('div');
   creditElement.className = 'programmer-credit';
   creditElement.innerHTML = `
     <div class="credit-text">
-      <i class="fas fa-code credit-icon"></i>
-      <span>برمجة وتطوير: محمد الهدوني</span>
-      <i class="fas fa-heart credit-icon" style="color: #ff6b6b;"></i>
+      <i class="fas fa-laptop-code credit-icon"></i>
+      <div style="line-height: 1.4;">
+        <div style="font-size: 0.9rem; opacity: 0.8;">مطور الموقع</div>
+        <div style="font-weight: 700;">محمد الهدوني</div>
+      </div>
+      <i class="fas fa-star credit-icon" style="color: #ffd700;"></i>
     </div>
   `;
   
-  // إضافة الرسالة إلى الصفحة
   document.body.appendChild(creditElement);
   
-  // إظهار الرسالة بعد ثانية واحدة
   setTimeout(() => {
     creditElement.classList.add('show');
   }, 1000);
   
-  // إخفاء الرسالة بعد 5 ثوانٍ
   setTimeout(() => {
     creditElement.classList.remove('show');
-    // حذف العنصر بعد انتهاء الحركة
     setTimeout(() => {
       if (creditElement.parentNode) {
         creditElement.parentNode.removeChild(creditElement);
       }
     }, 500);
-  }, 6000); // 5 ثوانٍ + ثانية للظهور
+  }, 6000);
   
-  // إضافة حدث النقر لإخفاء الرسالة
   creditElement.addEventListener('click', () => {
     creditElement.classList.remove('show');
     setTimeout(() => {
@@ -646,8 +643,7 @@ function showProgrammerCredit() {
   });
 }
 
-// تشغيل الرسالة عند تحميل الصفحة
+// تشغيل الرسالة
 document.addEventListener('DOMContentLoaded', () => {
-  // تأخير لمدة 3 ثوانٍ بعد تحميل الصفحة
-  setTimeout(showProgrammerCredit, 3000);
+  setTimeout(showEnhancedProgrammerCredit, 3000);
 });
