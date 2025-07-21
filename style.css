@@ -1060,63 +1060,46 @@ section {
   visibility: visible;
   bottom: 40px;
 }
-/* ===== PROGRAMMER CREDIT MESSAGE ===== */
-.programmer-credit {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 15px 25px;
-  border-radius: 50px;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-  z-index: 9999;
-  font-family: 'El Messiri', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  opacity: 0;
-  transform: translateY(50px) scale(0.8);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
+/* --- Programmer Profile Image --- */
+.programmer-credit .profile-pic {
+  width: 40px; /* حجم الصورة */
+  height: 40px; /* حجم الصورة */
+  border-radius: 50%; /* لجعل الصورة دائرية */
+  object-fit: cover; /* لضمان ملء الصورة للمساحة */
+  margin-left: 10px; /* مسافة بين الصورة والنص */
+  border: 2px solid rgba(255, 255, 255, 0.7); /* إطار أبيض خفيف */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-.programmer-credit.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.programmer-credit:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-}
-
-.programmer-credit .credit-icon {
-  display: inline-block;
-  margin-left: 8px;
-  animation: pulse 2s infinite;
-}
-
+/* تعديل بسيط لترتيب العناصر داخل الرسالة */
 .programmer-credit .credit-text {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 8px; /* مسافة بين العناصر */
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+/* تعديل ليكون النص بجانب الصورة */
+.programmer-credit .credit-text > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* لمحاذاة النص لليسار */
 }
 
-/* Responsive */
+/* تعديل حجم الأيقونات لتكون متناسقة */
+.programmer-credit .credit-icon {
+  font-size: 1.2rem; /* حجم الأيقونات */
+}
+
 @media (max-width: 768px) {
-  .programmer-credit {
-    bottom: 15px;
-    right: 15px;
-    left: 15px;
-    text-align: center;
-    font-size: 0.9rem;
-    padding: 12px 20px;
+  .programmer-credit .profile-pic {
+    width: 30px;
+    height: 30px;
+  }
+  .programmer-credit .credit-text {
+    flex-direction: row; /* إبقاء العناصر في صف واحد على الجوال */
+    justify-content: center;
+  }
+  .programmer-credit .credit-text > div {
+    align-items: center; /* محاذاة النص في المنتصف على الجوال */
   }
 }
