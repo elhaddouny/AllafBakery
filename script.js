@@ -50,7 +50,7 @@ const PRODUCTS = [
   {
     id: 6,
     name: 'كعب غزال',
-    price: غير محدد,
+    price: 1,
     image: 'images/cake.jpg',
     category: 'sweets',
     badge: 'أصيل'
