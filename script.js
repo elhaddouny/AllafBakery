@@ -588,3 +588,18 @@ window.toggleCart = toggleCart;
 window.generateWhatsAppOrder = generateWhatsAppOrder;
 
 console.log('🍞 مخبزة علاّف - تم تحميل التطبيق بنجاح!');
+// ===== DEVELOPER MESSAGE FUNCTION =====
+function showDeveloperMessage() {
+  const devMessage = document.getElementById("developer-message");
+  if (devMessage) {
+    devMessage.classList.add("show");
+    setTimeout(() => {
+      devMessage.classList.remove("show");
+    }, 5000); // 5000 milliseconds = 5 seconds
+  }
+}
+
+// Call the function when the page loads
+// يمكنك وضع هذا السطر في نهاية دالة initializeApp() أو في نهاية ملف script.js
+// تأكد من استدعائها بعد تحميل DOM بالكامل
+showDeveloperMessage();
