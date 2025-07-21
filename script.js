@@ -9,7 +9,7 @@ const CONFIG = {
 const PRODUCTS = [
   {
     id: 1,
-    name: 'كرواسون بالزبدة',
+    name: 'كرواسون ',
     price: 2,
     image: 'images/croissant.jpg',
     category: 'bakery',
@@ -17,7 +17,7 @@ const PRODUCTS = [
   },
   {
     id: 2,
-    name: 'مسمن بلدي معسل',
+    name: 'مسمن  ',
     price: 3.5,
     image: 'images/msemen.jpg',
     category: 'bakery',
