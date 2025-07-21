@@ -41,9 +41,9 @@ const PRODUCTS = [
   },
   {
     id: 5,
-    name: 'غريبة باللوز',
+    name: 'بالمي',
     price: 2.5,
-    image: 'images/cake.jpg',
+    image: 'images/Palmier.png',
     category: 'sweets',
     badge: 'حلو'
   },
