@@ -1,82 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الموقع قيد التطوير</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg, #fff4e6, #fbe8d3);
-      color: #5a2d0c;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-      background-image: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
-    }
-
-    .logo {
-      width: 120px;
-      margin-bottom: 20px;
-      border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .message {
-      font-size: 32px;
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: #8B4513;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .sub-message {
-      font-size: 20px;
-      margin-bottom: 30px;
-      color: #a0522d;
-    }
-
-    .bakery-touch {
-      font-size: 22px;
-      font-style: italic;
-      color: #d2691e;
-      margin-bottom: 40px;
-    }
-
-    .icon {
-      font-size: 50px;
-      margin-bottom: 15px;
-    }
-
-    .footer {
-      font-size: 14px;
-      color: #b8860b;
-      position: absolute;
-      bottom: 10px;
-    }
-
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-  </style>
-</head>
-<body>
-  <img src="logo.png" alt="شعار المخبزة" class="logo"> <!-- غيّر logo.png إلى رابط شعارك -->
-
-  <div class="icon">🥖</div>
-  <div class="message">نأسف، الموقع قيد التطوير</div>
-  <div class="sub-message">نقوم بتحضير وصفات رقمية لذيذة لكم في الفرن 🔥</div>
-  <div class="bakery-touch">ترقّبوا لحظة الخبز الذهبي! 🍞</div>
-
-  <div class="footer">مخبزة علاّف - نخبز بحب منذ 2025</div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مخبزة وحلويات علاّف | طعم أصيل لا يُنسى</title>
@@ -96,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Custom CSS -->
@@ -356,15 +280,19 @@
                     <form id="contactForm">
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="الاسم الكامل" required>
+                            <div class="form-error"></div>
                         </div>
                         <div class="form-group">
                             <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required>
+                            <div class="form-error"></div>
                         </div>
                         <div class="form-group">
                             <input type="email" id="email" name="email" placeholder="البريد الإلكتروني">
+                            <div class="form-error"></div>
                         </div>
                         <div class="form-group">
                             <textarea id="message" name="message" placeholder="رسالتك" rows="5" required></textarea>
+                            <div class="form-error"></div>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-paper-plane"></i>
@@ -497,141 +425,7 @@
 
     <!-- External Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
-// ===== ADDITIONAL JAVASCRIPT ENHANCEMENTS =====
-
-// Enhanced form validation
-function validateForm(form) {
-    const fields = form.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-    
-    fields.forEach(field => {
-        const formGroup = field.closest('.form-group');
-        const errorElement = formGroup.querySelector('.form-error');
-        
-        if (!field.value.trim()) {
-            formGroup.classList.add('error');
-            formGroup.classList.remove('success');
-            if (errorElement) {
-                errorElement.textContent = 'هذا الحقل مطلوب';
-            }
-            isValid = false;
-        } else if (field.type === 'email' && !isValidEmail(field.value)) {
-            formGroup.classList.add('error');
-            formGroup.classList.remove('success');
-            if (errorElement) {
-                errorElement.textContent = 'يرجى إدخال بريد إلكتروني صحيح';
-            }
-            isValid = false;
-        } else if (field.type === 'tel' && !isValidPhone(field.value)) {
-            formGroup.classList.add('error');
-            formGroup.classList.remove('success');
-            if (errorElement) {
-                errorElement.textContent = 'يرجى إدخال رقم هاتف صحيح';
-            }
-            isValid = false;
-        } else {
-            formGroup.classList.remove('error');
-            formGroup.classList.add('success');
-        }
-    });
-    
-    return isValid;
-}
-
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-function isValidPhone(phone) {
-    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
-    return phoneRegex.test(phone);
-}
-
-// Enhanced error handling with retry mechanism
-function withRetry(fn, maxRetries = 3) {
-    return async function(...args) {
-        let lastError;
-        
-        for (let i = 0; i < maxRetries; i++) {
-            try {
-                return await fn.apply(this, args);
-            } catch (error) {
-                lastError = error;
-                if (i < maxRetries - 1) {
-                    await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
-                }
-            }
-        }
-        
-        throw lastError;
-    };
-}
-
-// Performance monitoring
-function measurePerformance(name, fn) {
-    return function(...args) {
-        const start = performance.now();
-        const result = fn.apply(this, args);
-        const end = performance.now();
-        console.log(`⏱️ ${name}: ${Math.round(end - start)}ms`);
-        return result;
-    };
-}
-
-// Add to global scope for enhanced functionality
-window.validateForm = validateForm;
-window.isValidEmail = isValidEmail;
-window.isValidPhone = isValidPhone;
-window.withRetry = withRetry;
-window.measurePerformance = measurePerformance;
-
-// Auto-cleanup for better memory management
-window.addEventListener('beforeunload', () => {
-    // Clear any intervals or timeouts
-    clearInterval(window.testimonialsInterval);
-    clearInterval(window.autoSaveInterval);
-    
-    // Save final state
-    saveCart();
-});
-
-// Enhanced accessibility
-function enhanceAccessibility() {
-    // Add ARIA labels to interactive elements
-    const buttons = document.querySelectorAll('button:not([aria-label])');
-    buttons.forEach(button => {
-        const text = button.textContent.trim();
-        if (text) {
-            button.setAttribute('aria-label', text);
-        }
-    });
-    
-    // Add role attributes where needed
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        modal.setAttribute('role', 'dialog');
-        modal.setAttribute('aria-modal', 'true');
-    });
-    
-    // Enhance keyboard navigation
-    const focusableElements = document.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    
-    focusableElements.forEach((element, index) => {
-        element.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab') {
-                // Custom tab handling if needed
-            }
-        });
-    });
-}
-
-// Call accessibility enhancements after DOM is loaded
-document.addEventListener('DOMContentLoaded', enhanceAccessibility);
