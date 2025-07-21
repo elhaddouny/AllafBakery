@@ -3,33 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مخبزة وحلويات علاّف | طعم أصيل لا يُنسى</title>
+    
+    <!-- Meta Tags -->
     <meta name="description" content="مخبزة وحلويات علاّف - أجود المخبوزات والحلويات الطازجة يومياً. طعم أصيل لا يُنسى">
     <meta name="keywords" content="مخبزة, حلويات, خبز, كيك, مسمن, كرواسون, علاّف">
     <meta name="author" content="مخبزة وحلويات علاّف">
     
-    <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="مخبزة وحلويات علاّف - طعم أصيل لا يُنسى">
-    <meta property="og:description" content="أجود المخبوزات والحلويات الطازجة يومياً">
-    <meta property="og:image" content="images/og-image.jpg">
-    <meta property="og:url" content="https://allaf-bakery.com">
-    <meta property="og:type" content="website">
-    
-    <title>مخبزة وحلويات علاّف | طعم أصيل لا يُنسى</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
@@ -39,7 +26,7 @@
     <div id="loading-screen" class="loading-screen">
         <div class="loading-content">
             <div class="loading-logo">
-                <img src="images/logo.png" alt="شعار مخبزة علاّف">
+                <div class="logo-placeholder">🍞</div>
             </div>
             <div class="loading-spinner">
                 <div class="spinner"></div>
@@ -48,47 +35,47 @@
         </div>
     </div>
 
-    <!-- Header & Navigation -->
+    <!-- Header -->
     <header id="main-header" class="main-header">
         <nav class="navbar">
             <div class="nav-container">
                 <!-- Logo Section -->
                 <div class="logo-section">
-                    <img src="images/logo.png" alt="شعار مخبزة علاّف" class="logo">
+                    <div class="logo">🍞</div>
                     <div class="brand-info">
                         <h1 class="brand-name">مخبزة علاّف</h1>
                         <span class="brand-tagline">طعم أصيل لا يُنسى</span>
                     </div>
                 </div>
 
-                <!-- Desktop Navigation Menu -->
+                <!-- Navigation Menu -->
                 <ul class="nav-menu" id="nav-menu">
                     <li class="nav-item">
-                        <a href="#home" class="nav-link active" data-section="home">
+                        <a href="#home" class="nav-link active">
                             <i class="fas fa-home"></i>
                             <span>الرئيسية</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#products" class="nav-link" data-section="products">
+                        <a href="#products" class="nav-link">
                             <i class="fas fa-bread-slice"></i>
                             <span>منتجاتنا</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#gallery" class="nav-link" data-section="gallery">
+                        <a href="#gallery" class="nav-link">
                             <i class="fas fa-images"></i>
                             <span>معرض الصور</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link" data-section="about">
+                        <a href="#about" class="nav-link">
                             <i class="fas fa-info-circle"></i>
                             <span>قصتنا</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link" data-section="contact">
+                        <a href="#contact" class="nav-link">
                             <i class="fas fa-phone"></i>
                             <span>تواصل معنا</span>
                         </a>
@@ -98,23 +85,18 @@
                 <!-- Header Actions -->
                 <div class="header-actions">
                     <!-- Search Button -->
-                    <button class="search-btn" id="search-btn" aria-label="البحث">
+                    <button class="search-btn" id="search-btn">
                         <i class="fas fa-search"></i>
                     </button>
                     
                     <!-- Cart Button -->
-                    <button class="cart-btn" id="cart-btn" aria-label="سلة التسوق">
+                    <button class="cart-btn" id="cart-btn">
                         <i class="fas fa-shopping-basket"></i>
                         <span class="cart-count" id="cart-count">0</span>
                     </button>
                     
-                    <!-- Theme Toggle -->
-                    <button class="theme-toggle" id="theme-toggle" aria-label="تغيير المظهر">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    
                     <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="القائمة">
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
@@ -141,12 +123,9 @@
         <section id="home" class="hero-section">
             <div class="hero-background">
                 <div class="hero-overlay"></div>
-                <video class="hero-video" autoplay muted loop>
-                    <source src="images/bakery-video.mp4" type="video/mp4">
-                </video>
             </div>
             <div class="hero-content">
-                <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
+                <div class="hero-text">
                     <h2 class="hero-title">نخبز بحب، نقدم بشغف</h2>
                     <p class="hero-subtitle">اكتشف تشكيلتنا الفريدة من المخبوزات الطازجة والحلويات الشهية المصنوعة يدوياً كل يوم</p>
                     <div class="hero-buttons">
@@ -160,7 +139,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+                <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-number" data-count="15">0</span>
                         <span class="stat-label">سنة خبرة</span>
@@ -185,16 +164,16 @@
         <!-- Featured Products Section -->
         <section class="featured-section">
             <div class="container">
-                <div class="section-header" data-aos="fade-up">
+                <div class="section-header">
                     <h2 class="section-title">منتجاتنا المميزة</h2>
                     <p class="section-subtitle">تذوق أشهى المخبوزات والحلويات الطازجة</p>
                 </div>
                 <div class="featured-grid">
-                    <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="featured-card">
                         <div class="card-image">
-                            <img src="images/featured-bread.jpg" alt="خبز طازج">
+                            <div class="image-placeholder">🥖</div>
                             <div class="card-overlay">
-                                <button class="quick-view-btn" data-product="bread">
+                                <button class="quick-view-btn" onclick="openQuickView(1)">
                                     <i class="fas fa-eye"></i>
                                     عرض سريع
                                 </button>
@@ -205,11 +184,11 @@
                             <p class="card-description">خبز يومي طازج بأجود المكونات</p>
                         </div>
                     </div>
-                    <div class="featured-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="featured-card">
                         <div class="card-image">
-                            <img src="images/featured-sweets.jpg" alt="حلويات">
+                            <div class="image-placeholder">🧁</div>
                             <div class="card-overlay">
-                                <button class="quick-view-btn" data-product="sweets">
+                                <button class="quick-view-btn" onclick="openQuickView(2)">
                                     <i class="fas fa-eye"></i>
                                     عرض سريع
                                 </button>
@@ -220,11 +199,11 @@
                             <p class="card-description">حلويات تقليدية بنكهات أصيلة</p>
                         </div>
                     </div>
-                    <div class="featured-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="featured-card">
                         <div class="card-image">
-                            <img src="images/featured-cakes.jpg" alt="كيك">
+                            <div class="image-placeholder">🎂</div>
                             <div class="card-overlay">
-                                <button class="quick-view-btn" data-product="cakes">
+                                <button class="quick-view-btn" onclick="openQuickView(3)">
                                     <i class="fas fa-eye"></i>
                                     عرض سريع
                                 </button>
@@ -242,13 +221,13 @@
         <!-- Products Section -->
         <section id="products" class="products-section">
             <div class="container">
-                <div class="section-header" data-aos="fade-up">
+                <div class="section-header">
                     <h2 class="section-title">جميع منتجاتنا</h2>
                     <p class="section-subtitle">اختر من تشكيلتنا الواسعة</p>
                 </div>
                 
                 <!-- Product Categories Filter -->
-                <div class="category-filter" data-aos="fade-up" data-aos-delay="100">
+                <div class="category-filter">
                     <button class="filter-btn active" data-category="all">
                         <i class="fas fa-th"></i>
                         الكل
@@ -273,15 +252,7 @@
 
                 <!-- Products Grid -->
                 <div class="products-grid" id="products-grid">
-                    <!-- Product items will be dynamically loaded here -->
-                </div>
-
-                <!-- Load More Button -->
-                <div class="load-more-container" data-aos="fade-up">
-                    <button class="load-more-btn" id="load-more-btn">
-                        <i class="fas fa-plus"></i>
-                        عرض المزيد
-                    </button>
+                    <!-- Products will be loaded here by JavaScript -->
                 </div>
             </div>
         </section>
@@ -289,12 +260,12 @@
         <!-- Gallery Section -->
         <section id="gallery" class="gallery-section">
             <div class="container">
-                <div class="section-header" data-aos="fade-up">
+                <div class="section-header">
                     <h2 class="section-title">معرض إبداعاتنا</h2>
                     <p class="section-subtitle">شاهد أجمل ما نصنعه لكم</p>
                 </div>
                 <div class="gallery-grid" id="gallery-grid">
-                    <!-- Gallery items will be dynamically loaded here -->
+                    <!-- Gallery items will be loaded here by JavaScript -->
                 </div>
             </div>
         </section>
@@ -303,7 +274,7 @@
         <section id="about" class="about-section">
             <div class="container">
                 <div class="about-content">
-                    <div class="about-text" data-aos="fade-right">
+                    <div class="about-text">
                         <div class="section-header">
                             <h2 class="section-title">قصتنا</h2>
                             <p class="section-subtitle">رحلة من الشغف إلى الإتقان</p>
@@ -331,12 +302,9 @@
                             تواصل معنا
                         </a>
                     </div>
-                    <div class="about-media" data-aos="fade-left">
+                    <div class="about-media">
                         <div class="media-container">
-                            <img src="images/about-image.jpg" alt="داخل المخبزة" class="about-image">
-                            <div class="play-button" id="play-video">
-                                <i class="fas fa-play"></i>
-                            </div>
+                            <div class="image-placeholder about-image">🏪</div>
                         </div>
                         <div class="about-stats">
                             <div class="stat-card">
@@ -355,28 +323,15 @@
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section class="testimonials-section">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <h2 class="section-title">آراء عملائنا</h2>
-                    <p class="section-subtitle">ما يقوله عملاؤنا الكرام عنا</p>
-                </div>
-                <div class="testimonials-slider" id="testimonials-slider">
-                    <!-- Testimonial items will be dynamically loaded here -->
-                </div>
-            </div>
-        </section>
-
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="container">
-                <div class="section-header" data-aos="fade-up">
+                <div class="section-header">
                     <h2 class="section-title">تواصل معنا</h2>
                     <p class="section-subtitle">نحن هنا لخدمتكم</p>
                 </div>
                 <div class="contact-content">
-                    <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-info">
                         <div class="info-card">
                             <i class="fas fa-map-marker-alt"></i>
                             <h3>موقعنا</h3>
@@ -400,17 +355,72 @@
                             <p>الجمعة: 2:00 م - 10:00 م</p>
                         </div>
                         <div class="social-links">
-                            <a href="#" class="social-link" aria-label="فيسبوك">
+                            <a href="#" class="social-link">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="social-link" aria-label="إنستغرام">
+                            <a href="#" class="social-link">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="social-link" aria-label="تيك توك">
+                            <a href="#" class="social-link">
                                 <i class="fab fa-tiktok"></i>
                             </a>
-                            <a href="https://wa.me/212681848262" class="social-link whatsapp" aria-label="واتساب">
+                            <a href="https://wa.me/212681848262" class="social-link whatsapp">
                                 <i class="fab fa-whatsapp"></i>
                             </a>
                         </div>
-         
+                    </div>
+                    <div class="contact-form">
+                        <form id="contact-form" class="form">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" required>
+                                <label for="name">الاسم الكامل</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" required>
+                                <label for="phone">رقم الهاتف</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email">
+                                <label for="email">البريد الإلكتروني (اختياري)</label>
+                            </div>
+                            <div class="form-group">
+                                <select id="subject" name="subject" required>
+                                    <option value="">اختر نوع الاستفسار</option>
+                                    <option value="order">طلب منتجات</option>
+                                    <option value="custom">طلب مخصص</option>
+                                    <option value="complaint">شكوى</option>
+                                    <option value="suggestion">اقتراح</option>
+                                    <option value="other">أخرى</option>
+                                </select>
+                                <label for="subject">نوع الاستفسار</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <label for="message">رسالتك</label>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                إرسال الرسالة
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <div class="footer-logo">
+                            <div class="logo">🍞</div>
+                            <h3>مخبزة علاّف</h3>
+                        </div>
+                        <p class="footer-description">
+                            نخبز بحب ونقدم بشغف أجود المخبوزات والحلويات الطازجة يومياً
+                        </p>
+                        <div class="footer-social">
+                            <a href="#" class="social-link">
