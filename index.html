@@ -1,431 +1,519 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مخبزة وحلويات علاّف | طعم أصيل لا يُنسى</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مخبزة وحلويات علاّف | Allaf Bakery - الطعم الأصيل الذي لا يُنسى</title>
+  
+  <!-- Google Fonts for a more elegant look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;700&family=Readex+Pro:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* --- CSS Variables for easy theme management --- */
+    :root {
+      --primary-color: #8B4513; /* SaddleBrown - لون القهوة/الخبز */
+      --secondary-color: #c89c6d; /* لون الكراميل */
+      --background-color: #fffdf9; /* أبيض دافئ */
+      --text-color: #4a2c0f;
+      --white-color: #ffffff;
+      --heading-font: 'El Messiri', sans-serif;
+      --body-font: 'Readex Pro', sans-serif;
+    }
+
+    /* --- General Body Styles --- */
+    body {
+      font-family: var(--body-font);
+      margin: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    /* --- Header & Navigation --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: var(--white-color);
+      box-shadow: 0 4px 12px rgba(139, 69, 19, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-container img {
+      height: 55px;
+    }
+
+    .logo-container h1 {
+      margin: 0;
+      font-family: var(--heading-font);
+      font-size: 24px;
+      color: var(--primary-color);
+    }
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary-color);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cart-button {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .cart-button:hover {
+      background-color: #6a350f;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=2070') no-repeat center center/cover;
+      color: var(--white-color);
+      padding: 100px 20px;
+    }
+
+    .hero h2 {
+      font-family: var(--heading-font);
+      font-size: 3.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: 15px auto 30px;
+    }
+
+    .btn {
+      background-color: var(--secondary-color);
+      color: var(--white-color);
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .btn:hover {
+      background-color: transparent;
+      border-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+
+    /* --- General Section Styling --- */
+    section {
+      padding: 80px 5%;
+    }
+
+    section h2 {
+      text-align: center;
+      font-family: var(--heading-font);
+      font-size: 2.8em;
+      color: var(--primary-color);
+      margin-bottom: 50px;
+    }
+
+    /* --- Products Section --- */
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: var(--white-color);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(139, 69, 19, 0.1);
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(139, 69, 19, 0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
     
-    <!-- Meta Tags for SEO -->
-    <meta name="description" content="مخبزة وحلويات علاّف - أجود المخبوزات والحلويات الطازجة يومياً. طعم أصيل لا يُنسى">
-    <meta name="keywords" content="مخبزة, حلويات, خبز, كيك, مسمن, كرواسون, علاّف, مغرب">
-    <meta name="author" content="مخبزة وحلويات علاّف">
+    .product-card-content {
+        padding: 20px;
+    }
+
+    .product-card h3 {
+      font-family: var(--heading-font);
+      font-size: 1.5em;
+      margin: 10px 0;
+    }
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="مخبزة وحلويات علاّف - طعم أصيل لا يُنسى">
-    <meta property="og:description" content="أجود المخبوزات والحلويات الطازجة يومياً">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="ar_MA">
+    .product-card .price {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+    }
+
+    .product-card button {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .product-card button:hover {
+      background-color: #6a350f;
+    }
+
+    /* --- About Us Section --- */
+    #about {
+        background-color: var(--white-color);
+    }
+    .about-container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        flex-wrap: wrap;
+    }
+    .about-text { flex: 1; min-width: 300px; }
+    .about-image { flex: 1; min-width: 300px; }
+    .about-image img {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background-color: #4a2c0f;
+      color: #e0d6cb;
+      padding: 50px 5%;
+      text-align: center;
+    }
     
-    <!-- External Libraries from CDN -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    .footer-content p {
+        margin: 5px 0;
+    }
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    .social-links a {
+        color: var(--white-color);
+        margin: 0 15px;
+        font-size: 1.5em;
+        transition: color 0.3s;
+    }
+    .social-links a:hover {
+        color: var(--secondary-color);
+    }
+
+    /* --- Cart Popup --- */
+    #cart-popup {
+      display: none;
+      background: var(--background-color);
+      padding: 30px;
+      border: 2px solid var(--primary-color);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 500px;
+      z-index: 1001;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    }
+    
+    #cart-popup h2 { margin-top: 0; }
+    #cart-items { list-style: none; padding: 0; }
+    #cart-items li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+    
+    .cart-actions { margin-top: 20px; display: flex; gap: 10px; justify-content: center; }
+    .cart-actions button { padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; }
+    .cart-actions .close-btn { background-color: #ccc; }
+    .cart-actions .whatsapp-btn { background-color: #25D366; color: white; }
+
+    /* --- Maintenance Mode --- */
+    #maintenance-mode {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: #1b1b1b; color: #fff;
+      display: none; /* Initially hidden */
+      flex-direction: column; justify-content: center; align-items: center;
+      z-index: 99999; font-family: var(--body-font); text-align: center; padding: 20px;
+    }
+    #maintenance-mode h1 { font-family: var(--heading-font); color: var(--secondary-color); }
+  </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="loading-screen">
-        <div class="loading-content">
-            <div class="bakery-logo">
-                <div class="bread-icon">🍞</div>
-                <h2>مخبزة علاّف</h2>
-            </div>
-            <div class="loading-spinner">
-                <div class="spinner"></div>
-            </div>
-            <p class="loading-text">جاري تحضير أشهى المخبوزات...</p>
+
+  <!-- ====================================================== -->
+  <!--               صفحة وضع الصيانة (مخفية مبدئياً)             -->
+  <!-- ====================================================== -->
+  <div id="maintenance-mode">
+    <img src="images/logo.png" alt="شعار مخبزة علاّف" style="width: 120px; height: auto; margin-bottom: 25px;" />
+    <h1 style="font-size: 2.5em; margin-bottom: 10px;">🚧 الموقع قيد التطوير حاليًا</h1>
+    <p style="font-size: 1.3em; max-width: 500px; line-height: 1.6;">
+      نخبز الأفكار كما نخبز الخبز – بحبٍّ وتأنٍ.  
+      <br>عد إلينا قريبًا لتذوق التحديثات الجديدة 🍞✨
+    </p>
+    <p style="margin-top: 25px; font-size: 0.9em; opacity: 0.5;">© Allaf Bakery 2025</p>
+  </div>
+
+  <!-- ====================================================== -->
+  <!--                         الهيدر والناف بار                  -->
+  <!-- ====================================================== -->
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="شعار المخبزة" />
+      <h1>مخبزة علاّف</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#hero">الرئيسية</a></li>
+        <li><a href="#products">منتجاتنا</a></li>
+        <li><a href="#about">قصتنا</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="#" onclick="showCart()" class="cart-button">
+        <i class="fas fa-shopping-basket"></i> السلة (<span id="cart-count">0</span>)
+      </a>
+    </div>
+  </header>
+
+  <!-- ====================================================== -->
+  <!--                         قسم الهيرو (الواجهة)               -->
+  <!-- ====================================================== -->
+  <section id="hero" class="hero">
+    <h2>الطعم الأصيل الذي لا يُنسى</h2>
+    <p>نخبز لكم يوميًا تشكيلة من أشهى المخبوزات والحلويات المصنوعة بحب وشغف من أجود المكونات الطبيعية.</p>
+    <a href="#products" class="btn">اكتشف قائمة منتجاتنا</a>
+  </section>
+
+  <!-- ====================================================== -->
+  <!--                         قسم المنتجات                      -->
+  <!-- ====================================================== -->
+  <section id="products">
+    <h2><i class="fas fa-bread-slice"></i> منتجاتنا المميزة</h2>
+    <div class="product-list">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <img src="images/croissant.jpg" alt="كرواسون بالزبدة الفرنسية" />
+        <div class="product-card-content">
+          <h3>كرواسون بالزبدة</h3>
+          <p class="price">2 دراهم</p>
+          <button onclick="addToCart('كرواسون بالزبدة', 2)"><i class="fas fa-cart-plus"></i> أضف إلى السلة</button>
+        </div>
+      </div>
+      <!-- Product 2 -->
+      <div class="product-card">
+        <img src="images/msemen.jpg" alt="مسمن بلدي معسل" />
+        <div class="product-card-content">
+          <h3>مسمن بلدي معسل</h3>
+          <p class="price">3.5 دراهم</p>
+          <button onclick="addToCart('مسمن بلدي معسل', 3.5)"><i class="fas fa-cart-plus"></i> أضف إلى السلة</button>
+        </div>
+      </div>
+      <!-- Product 3 -->
+      <div class="product-card">
+        <img src="images/cake.jpg" alt="كيكة الشوكولاتة الغنية" />
+        <div class="product-card-content">
+          <h3>كيكة الشوكولاتة</h3>
+          <p class="price">40 درهم</p>
+          <button onclick="addToCart('كيكة الشوكولاتة', 40)"><i class="fas fa-cart-plus"></i> أضف إلى السلة</button>
+        </div>
+      </div>
+      <!-- Add more products here -->
+    </div>
+  </section>
+
+  <!-- ====================================================== -->
+  <!--                         قسم قصتنا (من نحن)                -->
+  <!-- ====================================================== -->
+  <section id="about">
+    <h2><i class="fas fa-book-open"></i> قصتنا</h2>
+    <div class="about-container">
+        <div class="about-text">
+            <p>في مخبزة علاّف، بدأت حكايتنا عام 2024 بشغف لصنع مخبوزات تجمع بين الأصالة المغربية وأفضل تقنيات الخبز الحديثة. نحن نؤمن بأن المكونات الطازجة والحب هما سر كل قطعة لذيذة تخرج من فرننا. من المسمن البلدي إلى الكرواسون الفرنسي، كل منتج هو دعوة لتذوق السعادة.</p>
+            <a href="#contact" class="btn">تحدث مع الخباز</a>
+        </div>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2b77?q=80&w=1974" alt="صورة داخل المخبزة">
         </div>
     </div>
+  </section>
 
-    <!-- Main Header -->
-    <header class="main-header" id="mainHeader">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo">🍞</div>
-                    <div class="brand-info">
-                        <h1>مخبزة علاّف</h1>
-                        <p>طعم أصيل لا يُنسى</p>
-                    </div>
-                </div>
-                
-                <nav class="main-nav">
-                    <ul class="nav-list">
-                        <li><a href="#home" class="nav-link active">الرئيسية</a></li>
-                        <li><a href="#products" class="nav-link">منتجاتنا</a></li>
-                        <li><a href="#gallery" class="nav-link">معرض الصور</a></li>
-                        <li><a href="#about" class="nav-link">من نحن</a></li>
-                        <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="header-actions">
-                    <button class="search-btn" id="searchBtn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <button class="cart-btn" id="cartBtn">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-counter" id="cartCounter">0</span>
-                    </button>
-                    <button class="menu-toggle" id="menuToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Search Overlay -->
-    <div class="search-overlay" id="searchOverlay">
-        <div class="search-container">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="ابحث عن المنتجات..." autocomplete="off">
-                <button class="search-close" id="searchClose">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="search-results" id="searchResults"></div>
-        </div>
+  <!-- ====================================================== -->
+  <!--                         قسم التواصل                      -->
+  <!-- ====================================================== -->
+  <section id="contact" style="background-color: var(--white-color);">
+    <h2><i class="fas fa-map-marker-alt"></i> زورونا أو تواصلوا معنا</h2>
+    <p style="text-align: center;">نحن بانتظاركم في موقعنا، أو يمكنكم إرسال طلباتكم واستفساراتكم مباشرة عبر واتساب.</p>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="btn" style="margin: 5px;">📍 موقعنا على الخريطة</a>
+        <a href="https://wa.me/212681848262" target="_blank" class="btn" style="margin: 5px; background-color: #25D366;">💬 الطلب عبر واتساب</a>
     </div>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="hero-section" id="home">
-        <div class="hero-background">
-            <div class="hero-overlay"></div>
+  <!-- ====================================================== -->
+  <!--                         الفوتر (تذييل الصفحة)              -->
+  <!-- ====================================================== -->
+  <footer>
+    <div class="footer-content">
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
-        <div class="container">
-            <div class="hero-content" data-aos="fade-up">
-                <h1 class="hero-title">مرحباً بكم في مخبزة علاّف</h1>
-                <p class="hero-subtitle">نخبز لكم أجود المخبوزات والحلويات بحب وإتقان منذ عقود</p>
-                <div class="hero-actions">
-                    <a href="#products" class="btn btn-primary">
-                        <i class="fas fa-shopping-bag"></i>
-                        تسوق الآن
-                    </a>
-                    <a href="#about" class="btn btn-secondary">
-                        <i class="fas fa-info-circle"></i>
-                        اكتشف قصتنا
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="hero-scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- Featured Products Section -->
-    <section class="featured-section" id="featured">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">منتجاتنا المميزة</h2>
-                <p class="section-subtitle">اكتشف أشهى ما نقدمه من مخبوزات وحلويات طازجة</p>
-            </div>
-            <div class="featured-grid" id="featuredGrid">
-                <!-- Featured products will be loaded here by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section class="products-section" id="products">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">جميع منتجاتنا</h2>
-                <p class="section-subtitle">تصفح مجموعتنا الكاملة من المخبوزات والحلويات</p>
-            </div>
-            
-            <!-- Category Filter -->
-            <div class="category-filter" data-aos="fade-up" data-aos-delay="100">
-                <button class="filter-btn active" data-category="all">الكل</button>
-                <button class="filter-btn" data-category="bread">مخبوزات</button>
-                <button class="filter-btn" data-category="sweets">حلويات</button>
-                <button class="filter-btn" data-category="cakes">كيك</button>
-                <button class="filter-btn" data-category="drinks">مشروبات</button>
-            </div>
-            
-            <!-- Products Grid -->
-            <div class="products-grid" id="productsGrid">
-                <!-- Products will be loaded here by JavaScript -->
-            </div>
-            
-            <!-- Load More Button -->
-            <div class="load-more-section" data-aos="fade-up">
-                <button class="btn btn-outline" id="loadMoreBtn">
-                    <i class="fas fa-plus"></i>
-                    عرض المزيد
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery-section" id="gallery">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">معرض الصور</h2>
-                <p class="section-subtitle">شاهد إبداعاتنا وأجواء مخبزتنا الدافئة</p>
-            </div>
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery items will be loaded here by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about-section" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text" data-aos="fade-right">
-                    <h2 class="section-title">قصتنا</h2>
-                    <p class="about-description">
-                        منذ أكثر من ثلاثة عقود، بدأت مخبزة علاّف رحلتها في خدمة المجتمع بأجود المخبوزات والحلويات. 
-                        نحن نؤمن بأن الطعام الجيد يجمع الناس ويخلق ذكريات جميلة.
-                    </p>
-                    <p class="about-description">
-                        نستخدم أجود المكونات الطبيعية ونتبع وصفات تقليدية موروثة، مع لمسة عصرية تواكب أذواق العصر. 
-                        فريقنا من الخبازين المهرة يعمل بشغف لضمان جودة كل منتج نقدمه.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">30+</div>
-                            <div class="stat-label">سنة من الخبرة</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">نوع من المنتجات</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">1000+</div>
-                            <div class="stat-label">عميل راضٍ</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image" data-aos="fade-left">
-                    <div class="image-placeholder">
-                        <i class="fas fa-bread-slice"></i>
-                        <p>صورة المخبزة</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials-section">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">آراء عملائنا</h2>
-                <p class="section-subtitle">ماذا يقول عملاؤنا الكرام عن تجربتهم معنا</p>
-            </div>
-            <div class="testimonials-slider" id="testimonialsSlider">
-                <!-- Testimonials will be loaded here by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">تواصل معنا</h2>
-                <p class="section-subtitle">نحن هنا لخدمتكم في أي وقت</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>العنوان</h4>
-                            <p>شارع الرئيسي، المدينة، المغرب</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>الهاتف</h4>
-                            <p>+212 681 848 262</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>ساعات العمل</h4>
-                            <p>يومياً من 6:00 صباحاً إلى 10:00 مساءً</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>واتساب</h4>
-                            <p>للطلبات والاستفسارات</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form" data-aos="fade-left">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="الاسم الكامل" required>
-                            <div class="form-error"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required>
-                            <div class="form-error"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="البريد الإلكتروني">
-                            <div class="form-error"></div>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="رسالتك" rows="5" required></textarea>
-                            <div class="form-error"></div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            إرسال الرسالة
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <div class="logo">🍞</div>
-                        <h3>مخبزة علاّف</h3>
-                    </div>
-                    <p class="footer-description">
-                        نخبز لكم أجود المخبوزات والحلويات بحب وإتقان منذ عقود
-                    </p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="https://wa.me/212681848262" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>روابط سريعة</h4>
-                    <ul class="footer-links">
-                        <li><a href="#home">الرئيسية</a></li>
-                        <li><a href="#products">منتجاتنا</a></li>
-                        <li><a href="#gallery">معرض الصور</a></li>
-                        <li><a href="#about">من نحن</a></li>
-                        <li><a href="#contact">تواصل معنا</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>منتجاتنا</h4>
-                    <ul class="footer-links">
-                        <li><a href="#products">مخبوزات طازجة</a></li>
-                        <li><a href="#products">حلويات شرقية</a></li>
-                        <li><a href="#products">كيك وتورتات</a></li>
-                        <li><a href="#products">مشروبات ساخنة</a></li>
-                        <li><a href="#products">منتجات خاصة</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>معلومات التواصل</h4>
-                    <div class="footer-contact">
-                        <p><i class="fas fa-map-marker-alt"></i> شارع الرئيسي، المدينة</p>
-                        <p><i class="fas fa-phone"></i> +212 681 848 262</p>
-                        <p><i class="fas fa-clock"></i> يومياً 6:00 - 22:00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2025 مخبزة وحلويات علاّف. جميع الحقوق محفوظة.</p>
-                    <div class="visitor-counter">
-                        <i class="fas fa-eye"></i>
-                        <span>عدد الزوار: <span id="visitorCount">0</span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Cart Modal -->
-    <div class="modal cart-modal" id="cartModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-shopping-cart"></i> سلة التسوق</h3>
-                <button class="modal-close" id="cartClose">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="cart-items" id="cartItems">
-                    <!-- Cart items will be loaded here -->
-                </div>
-                <div class="empty-cart" id="emptyCart">
-                    <i class="fas fa-shopping-cart"></i>
-                    <h4>السلة فارغة</h4>
-                    <p>لم تقم بإضافة أي منتجات بعد</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="cart-total">
-                    <strong>المجموع: <span id="cartTotal">0.00</span> درهم</strong>
-                </div>
-                <div class="cart-actions">
-                    <button class="btn btn-outline" id="clearCart">
-                        <i class="fas fa-trash"></i>
-                        إفراغ السلة
-                    </button>
-                    <button class="btn btn-primary" id="cartCheckout">
-                        <i class="fab fa-whatsapp"></i>
-                        إرسال الطلب
-                    </button>
-                </div>
-            </div>
-        </div>
+        <p>جميع الحقوق محفوظة © 2025 | مخبزة وحلويات علاّف</p>
+        <p>👁️ عدد زوار الموقع: <span id="visitor-count">0</span></p>
     </div>
+  </footer>
 
-    <!-- Quick View Modal -->
-    <div class="modal quick-view-modal" id="quickViewModal">
-        <div class="modal-content">
-            <button class="modal-close" id="quickViewClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="modal-body" id="quickViewBody">
-                <!-- Quick view content will be loaded here -->
-            </div>
-        </div>
+  <!-- ====================================================== -->
+  <!--                         نافذة السلة المنبثقة               -->
+  <!-- ====================================================== -->
+  <div id="cart-popup">
+    <h2><i class="fas fa-shopping-basket"></i> محتويات سلة التسوق</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>المجموع: <span id="cart-total">0.00</span> درهم</strong></p>
+    <div class="cart-actions">
+        <button onclick="closeCart()" class="close-btn">❌ إغلاق</button>
+        <button onclick="generateWhatsAppInvoice()" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب</button>
     </div>
+  </div>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+  <!-- ====================================================== -->
+  <!--                         كود الجافاسكريبت                  -->
+  <!-- ====================================================== -->
+  <script>
+    // --- Maintenance Mode Control ---
+    // لتفعيل وضع الصيانة، غير القيمة إلى true
+    const MAINTENANCE_ENABLED = false; 
+    if (MAINTENANCE_ENABLED) {
+      document.getElementById('maintenance-mode').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/212681848262" class="whatsapp-float" target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    // --- Cart Logic ---
+    let cart = [];
+    let total = 0;
 
-    <!-- External Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+    function addToCart(productName, price) {
+      cart.push({ name: productName, price: price });
+      total += price;
+      updateCartDisplay();
+      showCart(); // فتح السلة تلقائياً عند إضافة منتج
+    }
+
+    function updateCartDisplay() {
+      const cartCount = document.getElementById('cart-count');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+
+      cartCount.innerText = cart.length;
+      cartTotal.innerText = total.toFixed(2);
+
+      cartItems.innerHTML = '';
+      if (cart.length === 0) {
+          cartItems.innerHTML = '<li>السلة فارغة حاليًا.</li>';
+      } else {
+          cart.forEach(item => {
+            const li = document.createElement('li');
+            li.innerText = `${item.name} - ${item.price.toFixed(2)} درهم`;
+            cartItems.appendChild(li);
+          });
+      }
+    }
+
+    function showCart() {
+      document.getElementById('cart-popup').style.display = 'block';
+    }
+
+    function closeCart() {
+      document.getElementById('cart-popup').style.display = 'none';
+    }
+
+    function generateWhatsAppInvoice() {
+      if (cart.length === 0) {
+        alert("الرجاء إضافة منتجات إلى السلة أولاً!");
+        return;
+      }
+
+      let invoice = "مرحباً مخبزة علاّف، أود طلب المنتجات التالية:\n\n";
+      cart.forEach(item => {
+        invoice += `- ${item.name} (${item.price.toFixed(2)} درهم)\n`;
+      });
+      invoice += `\n*المجموع الإجمالي: ${total.toFixed(2)} درهم*`;
+
+      const whatsappNumber = "212681848262";
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(invoice)}`;
+      
+      window.open(whatsappURL, '_blank');
+    }
+
+    // --- Visitor Counter ---
+    document.addEventListener('DOMContentLoaded', function() {
+      const countDisplay = document.getElementById('visitor-count');
+      let visitorCount = localStorage.getItem('visitorCount_allafBakery');
+
+      if (visitorCount === null) {
+        visitorCount = 1;
+      } else {
+        visitorCount = parseInt(visitorCount) + 1;
+      }
+      
+      localStorage.setItem('visitorCount_allafBakery', visitorCount);
+      countDisplay.innerText = visitorCount;
+      
+      // Initialize cart display on page load
+      updateCartDisplay();
+    });
+  </script>
+
 </body>
 </html>
