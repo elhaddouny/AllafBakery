@@ -35,7 +35,7 @@ const PRODUCTS = [
     id: 4,
     name: 'شنيك',
     price: 2,
-    image: 'images/Shenik.png',
+    image: 'images/Shenik.jpg',
     category: 'bakery',
     badge: 'طازج'
   },
@@ -43,7 +43,7 @@ const PRODUCTS = [
     id: 5,
     name: 'بالمي',
     price: 2,
-    image: 'images/Palmier.png',
+    image: 'images/Palmier.jpg',
     category: 'sweets',
     badge: 'حلو'
   },
