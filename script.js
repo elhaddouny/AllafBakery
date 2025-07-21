@@ -1031,4 +1031,66 @@ window.addEventListener('load', () => {
     const loadTime = performance.now();
     console.log(`⚡ تم تحميل الموقع في ${Math.round(loadTime)}ms`);
 });
+// ===== ADDITIONAL JAVASCRIPT ENHANCEMENTS =====
+
+// Enhanced search with debouncing
+const debouncedSearch = debounce(performSearch, CONFIG.SEARCH_DEBOUNCE_DELAY);
+
+// Auto-save cart periodically
+setInterval(() => {
+    if (appState.cart.length > 0) {
+        saveCart();
+    }
+}, 30000); // Save every 30 seconds
+
+// Keyboard navigation for modals
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (appState.isCartOpen) toggleCart();
+        if (appState.isQuickViewOpen) closeQuickView();
+    }
+    
+    if (e.key === 'Tab' && (appState.isCartOpen || appState.isQuickViewOpen)) {
+        // Keep focus within modal
+        const activeModal = document.querySelector('.modal.active');
+        if (activeModal) {
+            const focusableElements = activeModal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+            
+            if (e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            } else if (!e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        }
+    }
+});
+
+// Enhanced form validation
+function validateContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return true;
+    
+    const fields = form.querySelectorAll('input[required], textarea[required]');
+    let isValid = true;
+    
+    fields.forEach(field => {
+        if (!field.value.trim()) {
+            field.style.borderColor = '#e74c3c';
+            isValid = false;
+        } else {
+            field.style.borderColor = '';
+        }
+    });
+    
+    return isValid;
+}
+
+// Add to global scope
+window.validateContactForm = validateContactForm;
            
