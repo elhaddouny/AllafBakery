@@ -5,14 +5,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const WHATSAPP_NUMBER = "212681848262";
   
   // --- Product Data ---
+  // تم تعديل مسارات الصور لتطابق الملفات الموجودة لديك حالياً
   const products = [
     { id: 1, name: 'كرواسون بالزبدة', price: 2, image: 'images/croissant.jpg', category: 'bakery' },
     { id: 2, name: 'مسمن بلدي معسل', price: 3.5, image: 'images/msemen.jpg', category: 'bakery' },
     { id: 3, name: 'كيكة الشوكولاتة', price: 40, image: 'images/cake.jpg', category: 'cakes' },
-    { id: 4, name: 'بغرير شهي', price: 1.5, image: 'images/baghrir.jpg', category: 'bakery' },
-    { id: 5, name: 'غريبة باللوز', price: 2.5, image: 'images/ghriba.jpg', category: 'sweets' },
-    { id: 6, name: 'كعب غزال', price: 4, image: 'images/kaab.jpg', category: 'sweets' },
-    { id: 7, name: 'تارت الفواكه', price: 35, image: 'images/fruit-tart.jpg', category: 'cakes' },
+    // المنتجات التالية ستستخدم صورة الكيك كصورة مؤقتة. قم بتغييرها عند توفر الصور الصحيحة
+    { id: 4, name: 'بغرير شهي', price: 1.5, image: 'images/cake.jpg', category: 'bakery' },
+    { id: 5, name: 'غريبة باللوز', price: 2.5, image: 'images/cake.jpg', category: 'sweets' },
+    { id: 6, name: 'كعب غزال', price: 4, image: 'images/cake.jpg', category: 'sweets' },
+    { id: 7, name: 'تارت الفواكه', price: 35, image: 'images/cake.jpg', category: 'cakes' },
   ];
 
   // --- DOM Elements ---
@@ -130,4 +132,81 @@ document.addEventListener('DOMContentLoaded', function() {
     const productId = Number(cartItemDiv.dataset.id);
     const cartItem = cart.find(item => item.id === productId);
 
-    if (target
+    if (target.classList.contains('increase-btn')) {
+      cartItem.quantity++;
+    } else if (target.classList.contains('decrease-btn')) {
+      cartItem.quantity--;
+      if (cartItem.quantity === 0) {
+        cart = cart.filter(item => item.id !== productId);
+      }
+    } else if (target.classList.contains('remove-btn')) {
+      cart = cart.filter(item => item.id !== productId);
+    }
+    
+    updateCart();
+  }
+
+  // --- UI Interactions ---
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  function toggleCart() {
+    cartPopup.classList.toggle('open');
+    cartOverlay.style.display = cartPopup.classList.contains('open') ? 'block' : 'none';
+  }
+
+  function generateWhatsAppInvoice() {
+    if (cart.length === 0) {
+      alert("الرجاء إضافة منتجات إلى السلة أولاً!");
+      return;
+    }
+
+    let invoice = "مرحباً مخبزة علاّف، أود طلب المنتجات التالية:\n\n";
+    cart.forEach(item => {
+      invoice += `- ${item.quantity} x ${item.name} (${item.price.toFixed(2)} درهم للقطعة)\n`;
+    });
+    invoice += `\n*المجموع الإجمالي: ${cartTotal.innerText} درهم*`;
+
+    const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(invoice)}`;
+    window.open(whatsappURL, '_blank');
+  }
+
+  // --- Event Listeners ---
+  productList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('add-to-cart-btn')) {
+      const productId = Number(e.target.closest('.product-card').dataset.id);
+      addToCart(productId);
+    }
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelector('.filter-btn.active').classList.remove('active');
+      btn.classList.add('active');
+      renderProducts(btn.dataset.filter);
+    });
+  });
+
+  cartItemsContainer.addEventListener('click', handleCartAction);
+  menuToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+  document.getElementById('cart-button').addEventListener('click', toggleCart);
+  document.getElementById('close-cart-btn').addEventListener('click', toggleCart);
+  cartOverlay.addEventListener('click', toggleCart);
+  document.getElementById('whatsapp-order-btn').addEventListener('click', generateWhatsAppInvoice);
+
+  // --- Visitor Counter ---
+  const countDisplay = document.getElementById('visitor-count');
+  let visitorCount = localStorage.getItem('visitorCount_allafBakery') || 0;
+  visitorCount = parseInt(visitorCount) + 1;
+  localStorage.setItem('visitorCount_allafBakery', visitorCount);
+  countDisplay.innerText = visitorCount;
+
+  // --- Initial Load ---
+  renderProducts();
+  updateCart();
+});
