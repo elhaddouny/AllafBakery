@@ -1,8 +1,6 @@
 // ===== CONFIGURATION =====
 const CONFIG = {
   whatsappNumber: '212681848262',
-  visitorApiUrl: 'https://api.countapi.xyz',
-  siteName: 'allaf-bakery-visits'
 };
 
 // ===== PRODUCT DATA =====
@@ -125,7 +123,7 @@ async function initializeApp() {
     
     // Initialize components
     await Promise.all([
-      initializeVisitorCounter(),
+      initializeLocalVisitorCounter(), // Use local counter
       loadProducts(),
       setupEventListeners(),
       updateCartDisplay()
@@ -164,41 +162,12 @@ function hideLoadingScreen() {
   }
 }
 
-// ===== VISITOR COUNTER =====
-async function initializeVisitorCounter() {
-  try {
-    // Get current count
-    const response = await fetch(`${CONFIG.visitorApiUrl}/get/${CONFIG.siteName}`);
-    const data = await response.json();
-    
-    if (data && data.value !== undefined) {
-      // Increment visitor count
-      const incrementResponse = await fetch(`${CONFIG.visitorApiUrl}/hit/${CONFIG.siteName}`);
-      const incrementData = await incrementResponse.json();
-      
-      if (incrementData && incrementData.value !== undefined) {
-        updateVisitorDisplay(incrementData.value);
-      } else {
-        updateVisitorDisplay(data.value);
-      }
-    } else {
-      // Initialize counter if it doesn't exist
-      const initResponse = await fetch(`${CONFIG.visitorApiUrl}/set/${CONFIG.siteName}?value=1`);
-      const initData = await initResponse.json();
-      
-      if (initData && initData.value !== undefined) {
-        updateVisitorDisplay(initData.value);
-      } else {
-        updateVisitorDisplay(1);
-      }
-    }
-  } catch (error) {
-    console.error('خطأ في تحديث عداد الزوار:', error);
-    // Use fallback local counter
-    let localCount = parseInt(localStorage.getItem('local-visitor-count') || '0') + 1;
-    localStorage.setItem('local-visitor-count', localCount.toString());
-    updateVisitorDisplay(localCount);
-  }
+// ===== LOCAL VISITOR COUNTER =====
+function initializeLocalVisitorCounter() {
+  let localCount = parseInt(localStorage.getItem('local-visitor-count') || '0');
+  localCount++; // Increment for each visit
+  localStorage.setItem('local-visitor-count', localCount.toString());
+  updateVisitorDisplay(localCount);
 }
 
 function updateVisitorDisplay(count) {
@@ -695,4 +664,36 @@ function showProgrammerCreditWithProfile() {
     // حذف العنصر بعد انتهاء الحركة
     setTimeout(() => {
       if (creditElement.parentNode) {
-        creditElement.parentNode.removeChild(cred
+        creditElement.parentNode.removeChild(creditElement);
+      }
+    }, 600);
+  }, 8000); // 6 ثوانٍ + ثانيتين للظهور
+  
+  // إضافة حدث النقر لإخفاء الرسالة
+  creditElement.addEventListener('click', () => {
+    creditElement.classList.remove('show');
+    setTimeout(() => {
+      if (creditElement.parentNode) {
+        creditElement.parentNode.removeChild(creditElement);
+      }
+    }, 600);
+  });
+  
+  // تأثير hover إضافي
+  creditElement.addEventListener('mouseenter', () => {
+    creditElement.style.transform = 'translateY(-10px) scale(1.08)';
+  });
+  
+  creditElement.addEventListener('mouseleave', () => {
+    creditElement.style.transform = 'translateY(-8px) scale(1.05)';
+  });
+}
+
+// تشغيل الرسالة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+  // تأخير لمدة 4 ثوانٍ بعد تحميل الصفحة
+  setTimeout(showProgrammerCreditWithProfile, 4000);
+  
+  // Call the developer message function
+  setTimeout(showDeveloperMessage, 6000);
+});
