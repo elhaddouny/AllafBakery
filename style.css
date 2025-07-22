@@ -921,121 +921,6 @@ section {
   gap: 10px;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1024px) {
-  .about-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    height: 100vh;
-    background: var(--surface-color);
-    padding: 100px 30px 30px;
-    transition: var(--transition);
-    box-shadow: var(--shadow-heavy);
-  }
-  
-  .nav.active {
-    right: 0;
-  }
-  
-  .nav-list {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .menu-toggle {
-    display: flex;
-  }
-  
-  .menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-  
-  .menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-  }
-  
-  .cart-btn .cart-text {
-    display: none;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .products-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .contact-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .cart-sidebar {
-    width: 100%;
-    right: -100%;
-  }
-  
-  .filter-tabs {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 10px;
-  }
-  
-  .filter-btn {
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0 15px;
-  }
-  
-  section {
-    padding: 60px 0;
-  }
-  
-  .hero-title {
-    font-size: 2rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-  
-  .section-header h2 {
-    font-size: 1.8rem;
-  }
-  
-  .products-grid {
-    gap: 20px;
-  }
-  
-  .product-content {
-    padding: 20px;
-  }
-}
 /* ===== PROGRAMMER CREDIT MESSAGE WITH PROFILE ===== */
 .programmer-credit {
   position: fixed;
@@ -1132,27 +1017,115 @@ section {
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .programmer-credit {
-    bottom: 15px;
-    right: 15px;
-    left: 15px;
-    min-width: auto;
-    padding: 12px 18px;
-    border-radius: 50px;
+/* ===== DEVELOPER MESSAGE ===== */
+.developer-message {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  z-index: 9998;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.developer-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
   
-  .programmer-credit .profile-image {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .programmer-credit .credit-name {
-    font-size: 1rem;
-  }
-  
-  .programmer-credit .credit-title {
-    font-size: 0.8rem;
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 30px;
   }
 }
+
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background: var(--surface-color);
+    padding: 100px 30px 30px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-heavy);
+  }
+  
+  .nav.active {
+    right: 0;
+  }
+  
+  .nav-list {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+  .cart-btn .cart-text {
+    display: none;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cart-sidebar {
+    width: 100%;
+    right: -100%;
+  }
+  
+  .filter-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  
+  .filter-btn {
+    white-space: nowrap;
+  }
+  
+  .programmer-credit 
