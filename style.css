@@ -1080,7 +1080,7 @@ section {
   }
   
   .menu-toggle {
-    display: flex;
+    display: none;
   }
   
   .menu-toggle.active span:nth-child(1) {
