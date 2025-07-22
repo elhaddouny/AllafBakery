@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مخبزة وحلويات علاّف | Allaf Bakery - الطعم الأصيل الذي لا يُنسى</title>
+  <meta name="description" content="نخبز لكم يوميًا تشكيلة من أشهى المخبوزات والحلويات المصنوعة بحب وشغف من أجود المكونات الطبيعية في مخبزة علاّف."/>
+  <meta name="keywords" content="مخبزة, حلويات, مغربية, خبز, كيك, شباكية, غريبة, فقاص, طلب أونلاين"/>
+  <meta name="author" content="محمد الهدوني"/>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="مخبزة وحلويات علاّف | Allaf Bakery"/>
+  <meta property="og:description" content="الطعم الأصيل الذي لا يُنسى - نخبز لكم يوميًا أشهى المخبوزات والحلويات المغربية"/>
+  <meta property="og:image" content="images/og-image.jpg"/>
+  <meta property="og:url" content="https://elhaddouny.github.io/AllafBakery/"/>
+  <meta property="og:type" content="website"/>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Swiper CSS for Image Slider -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-logo">
+        <img src="images/logo.png" alt="شعار مخبزة علاّف" />
+        <div class="loading-text">
+          <h2>مخبزة علاّف</h2>
+          <p>جاري تحضير أشهى المخبوزات...</p>
+        </div>
+      </div>
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+
+  <!-- Language Switcher -->
+  <div class="language-switcher">
+    <button class="lang-btn active" data-lang="ar">العربية</button>
+    <button class="lang-btn" data-lang="fr">Français</button>
+  </div>
+
+  <!-- Header -->
+  <header id="header" class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <img src="images/logo.png" alt="شعار المخبزة" />
+          <div class="logo-text">
+            <h1 data-ar="مخبزة علاّف" data-fr="Boulangerie Allaf">مخبزة علاّف</h1>
+            <span data-ar="الطعم الأصيل" data-fr="Goût Authentique">الطعم الأصيل</span>
+          </div>
+        </a>
+        
+        <nav class="nav" id="nav">
+          <ul class="nav-list">
+            <li><a href="#hero" class="nav-link active" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a></li>
+            <li><a href="#about" class="nav-link" data-ar="من نحن" data-fr="À Propos">من نحن</a></li>
+            <li><a href="#products" class="nav-link" data-ar="القائمة" data-fr="Menu">القائمة</a></li>
+            <li><a href="#store" class="nav-link" data-ar="المتجر" data-fr="Boutique">المتجر</a></li>
+            <li><a href="#offers" class="nav-link" data-ar="العروض" data-fr="Offres">العروض</a></li>
+            <li><a href="#blog" class="nav-link" data-ar="المدونة" data-fr="Blog">المدونة</a></li>
+            <li><a href="#contact" class="nav-link" data-ar="اتصل بنا" data-fr="Contact">اتصل بنا</a></li>
+          </ul>
+        </nav>
+        
+        <div class="header-actions">
+          <div class="search-container">
+            <input type="text" id="search-input" placeholder="ابحث عن منتج..." data-ar-placeholder="ابحث عن منتج..." data-fr-placeholder="Rechercher un produit...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          
+          <button id="cart-btn" class="cart-btn">
+            <i class="fas fa-shopping-basket"></i>
+            <span class="cart-text" data-ar="السلة" data-fr="Panier">السلة</span>
+            <span id="cart-count" class="cart-count">0</span>
+          </button>
+          
+          <button id="menu-toggle" class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/212681848262" target="_blank" class="whatsapp-float" id="whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-text" data-ar="اطلب الآن" data-fr="Commander">اطلب الآن</span>
+  </a>
+
+  <!-- Sticky Order Button -->
+  <button class="sticky-order-btn" id="sticky-order-btn">
+    <i class="fas fa-shopping-cart"></i>
+    <span data-ar="اطلب الآن" data-fr="Commander Maintenant">اطلب الآن</span>
+  </button>
+
+  <!-- Hero Section with Image Slider -->
+  <section id="hero" class="hero">
+    <div class="hero-slider swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide hero-slide">
+          <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=2070');"></div>
+          <div class="hero-overlay"></div>
+          <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+              <h2 class="hero-title" data-ar="الطعم الأصيل الذي لا يُنسى" data-fr="Le Goût Authentique Inoubliable">الطعم الأصيل الذي لا يُنسى</h2>
+              <p class="hero-subtitle" data-ar="نخبز لكم يوميًا تشكيلة من أشهى المخبوزات والحلويات المصنوعة بحب وشغف من أجود المكونات الطبيعية." data-fr="Nous cuisinons quotidiennement une sélection des plus délicieuses pâtisseries et confiseries faites avec amour et passion à partir des meilleurs ingrédients naturels.">نخبز لكم يوميًا تشكيلة من أشهى المخبوزات والحلويات المصنوعة بحب وشغف من أجود المكونات الطبيعية.</p>
+              <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">
+                  <i class="fas fa-bread-slice"></i>
+                  <span data-ar="اكتشف منتجاتنا" data-fr="Découvrir nos produits">اكتشف منتجاتنا</span>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                  <i class="fab fa-whatsapp"></i>
+                  <span data-ar="اطلب الآن" data-fr="Commander maintenant">اطلب الآن</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide hero-slide">
+          <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072');"></div>
+          <div class="hero-overlay"></div>
+          <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+              <h2 class="hero-title" data-ar="حلويات مغربية تقليدية" data-fr="Pâtisseries Marocaines Traditionnelles">حلويات مغربية تقليدية</h2>
+              <p class="hero-subtitle" data-ar="شباكية، غريبة، فقاص وأكثر من الحلويات التقليدية المصنوعة بوصفات أصيلة متوارثة عبر الأجيال." data-fr="Chebakia, Ghriba, Fekkas et plus de confiseries traditionnelles faites avec des recettes authentiques transmises de génération en génération.">شباكية، غريبة، فقاص وأكثر من الحلويات التقليدية المصنوعة بوصفات أصيلة متوارثة عبر الأجيال.</p>
+              <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">
+                  <i class="fas fa-cookie-bite"></i>
+                  <span data-ar="تسوق الحلويات" data-fr="Acheter des confiseries">تسوق الحلويات</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide hero-slide">
+          <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=2089');"></div>
+          <div class="hero-overlay"></div>
+          <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+              <h2 class="hero-title" data-ar="كيك وتارت حديثة" data-fr="Gâteaux et Tartes Modernes">كيك وتارت حديثة</h2>
+              <p class="hero-subtitle" data-ar="تصاميم عصرية وطعم استثنائي لجميع المناسبات الخاصة. نصنع أحلامكم الحلوة حقيقة." data-fr="Designs modernes et goût exceptionnel pour toutes les occasions spéciales. Nous réalisons vos rêves sucrés.">تصاميم عصرية وطعم استثنائي لجميع المناسبات الخاصة. نصنع أحلامكم الحلوة حقيقة.</p>
+              <div class="hero-buttons">
+                <a href="#custom-orders" class="btn btn-primary">
+                  <i class="fas fa-birthday-cake"></i>
+                  <span data-ar="طلب مخصص" data-fr="Commande personnalisée">طلب مخصص</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation buttons -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+    
+    <div class="hero-scroll">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- Daily Offers Section -->
+  <section id="offers" class="offers-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>
+          <i class="fas fa-fire"></i>
+          <span data-ar="عروض اليوم" data-fr="Offres du Jour">عروض اليوم</span>
+        </h2>
+        <p data-ar="عروض محدودة الوقت - لا تفوت الفرصة!" data-fr="Offres à durée limitée - Ne ratez pas l'occasion !">عروض محدودة الوقت - لا تفوت الفرصة!</p>
+      </div>
+      
+      <div class="offers-grid">
+        <div class="offer-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="offer-badge">
+            <span data-ar="خصم 30%" data-fr="30% de réduction">خصم 30%</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=400" alt="عرض الخبز الطازج" />
+          <div class="offer-content">
+            <h3 data-ar="خبز طازج يومياً" data-fr="Pain frais quotidien">خبز طازج يومياً</h3>
+            <p data-ar="خصم 30% على جميع أنواع الخبز الطازج" data-fr="30% de réduction sur tous les types de pain frais">خصم 30% على جميع أنواع الخبز الطازج</p>
+            <div class="countdown-timer" data-end="2025-07-23T23:59:59">
+              <div class="timer-item">
+                <span class="timer-number hours">00</span>
+                <span class="timer-label" data-ar="ساعة" data-fr="heures">ساعة</span>
+              </div>
+              <div class="timer-item">
+                <span class="timer-number minutes">00</span>
+                <span class="timer-label" data-ar="دقيقة" data-fr="minutes">دقيقة</span>
+              </div>
+              <div class="timer-item">
+                <span class="timer-number seconds">00</span>
+                <span class="timer-label" data-ar="ثانية" data-fr="secondes">ثانية</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-small">
+              <i class="fas fa-shopping-cart"></i>
+              <span data-ar="اطلب الآن" data-fr="Commander">اطلب الآن</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="offer-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="offer-badge">
+            <span data-ar="عرض خاص" data-fr="Offre spéciale">عرض خاص</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400" alt="عرض الحلويات المغربية" />
+          <div class="offer-content">
+            <h3 data-ar="حلويات مغربية" data-fr="Pâtisseries marocaines">حلويات مغربية</h3>
+            <p data-ar="اشتري 2 واحصل على 1 مجاناً" data-fr="Achetez 2 et obtenez 1 gratuit">اشتري 2 واحصل على 1 مجاناً</p>
+            <div class="countdown-timer" data-end="2025-07-24T18:00:00">
+              <div class="timer-item">
+                <span class="timer-number hours">00</span>
+                <span class="timer-label" data-ar="ساعة" data-fr="heures">ساعة</span>
+              </div>
+              <div class="timer-item">
+                <span class="timer-number minutes">00</span>
+                <span class="timer-label" data-ar="دقيقة" data-fr="minutes">دقيقة</span>
+              </div>
+              <div class="timer-item">
+                <span class="timer-number seconds">00</span>
+                <span class="timer-label" data-ar="ثانية" data-fr="secondes">ثانية</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-small">
+              <i class="fas fa-shopping-cart"></i>
+              <span data-ar="اطلب الآن" data-fr="Commander">اطلب الآن</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Categories Section -->
+  <section id="products" class="products-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>
+          <i class="fas fa-cookie-bite"></i>
+          <span data-ar="فئات منتجاتنا" data-fr="Nos Catégories de Produits">فئات منتجاتنا</span>
+        </h2>
+        <p data-ar="كل قطعة نخبزها هي تحفة فنية مصنوعة من أجود المكونات" data-fr="Chaque pièce que nous cuisinons est une œuvre d'art faite des meilleurs ingrédients">كل قطعة نخبزها هي تحفة فنية مصنوعة من أجود المكونات</p>
+      </div>
+      
+      <div class="filter-tabs" data-aos="fade-up" data-aos-delay="100">
+        <button class="filter-btn active" data-filter="all">
+          <span data-ar="الكل" data-fr="Tout">الكل</span>
+        </button>
+        <button class="filter-btn" data-filter="bread">
+          <span data-ar="الخبز الطازج" data-fr="Pain Frais">الخبز الطازج</span>
+        </button>
+        <button class="filter-btn" data-filter="traditional">
+          <span data-ar="حلويات تقليدية" data-fr="Pâtisseries Traditionnelles">حلويات تقليدية</span>
+        </button>
+        <button class="filter-btn" data-filter="cakes">
+          <span data-ar="كيك وتارت" data-fr="Gâteaux et Tartes">كيك وتارت</span>
+        </button>
+        <button class="filter-btn" data-filter="custom">
+          <span data-ar="طلبات مخصصة" data-fr="Commandes Personnalisées">طلبات مخصصة</span>
+        </button>
+      </div>
+      
+      <div class="ingredient-filters" data-aos="fade-up" data-aos-delay="200">
+        <h4 data-ar="فلترة حسب المكونات:" data-fr="Filtrer par ingrédients:">فلترة حسب المكونات:</h4>
+        <div class="ingredient-tags">
+          <button class="ingredient-tag" data-ingredient="gluten-free">
+            <span data-ar="خالي من الجلوتين" data-fr="Sans gluten">خالي من الجلوتين</span>
+          </button>
+          <button class="ingredient-tag" data-ingredient="sugar-free">
+            <span data-ar="خالي من السكر" data-fr="Sans sucre">خالي من السكر</span>
+          </button>
+          <button class="ingredient-tag" data-ingredient="vegan">
+            <span data-ar="نباتي" data-fr="Végétalien">نباتي</span>
+          </button>
+          <button class="ingredient-tag" data-ingredient="nuts">
+            <span data-ar="يحتوي على مكسرات" data-fr="Contient des noix">يحتوي على مكسرات</span>
+          </button>
+        </div>
+      </div>
+      
+      <div id="products-grid" class="products-grid">
+        <!-- Products will be loaded here by JavaScript -->
+      </div>
+      
+      <div class="load-more-container" data-aos="fade-up">
+        <button id="load-more-btn" class="btn btn-outline">
+          <i class="fas fa-plus"></i>
+          <span data-ar="عرض المزيد" data-fr="Voir plus">عرض المزيد</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-image" data-aos="fade-right">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=2070" alt="الخباز في العمل - مخبزة علاّف" />
+          <div class="about-badge">
+            <i class="fas fa-award"></i>
+            <span data-ar="منذ 2024" data-fr="Depuis 2024">منذ 2024</span>
+          </div>
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-number">1000+</span>
+              <span class="stat-label" data-ar="عميل سعيد" data-fr="clients satisfaits">عميل سعيد</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">50+</span>
+              <span class="stat-label" data-ar="منتج يومياً" data-fr="produits quotidiens">منتج يومياً</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-text" data-aos="fade-left">
+          <h2>
+            <i class="fas fa-heart"></i>
+            <span data-ar="قصتنا" data-fr="Notre Histoire">قصتنا</span>
+          </h2>
+          <h3 data-ar="حكاية بدأت بشغف" data-fr="Une histoire qui a commencé avec passion">حكاية بدأت بشغف</h3>
+          <p data-ar="في مخبزة علاّف، بدأت حكايتنا عام 2024 بشغف لصنع مخبوزات تجمع بين الأصالة المغربية وأفضل تقنيات الخبز الحديثة. نحن نؤمن بأن المكونات الطازجة والحب هما سر كل قطعة لذيذة تخرج من فرننا." data-fr="Chez la boulangerie Allaf, notre histoire a commencé en 2024 avec une passion pour créer des pâtisseries qui allient l'authenticité marocaine aux meilleures techniques de boulangerie modernes. Nous croyons que les ingrédients frais et l'amour sont le secret de chaque délicieuse pièce qui sort de notre four.">في مخبزة علاّف، بدأت حكايتنا عام 2024 بشغف لصنع مخبوزات تجمع بين الأصالة المغربية وأفضل تقنيات الخبز الحديثة. نحن نؤمن بأن المكونات الطازجة والحب هما سر كل قطعة لذيذة تخرج من فرننا.</p>
+          <div class="about-features">
+            <div class="feature">
+              <i class="fas fa-leaf"></i>
+              <span data-ar="مكونات طبيعية 100%" data-fr="Ingrédients 100% naturels">مكونات طبيعية 100%</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-clock"></i>
+              <span data-ar="طازج يومياً" data-fr="Frais quotidiennement">طازج يومياً</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-handshake"></i>
+              <span data-ar="خدمة عملاء مميزة" data-fr="Service client exceptionnel">خدمة عملاء مميزة</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-truck"></i>
+              <span data-ar="توصيل سريع" data-fr="Livraison rapide">توصيل سريع</span>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-primary">
+            <i class="fas fa-comments"></i>
+            <span data-ar="تحدث مع الخباز" data-fr="Parler au boulanger">تحدث مع الخباز</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>
+          <i class="fas fa-quote-left"></i>
+          <span data-ar="آراء عملائنا" data-fr="Avis de nos clients">آراء عملائنا</span>
+        </h2>
+        <p data-ar="ما يقوله عملاؤنا السعداء عن تجربتهم معنا" data-fr="Ce que disent nos clients satisfaits de leur expérience avec nous">ما يقوله عملاؤنا السعداء عن تجربتهم معنا</p>
+      </div>
+      
+      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide testimonial-card">
+            <div class="testimonial-content">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p data-ar="أفضل مخبزة في المدينة! الخبز طازج والحلويات لذيذة جداً. أنصح الجميع بتجربة منتجاتهم." data-fr="La meilleure boulangerie de la ville ! Le pain est frais et les pâtisseries sont délicieuses. Je recommande à tous d'essayer leurs produits.">"أفضل مخبزة في المدينة! الخبز طازج والحلويات لذيذة جداً. أنصح الجميع بتجربة منتجاتهم."</p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=150" alt="فاطمة الزهراء" />
+                <div class="author-info">
+                  <h4>فاطمة الزهراء</h4>
+                  <span data-ar="عميلة دائمة" data-fr="Cliente régulière">عميلة دائمة</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swiper-slide testimonial-card">
+            <div class="testimonial-content">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p data-ar="خدمة ممتازة وجودة عالية. طلبت كيكة عيد ميلاد وكانت رائعة! شكراً لفريق علاّف." data-fr="Service excellent et haute qualité. J'ai commandé un gâteau d'anniversaire et c'était magnifique ! Merci à l'équipe Allaf.">"خدمة ممتازة وجودة عالية. طلبت كيكة عيد ميلاد وكانت رائعة! شكراً لفريق علاّف."</p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150" alt="أحمد المرابط" />
+                <div class="author-info">
+                  <h4>أحمد المرابط</h4>
+                  <span data-ar="عميل سعيد" data-fr="Client satisfait">عميل سعيد</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swiper-slide testimonial-card">
+            <div class="testimonial-content">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p data-ar="الحلويات المغربية التقليدية هنا تذكرني بطعم جدتي. أصالة وجودة لا مثيل لها." data-fr="Les pâtisseries marocaines traditionnelles ici me rappellent le goût de ma grand-mère. Authenticité et qualité incomparables.">"الحلويات المغربية التقليدية هنا تذكرني بطعم جدتي. أصالة وجودة لا مثيل لها."</p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150" alt="خديجة العلوي" />
+                <div class="author-info">
+                  <h4>خديجة العلوي</h4>
+                  <span data-ar="محبة للحلويات التقليدية" data-fr="Amatrice de pâtisseries traditionnelles">محبة للحلويات التقليدية</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Hours & Location Section -->
+  <section id="location" class="location-section">
+    <div class="container">
+      <div class="location-content">
+        <div class="store-info" data-aos="fade-right">
+          <h2>
+            <i class="fas fa-map-marker-alt"></i>
+            <span data-ar="موقعنا وساعات العمل" data-fr="Notre emplacement et heures d'ouverture">موقعنا وساعات العمل</span>
+          </h2>
+          
+          <div class="store-hours">
+            <h3 data-ar="ساعات العمل" data-fr="Heures d'ouverture">ساعات العمل</h3>
+            <div class="hours-list">
+              <div class="hour-item">
+                <span class="day" data-ar="الاثنين - الجمعة" data-fr="Lundi - Vendredi">الاثنين - الجمعة</span>
+                <span class="time">06:00 - 22:00</span>
+              </div>
+              <div class="hour-item">
+                <span class="day" data-ar="السبت - الأحد" data-fr="Samedi - Dimanche">السبت - الأحد</span>
+                <span class="time">07:00 - 23:00</span>
+              </div>
+              <div class="hour-item special">
+                <span class="day" data-ar="العطل الرسمية" data-fr="Jours fériés">العطل الرسمية</span>
+                <span class="time" data-ar="ساعات خاصة" data-fr="Heures spéciales">ساعات خاصة</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+212 681 848 262</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@allafbakery.ma</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span data-ar="شارع محمد الخامس، الرباط، المغرب" data-fr="Avenue Mohammed V, Rabat, Maroc">شارع محمد الخامس، الرباط، المغرب</span>
+            </div>
+          </div>
+          
+          <div class="location-buttons">
+            <a href="https://maps.app.goo.gl/3QSaUA5nJiPQDRHZ9" target="_blank" class="btn btn-primary">
+              <i class="fas fa-directions"></i>
+              <span data-ar="احصل على الاتجاهات" data-fr="Obtenir les directions">احصل على الاتجاهات</span>
+            </a>
+            <a href="tel:+212681848262" class="btn btn-outline">
+              <i class="fas fa-phone"></i>
+              <span data-ar="اتصل بنا" data-fr="Appelez-nous">اتصل بنا</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="map-container" data-aos="fade-left">
+          <div id="google-map" class="google-map">
+            <!-- Google Map will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>
+          <i class="fas fa-envelope"></i>
+          <span data-ar="تواصل معنا" data-fr="Contactez-nous">تواصل معنا</span>
+        </h2>
+        <p data-ar="نحن هنا للإجابة على جميع استفساراتكم وتلبية طلباتكم" data-fr="Nous sommes là pour répondre à toutes vos questions et satisfaire vos demandes">نحن هنا للإجابة على جميع استفساراتكم وتلبية طلباتكم</p>
+      </div>
+      
+      <div class="contact-content">
+        <div class="contact-form-container" data-aos="fade-right">
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name" data-ar="الاسم الكامل" data-fr="Nom complet">الاسم الكامل</label>
+              <input type="text" id="name" name="name" required>
+              <span class="error-message"></span>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</label>
+              <input type="email" id="email" name="email" required>
+              <span class="error-message"></span>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone" data-ar="رقم الهاتف" data-fr="Numéro de téléphone">رقم الهاتف</label>
+              <input type="tel" id="phone" name="phone">
+              <span class="error-message"></span>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject" data-ar="الموضوع" data-fr="Sujet">الموضوع</label>
+              <select id="subject" name="subject" required>
+                <option value="" data-ar="اختر الموضوع" data-fr="Choisir le sujet">اختر الموضوع</option>
+                <option value="general" data-ar="استفسار عام" data-fr="Demande générale">استفسار عام</option>
+                <option value="order" data-ar="طلب خاص" data-fr="Commande spéciale">طلب خاص</option>
+                <option value="complaint" data-ar="شكوى" data-fr="Plainte">شكوى</option>
+                <option value="suggestion" data-ar="اقتراح" data-fr="Suggestion">اقتراح</option>
+              </select>
+              <span class="error-message"></span>
+            </div>
+            
+            <div class="form-group">
+              <label for="message" data-ar="الرسالة" data-fr="Message">الرسالة</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+              <span class="error-message"></span>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fas fa-paper-plane"></i>
+              <span data-ar="إرسال الرسالة" data-fr="Envoyer le message">إرسال الرسالة</span>
+            </button>
+          </form>
+        </div>
+        
+        <div class="contact-info-container" data-aos="fade-left">
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="method-icon">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div class="method-content">
+                <h4 data-ar="واتساب" data-fr="WhatsApp">واتساب</h4>
+                <p data-ar="للطلبات السريعة والاستفسارات" data-fr="Pour les commandes rapides et les questions">للطلبات السريعة والاستفسارات</p>
+                <a href="https://wa.me/212681848262" target="_blank">+212 681 848 262</a>
+              </div>
+            </div>
+            
+            <div class="contact-method">
+              <div class="method-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="method-content">
+                <h4 data-ar="الهاتف" data-fr="Téléphone">الهاتف</h4>
+                <p data-ar="للطلبات الكبيرة والاستشارات" data-fr="Pour les grosses commandes et consultations">للطلبات الكبيرة والاستشارات</p>
+                <a href="tel:+212681848262">+212 681 848 262</a>
+              </div>
+            </div>
+            
+            <div class="contact-method">
+              <div class="method-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="method-content">
+                <h4 data-ar="البريد الإلكتروني" data-fr="Email">البريد الإلكتروني</h4>
+                <p data-ar="للاستفسارات التفصيلية" data-fr="Pour les demandes détaillées">للاستفسارات التفصيلية</p>
+                <a href="mailto:info@allafbakery.ma">info@allafbakery.ma</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="social-media">
+            <h4 data-ar="تابعونا على" data-fr="Suivez-nous sur">تابعونا على</h4>
+            <div class="social-links">
+              <a href="#" class="social-link facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link tiktok">
+                <i class="fab fa-tiktok"></i>
+              </a>
+              <a href="#" class="social-link youtube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram Feed Section -->
+  <section id="instagram" class="instagram-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2>
+          <i class="fab fa-instagram"></i>
+          <span data-ar="تابعونا على إنستغرام" data-fr="Suivez-nous sur Instagram">تابعونا على إنستغرام</span>
+        </h2>
+        <p data-ar="شاهدوا أحدث إبداعاتنا وخلف الكواليس" data-fr="Découvrez nos dernières créations et les coulisses">شاهدوا أحدث إبداعاتنا وخلف الكواليس</p>
+      </div>
+      
+      <div class="instagram-feed" data-aos="fade-up" data-aos-delay="200">
+        <div class="instagram-post">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=400" alt="Instagram Post" />
+          <div class="post-overlay">
+            <i class="fab fa-instagram"></i>
+          </div>
+        </div>
+        <div class="instagram-post">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400" alt="Instagram Post" />
+          <div class="post-overlay">
+            <i class="fab fa-instagram"></i>
+          </div>
+        </div>
+        <div class="instagram-post">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=400" alt="Instagram Post" />
+          <div class="post-overlay">
+            <i class="fab fa-instagram"></i>
+          </div>
+        </div>
+        <div class="instagram-post">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=400" alt="Instagram Post" />
+          <div class="post-overlay">
+            <i class="fab fa-instagram"></i>
+          </div>
+        </div>
+        <div class="instagram-post">
+          <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?q=80&w=400" alt="Instagram Post" />
+          <div class="post-overlay">
+            <i class="fab fa-instagram"></i>
+          </div>
+        </div>
+        <div class="instagram-post">
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=400" alt="Instagram Post" />
+          <div class="post-overlay">
+            <i class="fab fa-instagram"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="instagram-cta" data-aos="fade-up" data-aos-delay="400">
+        <a href="https://instagram.com/allafbakery" target="_blank" class="btn btn-instagram">
+          <i class="fab fa-instagram"></i>
+          <span data-ar="تابعونا على إنستغرام" data-fr="Suivez-nous sur Instagram">تابعونا على إنستغرام</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section id="newsletter" class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content" data-aos="fade-up">
+        <div class="newsletter-text">
+          <h2 data-ar="اشترك في نشرتنا الإخبارية" data-fr="Abonnez-vous à notre newsletter">اشترك في نشرتنا الإخبارية</h2>
+          <p data-ar="احصل على أحدث العروض والوصفات الجديدة مباشرة في بريدك الإلكتروني" data-fr="Recevez les dernières offres et nouvelles recettes directement dans votre boîte email">احصل على أحدث العروض والوصفات الجديدة مباشرة في بريدك الإلكتروني</p>
+        </div>
+        <form id="newsletter-form" class="newsletter-form">
+          <div class="form-group">
+            <input type="email" id="newsletter-email" name="email" placeholder="أدخل بريدك الإلكتروني" data-ar-placeholder="أدخل بريدك الإلكتروني" data-fr-placeholder="Entrez votre email" required>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i>
+              <span data-ar="اشترك" data-fr="S'abonner">اشترك</span>
+            </button>
+          </div>
+          <div class="newsletter-privacy">
+            <small data-ar="نحن نحترم خصوصيتك ولن نشارك بياناتك مع أطراف ثالثة" data-fr="Nous respectons votre vie privée et ne partagerons pas vos données avec des tiers">نحن نحترم خصوصيتك ولن نشارك بياناتك مع أطراف ثالثة</small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="logo">
+            <img src="images/logo.png" alt="شعار المخبزة" />
+            <div class="logo-text">
+              <h3 data-ar="مخبزة علاّف" data-fr="Boulangerie Allaf">مخبزة علاّف</h3>
+              <span data-ar="الطعم الأصيل الذي لا يُنسى" data-fr="Le goût authentique inoubliable">الطعم الأصيل الذي لا يُنسى</span>
+            </div>
+          </div>
+          <p data-ar="نخبز لكم يوميًا أشهى المخبوزات والحلويات بحب وشغف من أجود المكونات الطبيعية." data-fr="Nous cuisinons quotidiennement les plus délicieuses pâtisseries et confiseries avec amour et passion à partir des meilleurs ingrédients naturels.">نخبز لكم يوميًا أشهى المخبوزات والحلويات بحب وشغف من أجود المكونات الطبيعية.</p>
+          
+          <div class="payment-methods">
+            <h4 data-ar="طرق الدفع المقبولة" data-fr="Méthodes de paiement acceptées">طرق الدفع المقبولة</h4>
+            <div class="payment-icons">
+              <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" />
+              <img src="https://img.icons8.com/color/48/mastercard.png" alt="MasterCard" />
+              <img src="https://img.icons8.com/color/48/cash-in-hand.png" alt="Cash on Delivery" />
+              <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4 data-ar="روابط سريعة" data-fr="Liens rapides">روابط سريعة</h4>
+          <ul>
+            <li><a href="#hero" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a></li>
+            <li><a href="#about" data-ar="من نحن" data-fr="À propos">من نحن</a></li>
+            <li><a href="#products" data-ar="منتجاتنا" data-fr="Nos produits">منتجاتنا</a></li>
+            <li><a href="#offers" data-ar="العروض" data-fr="Offres">العروض</a></li>
+            <li><a href="#contact" data-ar="تواصل معنا" data-fr="Contact">تواصل معنا</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-categories">
+          <h4 data-ar="فئات المنتجات" data-fr="Catégories de produits">فئات المنتجات</h4>
+          <ul>
+            <li><a href="#" data-ar="الخبز الطازج" data-fr="Pain frais">الخبز الطازج</a></li>
+            <li><a href="#" data-ar="حلويات تقليدية" data-fr="Pâtisseries traditionnelles">حلويات تقليدية</a></li>
+            <li><a href="#" data-ar="كيك وتارت" data-fr="Gâteaux et tartes">كيك وتارت</a></li>
+            <li><a href="#" data-ar="طلبات مخصصة" data-fr="Commandes personnalisées">طلبات مخصصة</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h4 data-ar="تابعونا" data-fr="Suivez-nous">تابعونا</h4>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+          
+          <div class="footer-contact">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+212 681 848 262</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@allafbakery.ma</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span data-ar="الرباط، المغرب" data-fr="Rabat, Maroc">الرباط، المغرب</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <p>&copy; <span id="current-year"></span> <span data-ar="مخبزة وحلويات علاّف. جميع الحقوق محفوظة" data-fr="Boulangerie et Pâtisserie Allaf. Tous droits réservés">مخبزة وحلويات علاّف. جميع الحقوق محفوظة</span></p>
+          <div class="footer-links-bottom">
+            <a href="#" data-ar="سياسة الخصوصية" data-fr="Politique de confidentialité">سياسة الخصوصية</a>
+            <a href="#" data-ar="شروط الاستخدام" data-fr="Conditions d'utilisation">شروط الاستخدام</a>
+            <a href="#" data-ar="سياسة الإرجاع" data-fr="Politique de retour">سياسة الإرجاع</a>
+          </div>
+        </div>
+        <p class="visitor-counter">
+          <i class="fas fa-eye"></i>
+          <span data-ar="أنت الزائر رقم:" data-fr="Vous êtes le visiteur numéro:">أنت الزائر رقم:</span>
+          <span id="visitor-count">...</span>
+        </p>
+        <div class="developer-credit">
+          <span data-ar="تطوير:" data-fr="Développé par:">تطوير:</span>
+          <a href="#" target="_blank">محمد الهدوني</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <div id="cart-overlay" class="cart-overlay"></div>
+  <div id="cart-sidebar" class="cart-sidebar">
+    <div class="cart-header">
+      <h3>
+        <i class="fas fa-shopping-basket"></i>
+        <span data-ar="سلة التسوق" data-fr="Panier d'achat">سلة التسوق</span>
+      </h3>
+      <button id="close-cart" class="close-btn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div id="cart-items" class="cart-items">
+      <!-- Cart items will be loaded here -->
+    </div>
+    
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span data-ar="المجموع:" data-fr="Total:">المجموع:</span>
+        <span id="cart-total">0.00 درهم</span>
+      </div>
+      <button id="checkout-btn" class="btn btn-whatsapp btn-block">
+        <i class="fab fa-whatsapp"></i>
+        <span data-ar="إتمام الطلب عبر واتساب" data-fr="Finaliser la commande via WhatsApp">إتمام الطلب عبر واتساب</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <div class="toast-content">
+      <i class="toast-icon"></i>
+      <span class="toast-message"></span>
+    </div>
+  </div>
+
+  <!-- Search Results Modal -->
+  <div id="search-modal" class="search-modal">
+    <div class="search-modal-content">
+      <div class="search-modal-header">
+        <h3 data-ar="نتائج البحث" data-fr="Résultats de recherche">نتائج البحث</h3>
+        <button id="close-search-modal" class="close-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="search-results" class="search-results">
+        <!-- Search results will be displayed here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- Google Maps API (Replace YOUR_API_KEY with actual key) -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+  
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
+
