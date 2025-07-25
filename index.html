@@ -4,46 +4,121 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مخبزة علاّف</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style_new.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- الخلفية المتحركة -->
+  <div class="animated-background">
+    <div class="floating-item item-1">
+      <img src="images/moroccan_bread_1.png" alt="خبز مغربي">
+    </div>
+    <div class="floating-item item-2">
+      <img src="images/moroccan_bread_2.png" alt="معجنات مغربية">
+    </div>
+    <div class="floating-item item-3">
+      <img src="images/bakery_sweets_1.png" alt="حلويات">
+    </div>
+    <div class="floating-item item-4">
+      <img src="images/bakery_sweets_2.png" alt="كرواسون">
+    </div>
+    <div class="floating-item item-5">
+      <img src="upload/search_images/v4l24NQbBZV9.gif" alt="حلويات متحركة">
+    </div>
+    <div class="floating-item item-6">
+      <img src="upload/search_images/YjUb3MB5DpSu.gif" alt="معجنات متحركة">
+    </div>
+  </div>
 
+  <!-- طبقة شفافة للتحكم في الشفافية -->
+  <div class="overlay"></div>
+
+  <!-- المحتوى الرئيسي -->
   <div class="container">
-
     <!-- الشعار -->
     <div class="logo-container">
-      <img src="images/logo.png" alt="شعار المخبزة" class="logo">
+      <div class="logo-wrapper">
+        <img src="images/logo.png" alt="شعار المخبزة" class="logo">
+        <div class="logo-glow"></div>
+      </div>
     </div>
 
+    <!-- العنوان الرئيسي -->
+    <h1 class="main-title">مخبزة علاّف</h1>
+    <p class="subtitle">أصالة الطعم المغربي الأصيل</p>
+
     <!-- الرسالة -->
-    <h1>مخبزة علاّف</h1>
-    <p class="message">نأسف، قرر المطور غلق الموقع لأجل غير مسمى.</p>
+    <div class="message-box">
+      <div class="message-icon">🏪</div>
+      <p class="message">نأسف، قرر المطور إغلاق الموقع لأجل غير مسمى.</p>
+      <p class="message-sub">نعتذر عن أي إزعاج قد يسببه هذا الإغلاق</p>
+    </div>
 
     <!-- العداد -->
-    <div class="countdown-box">
-      <p>من المتوقع فتح الموقع في:</p>
-      <div id="countdown">00:00:00:00</div>
+    <div class="countdown-container">
+      <div class="countdown-box">
+        <div class="countdown-header">
+          <span class="countdown-icon">⏰</span>
+          <p>مر على إغلاق الموقع:</p>
+        </div>
+        <div id="countdown" class="countdown-display">00ي : 00س : 00د : 00ث</div>
+      </div>
     </div>
 
     <!-- البوت -->
-    <div class="bot-box">
-      <h2>🤖 مساعد علاّف</h2>
-      <p>اسألني أي شيء مثل:</p>
-      <ul>
-        <li>ما هي مكونات الكرواسون؟</li>
-        <li>هل تفتحون أيام الجمعة؟</li>
-        <li>هل توفرون توصيل للمنازل؟</li>
-      </ul>
-      <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
-      <button id="sendButton">أرسل</button>
-      <div id="chatHistory" style="display: none;"></div>
+    <div class="bot-container">
+      <div class="bot-box">
+        <div class="bot-header">
+          <div class="bot-avatar">🤖</div>
+          <h2>مساعد علاّف الذكي</h2>
+          <div class="bot-status">متاح الآن</div>
+        </div>
+        
+        <div class="bot-suggestions">
+          <p>اسألني أي شيء مثل:</p>
+          <div class="suggestion-pills">
+            <span class="pill">ما هي مكونات الكرواسون؟</span>
+            <span class="pill">هل تفتحون أيام الجمعة؟</span>
+            <span class="pill">هل توفرون توصيل للمنازل؟</span>
+          </div>
+        </div>
+
+        <div class="chat-interface">
+          <div id="chatHistory" class="chat-history"></div>
+          <div class="input-container">
+            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..." class="chat-input">
+            <button id="sendButton" class="send-button">
+              <span>أرسل</span>
+              <div class="send-icon">📤</div>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- معلومات إضافية -->
+    <div class="info-section">
+      <div class="info-card">
+        <div class="info-icon">📞</div>
+        <h3>تواصل معنا</h3>
+        <p>للاستفسارات والطلبات الخاصة</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🚚</div>
+        <h3>خدمة التوصيل</h3>
+        <p>نوصل إلى جميع أنحاء المدينة</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">⭐</div>
+        <h3>جودة عالية</h3>
+        <p>أفضل المكونات الطبيعية</p>
+      </div>
+    </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script_corrected.js"></script>
   <script src="bot.js"></script>
+  <script src="animations.js"></script>
 </body>
 </html>
 
