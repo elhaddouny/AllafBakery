@@ -14,6 +14,12 @@ body {
 .container {
   padding: 30px;
   max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo-container {
+  margin-bottom: 20px;
 }
 
 .logo {
@@ -23,11 +29,21 @@ body {
   background: white;
   border: 3px solid #fff3e0;
   margin-bottom: 15px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 15px auto;
+}
+
+h1 {
+  margin: 20px 0;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .message {
   font-size: 18px;
   margin: 10px 0 20px;
+  line-height: 1.6;
 }
 
 .countdown-box {
@@ -35,24 +51,39 @@ body {
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.countdown-box p {
+  margin: 0 0 10px 0;
+  font-size: 16px;
 }
 
 #countdown {
   font-size: 24px;
   font-weight: bold;
   margin-top: 10px;
-  color: #ffd;
+  color: #ffdd44;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
 }
 
 .bot-box {
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 12px;
+  backdrop-filter: blur(10px);
 }
 
 .bot-box h2 {
-  margin-bottom: 10px;
+  margin: 0 0 15px 0;
   font-size: 20px;
+  font-weight: 700;
+}
+
+.bot-box p {
+  margin: 0 0 15px 0;
+  font-size: 16px;
 }
 
 .bot-box ul {
@@ -62,33 +93,80 @@ body {
 }
 
 .bot-box li {
-  background: rgba(255,255,255,0.1);
-  padding: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
   margin: 5px 0;
   border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .bot-box input, .bot-box button {
-  width: 90%;
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
   border: none;
   border-radius: 6px;
   margin-bottom: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
 .bot-box input {
   background: #fff;
   color: #333;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.bot-box input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .bot-box button {
   background: #ffa726;
   color: white;
   cursor: not-allowed;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.bot-box button:disabled {
+  opacity: 0.6;
 }
 
 .bot-box small {
   display: block;
   font-size: 12px;
-  color: #ffe;
+  color: #ffeeaa;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+    max-width: 100%;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .message {
+    font-size: 16px;
+  }
+  
+  #countdown {
+    font-size: 20px;
+  }
+  
+  .bot-box {
+    padding: 15px;
+  }
+  
+  .bot-box h2 {
+    font-size: 18px;
+  }
 }
