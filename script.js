@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(seconds).padStart(2, '0');
 
-    countdown.innerHTML = ${formattedDays}ي : ${formattedHours}س : ${formattedMinutes}د : ${formattedSeconds}ث;
+    countdown.innerHTML = `${formattedDays}ي : ${formattedHours}س : ${formattedMinutes}د : ${formattedSeconds}ث`;
   }
 
   // تشغيل العداد فوراً
@@ -47,3 +47,4 @@ document.addEventListener('DOMContentLoaded', function() {
     clearInterval(timer);
   });
 });
+
