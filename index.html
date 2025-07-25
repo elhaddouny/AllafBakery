@@ -13,7 +13,7 @@
 
     <!-- الشعار -->
     <div class="logo-container">
-      <img src="logo.png" alt="شعار المخبزة" class="logo">
+      <img src="images/logo.png" alt="شعار المخبزة" class="logo">
     </div>
 
     <!-- الرسالة -->
@@ -23,7 +23,7 @@
     <!-- العداد -->
     <div class="countdown-box">
       <p>سيتم إعادة فتح الموقع خلال:</p>
-      <div id="countdown">84:00:00:00</div>
+      <div id="countdown">00:00:00:00</div>
     </div>
 
     <!-- البوت -->
@@ -35,13 +35,15 @@
         <li>هل تفتحون أيام الجمعة؟</li>
         <li>هل توفرون توصيل للمنازل؟</li>
       </ul>
-      <input type="text" placeholder="اكتب سؤالك هنا..." disabled>
-      <button disabled>أرسل</button>
-      <small>البوت غير متاح حاليًا بسبب إغلاق الموقع</small>
+      <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
+      <button id="sendButton">أرسل</button>
+      <div id="chatHistory" style="display: none;"></div>
     </div>
 
   </div>
 
   <script src="script.js"></script>
+  <script src="bot.js"></script>
 </body>
 </html>
+
