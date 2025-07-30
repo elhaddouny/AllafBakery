@@ -1,0 +1,25 @@
+{
+  "name": "مخبزة وحلويات علاف",
+  "short_name": "علاف",
+  "description": "تطبيق خفيف الوزن لمخبزة وحلويات علاف",
+  "version": "1.0.0",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#FFD700",
+  "background_color": "#FFA500",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "business"],
+  "scope": "/",
+  "prefer_related_applications": false
+}
+
